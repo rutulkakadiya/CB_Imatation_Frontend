@@ -1,6 +1,7 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Star, ArrowRight, Phone, Mail, MapPin, Search, ShoppingCart, User, Heart, Eye, Gift } from 'lucide-react';
-
+import '../index.css'
 // Import all original images (unchanged)
 import SliderImage1 from '../assets/slider-1.jpg';
 import SliderImage2 from '../assets/slider-2.jpg';
@@ -27,12 +28,25 @@ import nd1 from '../assets/nd1.jpg';
 import nd2 from '../assets/nd2.jpg';
 import nd3 from '../assets/nd3.jpg';
 import nd4 from '../assets/nd4.jpg';
+import Button from '../components/Button';
 
 const ImitationWebsite = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [likedProducts, setLikedProducts] = useState([]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const heroSlides = [
     {
@@ -63,7 +77,7 @@ const ImitationWebsite = () => {
 
   const products = [
     {
-      id: 1,
+      id: 11,
       name: "Crystal Glow Necklace",
       category: "Bridal Collection",
       originalPrice: "₹49,999",
@@ -76,7 +90,7 @@ const ImitationWebsite = () => {
       badgeColor: "bg-red-600",
     },
     {
-      id: 2,
+      id: 12,
       name: "Faux Pearl Earrings",
       category: "Luxury Earrings",
       originalPrice: "₹15,999",
@@ -89,7 +103,7 @@ const ImitationWebsite = () => {
       badgeColor: "bg-green-600",
     },
     {
-      id: 3,
+      id: 13,
       name: "CZ Bangles Set",
       category: "Heritage Collection",
       originalPrice: "₹29,999",
@@ -102,7 +116,7 @@ const ImitationWebsite = () => {
       badgeColor: "bg-purple-600",
     },
     {
-      id: 4,
+      id: 14,
       name: "Imitation Gold Ring",
       category: "Engagement Collection",
       originalPrice: "₹39,999",
@@ -115,7 +129,7 @@ const ImitationWebsite = () => {
       badgeColor: "bg-blue-600",
     },
     {
-      id: 5,
+      id: 15,
       name: "Faux Diamond Chain",
       category: "Signature Collection",
       originalPrice: "₹32,999",
@@ -126,7 +140,7 @@ const ImitationWebsite = () => {
       image: p5,
     },
     {
-      id: 6,
+      id: 16,
       name: "Imitation Bracelet",
       category: "Modern Collection",
       originalPrice: "₹22,999",
@@ -223,6 +237,32 @@ const ImitationWebsite = () => {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+  };
+
+  const handleLikeClick = (productId) => {
+    setLikedProducts(prev => {
+      const newLiked = prev.includes(productId)
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId];
+
+      // Trigger animation
+      const heartElement = document.querySelector(`#heart-${productId}`);
+      if (heartElement) {
+        heartElement.classList.add('animate-heartBeat');
+        setTimeout(() => {
+          heartElement.classList.remove('animate-heartBeat');
+        }, 500);
+      }
+
+      return newLiked;
+    });
+  };
+  const closePopup = () => {
+    setSelectedProduct(null);
+  };
+
   // Loader UI
   if (isLoading) {
     return (
@@ -238,84 +278,32 @@ const ImitationWebsite = () => {
   }
 
   return (
+
     <div className="min-h-screen bg-white relative overflow-x-hidden">
-      {/* Import Google Fonts */}
-      <style jsx global>{`
-      @import url('https://fonts.googleapis.com/css2?family=Savate:ital,wght@0,200..900;1,200..900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700&family=Great+Vibes&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
-        body {
-          font-family: 'Raleway', sans-serif;
-        }
-
-        h1, h2, h3, h4 {
-          font-family: 'Great Vibes', cursive;
-          font-weight: 400;
-        }
-
-        p, span, li, nav, a, .nav-links, button, .badge, input::placeholder, .btn-text {
-          font-family: 'Raleway', sans-serif;
-        }
-
-        /* Simplified Animations */
-        @keyframes gentleFade {
-          0% { opacity: 0; }
-          100% { opacity: 1; }
-        }
-        @keyframes smoothSlideUp {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulseGlow {
-          0%, 100% { box-shadow: 0 0 5px rgba(204, 149, 67, 0.3); }
-          50% { box-shadow: 0 0 10px rgba(204, 149, 67, 0.6); }
-        }
-        @keyframes bounceIn {
-          0% { opacity: 0; transform: scale(0.9); }
-          100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes underlineGrow {
-          0% { width: 0; }
-          100% { width: 100%; }
-        }
-
-        .animate-gentleFade { animation: gentleFade 0.8s ease-in forwards; }
-        .animate-smoothSlideUp { animation: smoothSlideUp 0.8s ease-out forwards; }
-        .animate-pulseGlow { animation: pulseGlow 2s ease-in-out infinite; }
-        .animate-bounceIn { animation: bounceIn 0.6s ease-out forwards; }
-        .underline-grow::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background-color: #CC9543;
-          transition: width 0.3s ease;
-        }
-        .underline-grow:hover::after {
-          width: 100%;
-        }
-
-        /* Ensure visibility for sections */
-        [data-section] {
-          opacity: 1 !important;
-          transform: none !important;
-          transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        /* Disable heavy animations for reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-          .animate-gentleFade,
-          .animate-smoothSlideUp,
-          .animate-pulseGlow,
-          .animate-bounceIn {
-            animation: none !important;
-            transition: none !important;
-          }
-        }
-      `}</style>
-
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={closePopup}>
+          <div
+            className="relative bg-white p-4 rounded-lg max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closePopup}
+              className="absolute top-2 right-2 text-gray-500 hover:text-black"
+            >
+              <X size={24} />
+            </button>
+            <img
+              src={selectedProduct.image}
+              alt={selectedProduct.name}
+              className="w-full h-96 object-contain"
+            />
+            <div className="mt-4 text-center">
+              <h3 className="text-lg font-bold">{selectedProduct.name}</h3>
+              <p className="text-gray-600">{selectedProduct.category}</p>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Top Announcement Bar */}
       <div className="bg-black text-white py-2 px-4 text-center relative overflow-hidden animate-gentleFade">
         <p className="text-sm font-medium" style={{ color: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>
@@ -354,7 +342,7 @@ const ImitationWebsite = () => {
                 </div>
               </div>
               <div className="transform transition-transform duration-300 group-hover:translate-x-2">
-                <h1 className="text-2xl font-bold text-black tracking-wider" style={{ fontFamily: 'Verdana', fontWeight: '400' }}>
+                <h1 className="text-2xl font-bold text-black tracking-wider" style={{ fontFamily: 'Verdana', fontWeight: '400', fontSize: "20px", marginBottom: "0" }}>
                   CB IMITATION
                 </h1>
                 <p className="text-xs text-gray-500 font-medium tracking-widest" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
@@ -364,48 +352,42 @@ const ImitationWebsite = () => {
             </div>
 
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-700 hover:text-black font-medium transition-colors relative group transform hover:scale-105 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
-                Home
-              </a>
-              <div className="relative group">
-                <button className="flex items-center space-x-1 text-gray-700 hover:text-black font-medium transition-colors transform hover:scale-105" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
-                  <span className="underline-grow">Categories</span>
-                  <ChevronDown className="w-4 h-4 transition-transform duration-300" />
-                </button>
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 animate-bounceIn">
-                  <div className="p-4 space-y-2">
-                    <a href="#" className="block px-3 py-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Imitation Jewelry</a>
-                    <a href="#" className="block px-3 py-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Bridal Collection</a>
-                    <a href="#" className="block px-3 py-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Fashion Pieces</a>
-                    <a href="#" className="block px-3 py-2 text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Daily Wear</a>
-                  </div>
-                </div>
-              </div>
-              <a href="#" className="text-gray-700 hover:text-black font-medium transition-colors relative group transform hover:scale-105 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
-                Collections
-              </a>
-              <a href="#" className="text-gray-700 hover:text-black font-medium transition-colors relative group transform hover:scale-105 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
-                About
-              </a>
-              <a href="#" className="text-gray-700 hover:text-black font-medium transition-colors relative group transform hover:scale-105 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
-                Contact
-              </a>
+              {['Home', 'Categories', 'Collections', 'About', 'Contact'].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="text-gray-700 hover:text-black font-medium transition-colors relative nav-link royal-nav-item"
+                >
+                  {item}
+                </a>
+              ))}
             </nav>
 
             <div className="flex items-center space-x-4">
               <div className="hidden md:flex items-center space-x-3">
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-110 group">
+                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
                   <Search className="w-5 h-5 text-gray-600" />
                 </button>
-                <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-110 group">
-                  <Heart className="w-5 h-5 text-gray-600" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>2</span>
+                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
+                  <Heart
+                    className="w-5 h-5"
+                    fill={likedProducts.length > 0 ? '#CC9543' : 'none'}
+                    stroke="#CC9543"
+                  />
+                  {likedProducts.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
+                      {likedProducts.length}
+                    </span>
+                  )}
                 </button>
-                <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-110 group">
+                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
                   <ShoppingCart className="w-5 h-5 text-gray-600" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>3</span>
-                </button>
-                <button className="p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-110 group">
+                  {likedProducts.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
+                      {likedProducts.length}
+                    </span>
+                  )}                </button>
+                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
                   <User className="w-5 h-5 text-gray-600" />
                 </button>
               </div>
@@ -423,91 +405,135 @@ const ImitationWebsite = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t animate-gentleFade">
             <div className="p-4 space-y-3">
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Home</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Categories</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Collections</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>About</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Contact</a>
+              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Home</a>
+              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Categories</a>
+              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Collections</a>
+              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >About</a>
+              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Contact</a>
+              <div className="flex space-x-4 pt-2">
+                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
+                  <Search className="w-5 h-5 text-gray-600" />
+                </button>
+                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
+                  <Heart
+                    className="w-5 h-5"
+                    fill={likedProducts.length > 0 ? '#CC9543' : 'none'}
+                    stroke="#CC9543"
+                  />
+                  {likedProducts.length > 0 && (
+                    <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
+                      {likedProducts.length}
+                    </span>
+                  )}
+                </button>                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
+                  <ShoppingCart className="w-5 h-5 text-gray-600" />
+                  <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>3</span>
+                </button>
+                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
+                  <User className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
             </div>
           </div>
         )}
       </header>
 
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden" data-section="hero">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-black/60"></div>
+      {/* Hero Slider Section */}
+      <section className="relative h-[90vh] sm:h-[80vh] md:h-[90vh] overflow-hidden" data-section="hero">
+        {/* Slider Background Images */}
         <div className="absolute inset-0">
-          <img
-            src={heroSlides[currentSlide].image}
-            alt={heroSlides[currentSlide].title}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
+          {heroSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover object-center"
+                loading="eager"
+              />
+              {/* Subtle overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            </div>
+          ))}
         </div>
 
-        <div className="relative z-10 h-full flex items-center justify-center text-center text-white px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-8 animate-gentleFade">
-              <span className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
-                CB IMITATION - Signature Collection 2025
-              </span>
-            </div>
+        {/* Slider Content - Modern Minimalist Design */}
+        <div className="relative z-10 h-full flex items-center px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="max-w-2xl">
+              {heroSlides.map((slide, index) => (
+                <div
+                  key={index}
+                  className={`transition-all duration-700 ease-in-out ${index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 absolute'}`}
+                >
+                  {/* Minimalist Tag */}
+                  <div className="mb-4 sm:mb-6">
+                    <span className="inline-block px-3 py-1 rounded-md text-xs font-medium uppercase tracking-wider bg-white/90 text-[#CC9543] backdrop-blur-sm">
+                      New Collection
+                    </span>
+                  </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
-              {heroSlides[currentSlide].title}
-            </h1>
+                  {/* Slide Title */}
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight text-white">
+                    {slide.title}
+                  </h1>
 
-            <p className="text-lg md:text-xl mb-10 text-gray-200 max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
-              {heroSlides[currentSlide].subtitle}
-            </p>
+                  {/* Slide Subtitle */}
+                  <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-lg">
+                    {slide.subtitle}
+                  </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg animate-bounceIn" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
-                <span className="flex items-center justify-center space-x-2">
-                  <span>Discover Now</span>
-                  <ArrowRight className="w-5 h-5" />
-                </span>
-              </button>
-
-              <button className="px-8 py-4 rounded-xl font-bold text-lg border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 hover:shadow-lg animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
-                Watch Video
-              </button>
+                  {/* Slide Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                    <Button variant="primary" icon="arrow">
+                      Shop Now
+                    </Button>
+                    <Button variant="secondary">
+                      View Lookbook
+                    </Button>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {/* Slider Indicators - Minimal Design */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125 ${index === currentSlide ? 'w-8' : 'bg-white/50 hover:bg-white/70'}`}
-              style={{ backgroundColor: index === currentSlide ? '#CC9543' : undefined }}
+              className={`w-8 h-1 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-[#CC9543]' : 'bg-white/50 hover:bg-white/70'}`}
             />
           ))}
         </div>
+
+        {/* Decorative Elements */}
+        <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
       </section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-gray-50" data-section="categories">
+      <section className="py-12 sm:py-16 md:py-20 bg-gray-50" data-section="categories">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-3 sm:mb-4 animate-gentleFade" >
               Explore by Category
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" >
               Discover our exclusive range of imitation jewelry designs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {categories.map((category, index) => (
               <div
                 key={index}
-                className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
               >
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                   <img
                     src={category.image}
                     alt={category.name}
@@ -515,12 +541,12 @@ const ImitationWebsite = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 flex flex-col justify-between w-full p-6">
-                    <h3 className="text-white text-xl font-bold mb-2" style={{ fontFamily: 'Bodoni Moda', fontWeight: '800' }}>{category.name}</h3>
-                    <p className="text-gray-300 text-sm font-medium" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>{category.count}</p>
-                    <button className="mt-3 px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
-                      Shop Now
-                    </button>
+                  <div className="absolute bottom-0 flex flex-col justify-between w-full p-4 sm:p-6">
+                    <h3 className="text-white text-lg sm:text-xl font-bold" style={{ marginBottom: "0" }} >{category.name}</h3>
+                    <p className="text-gray-300 text-xs sm:text-sm font-medium" style={{ marginBottom: "8px sm:10px" }}>{category.count}</p>
+                    <Button variant="outline" className="border-2 border-[#CC9543] bg-transparent text-white hover:bg-[#CC9543]/20 p-2 mt-2" style={{ border: "2px solid #CC9543" }}>
+                      Explore All
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -530,23 +556,24 @@ const ImitationWebsite = () => {
       </section>
 
       {/* New Arrivals Section */}
-      <section className="py-20 bg-white" data-section="new-arrivals">
+      <section className="py-12 sm:py-16 md:py-20 bg-white" data-section="new-arrivals">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
+          <div className="text-center mb-12 sm:mb-16">
+            <div className="inline-block px-4 sm:px-6 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-3 sm:mb-4 animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
               SIGNATURE ARRIVALS
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade">
               New Designs Unveiled
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade">
               Explore the latest additions to our CB Imitation collection
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               {
+                id: 1,
                 name: "Faux Emerald Necklace",
                 price: "₹3,499",
                 originalPrice: "₹5,999",
@@ -554,6 +581,7 @@ const ImitationWebsite = () => {
                 isNew: true,
               },
               {
+                id: 2,
                 name: "CZ Stud Earrings",
                 price: "₹1,999",
                 originalPrice: "₹2,999",
@@ -561,6 +589,7 @@ const ImitationWebsite = () => {
                 isNew: true,
               },
               {
+                id: 3,
                 name: "Imitation Bangles",
                 price: "₹4,599",
                 originalPrice: "₹5,999",
@@ -568,6 +597,7 @@ const ImitationWebsite = () => {
                 isNew: true,
               },
               {
+                id: 4,
                 name: "Faux Gold Ring Set",
                 price: "₹2,799",
                 originalPrice: "₹3,999",
@@ -576,134 +606,154 @@ const ImitationWebsite = () => {
               },
             ].map((product, index) => (
               <div key={index} className="group cursor-pointer">
-                <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <div className="relative overflow-hidden">
+                <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                  <div className="relative pt-[100%] overflow-hidden">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
-                    {product.isNew && (
-                      <div className="absolute top-3 left-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
-                        NEW
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                      <div className="flex space-x-2">
-                        <button className="bg-white text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button className="bg-white text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
-                          <Heart className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-bold text-black mb-2" style={{ fontFamily: 'Bodoni Moda', fontWeight: '800' }}>{product.name}</h3>
-                    <div className="flex items-center space-x-2 mb-3">
-                      <span className="text-lg font-semibold text-black" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>{product.price}</span>
-                      <span className="text-sm text-gray-500 line-through" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>{product.originalPrice}</span>
+                  <div className="p-3 sm:p-4 flex flex-col flex-grow">
+                    <span className="text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">
+                      New Arrival
+                    </span>
+
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 leading-tight">
+                      {product.name}
+                    </h3>
+                    <div className="mt-auto">
+                      <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
+                        <span className="text-base sm:text-lg font-bold text-[#CC9543]">{product.price}</span>
+                        <span className="text-xs sm:text-sm text-gray-500 line-through">{product.originalPrice}</span>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <Button variant="primary" icon="" className="flex-1 text-sm sm:text-base">
+                          Add to Cart
+                        </Button>
+                        <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
+                          <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
+                        </button>
+                      </div>
                     </div>
-                    <button className="w-full py-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
-                      Add to Cart
-                    </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <button className="px-8 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
+          <div className="text-center mt-8 sm:mt-12">
+            <Button variant="primary" icon="" >
               View All Arrivals
-            </button>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-20 bg-white" data-section="featured">
+      <section className="py-12 sm:py-16 md:py-20 bg-white" data-section="featured">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" >
               Signature Masterpieces
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" >
               Our curated selection of iconic CB Imitation designs
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {products.map((product, index) => (
-              <div key={product.id} className="group cursor-pointer">
-                <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
-                  <div className="relative overflow-hidden">
+              <div key={product.id} className="product-card group cursor-pointer" >
+                <div className="bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                  <div className="relative overflow-hidden flex-grow">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-48 sm:h-56 md:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
                     {product.badge && (
-                      <div className={`absolute top-4 left-4 ${product.badgeColor} text-white px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow`} style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+                      <div className={`absolute top-3 sm:top-4 left-3 sm:left-4 ${product.badgeColor} text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow royal-badge`}>
                         {product.badge}
                       </div>
                     )}
-                    <div className="absolute top-4 right-4 text-white px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>
+                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-[#CC9543] text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow royal-badge">
                       {product.discount}% OFF
                     </div>
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                      <div className="flex space-x-3">
-                        <button className="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
-                          <Eye className="w-4 h-4" />
+                      <div className="flex space-x-2 sm:space-x-3">
+                        <button
+                          onClick={() => handleProductClick(product)}
+                          className="bg-white text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
+                        >
+                          <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
-                        <button className="bg-white text-black p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
-                          <Heart className="w-4 h-4" />
+                        <button
+                          onClick={() => handleLikeClick(product.id)}
+                          className={`bg-white text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 ${likedProducts.includes(product.id) ? 'text-red-500' : ''
+                            }`}
+                        >
+                          <Heart
+                            className="w-3 h-3 sm:w-4 sm:h-4"
+                            fill={likedProducts.includes(product.id) ? 'currentColor' : 'none'}
+                          />
                         </button>
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-sm font-semibold text-gray-600 uppercase tracking-wide" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>{product.category}</span>
+                  <div className="p-4 sm:p-6 flex-grow flex flex-col">
+                    <div className="flex items-center justify-between mb-2 sm:mb-3">
+                      <span className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide royal-subtext">
+                        {product.category}
+                      </span>
                       <div className="flex items-center space-x-1">
-                        <Star className="w-4 h-4 fill-current" style={{ color: '#CC9543' }} />
-                        <span className="text-sm font-semibold text-gray-700" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>{product.rating}</span>
-                        <span className="text-sm text-gray-500" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>({product.reviews})</span>
+                        <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current text-[#CC9543]" />
+                        <span className="text-xs sm:text-sm font-semibold text-gray-700">{product.rating}</span>
+                        <span className="text-xs sm:text-sm text-gray-500">({product.reviews})</span>
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-bold text-black mb-4 line-clamp-2" style={{ fontFamily: 'Bodoni Moda', fontWeight: '800' }}>
+                    <h3 className="text-base sm:text-lg font-bold text-black mb-3 sm:mb-4 line-clamp-2 royal-product-title">
                       {product.name}
                     </h3>
 
-                    <div className="flex items-center space-x-3 mb-6">
-                      <span className="text-xl font-bold text-black" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>{product.salePrice}</span>
-                      <span className="text-lg text-gray-500 line-through" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>{product.originalPrice}</span>
+                    <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6 mt-auto">
+                      <span className="text-lg sm:text-xl font-bold text-black royal-price">
+                        {product.salePrice}
+                      </span>
+                      <span className="text-base sm:text-lg text-gray-500 line-through royal-original-price">
+                        {product.originalPrice}
+                      </span>
                     </div>
 
-                    <button className="w-full py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
-                      Add to Cart
-                    </button>
+                    <div className="flex gap-2">
+                      <Button variant="primary" icon="" className="flex-1 text-sm sm:text-base">
+                        Add to Cart
+                      </Button>
+                      <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
+                        <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center mt-16">
-            <button className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+          <div className="text-center mt-12 sm:mt-16">
+            <Button variant="primary" icon="" >
               View All Products
-            </button>
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Best Selling Products */}
-      <section className="py-20 bg-white" data-section="best-sellers">
+      < section className="py-20 bg-white" data-section="best-sellers" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-red-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
@@ -720,6 +770,7 @@ const ImitationWebsite = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
+                id: 5,
                 name: "Imitation Star Studs",
                 price: "₹5,499",
                 originalPrice: "₹7,999",
@@ -729,6 +780,7 @@ const ImitationWebsite = () => {
                 badge: "#1 BESTSELLER",
               },
               {
+                id: 6,
                 name: "Faux Emerald Bracelet",
                 price: "₹3,199",
                 originalPrice: "₹4,499",
@@ -738,6 +790,7 @@ const ImitationWebsite = () => {
                 badge: "#2 BESTSELLER",
               },
               {
+                id: 7,
                 name: "CZ Crown Ring",
                 price: "₹3,799",
                 originalPrice: "₹5,499",
@@ -747,6 +800,7 @@ const ImitationWebsite = () => {
                 badge: "#3 BESTSELLER",
               },
               {
+                id: 8,
                 name: "Imitation Statement Necklace",
                 price: "₹6,499",
                 originalPrice: "₹8,999",
@@ -756,6 +810,7 @@ const ImitationWebsite = () => {
                 badge: "TOP RATED",
               },
               {
+                id: 9,
                 name: "Faux Gold Chain",
                 price: "₹4,799",
                 originalPrice: "₹6,499",
@@ -765,6 +820,7 @@ const ImitationWebsite = () => {
                 badge: "CUSTOMER CHOICE",
               },
               {
+                id: 10,
                 name: "Imitation Glow Earrings",
                 price: "₹2,999",
                 originalPrice: "₹4,499",
@@ -791,7 +847,9 @@ const ImitationWebsite = () => {
                     </div>
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                       <div className="flex space-x-2">
-                        <button className="bg-white text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
+                        <button onClick={() => handleProductClick(product)}
+                          className="bg-white text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
+                        >
                           <Eye className="w-4 h-4" />
                         </button>
                         <button className="bg-white text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
@@ -813,9 +871,18 @@ const ImitationWebsite = () => {
                       <span className="text-xl font-bold text-black" style={{ fontFamily: 'Raleway', fontWeight: '600' }}>{product.price}</span>
                       <span className="text-lg text-gray-500 line-through" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>{product.originalPrice}</span>
                     </div>
-                    <button className="w-full py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
+                    {/* <button className="btn btn-primary btn-sm w-full btn-hover-effect">
                       Add to Cart
-                    </button>
+                    </button> */}
+                    <div className="flex gap-2">
+                      <Button variant="primary" icon="" className="flex-1">
+                        Add to Cart
+                      </Button>
+                      <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
+                        <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
+                      </button>
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -823,15 +890,19 @@ const ImitationWebsite = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+            <Button variant="primary" icon="" >
               View All Best Sellers
-            </button>
+            </Button>
+
+            {/* <button className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+              View All Best Sellers
+            </button> */}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Special Offer Section */}
-      <section className="py-20 relative h-150 overflow-hidden" data-section="special-offer">
+      < section className="py-20 relative h-150 overflow-hidden" data-section="special-offer" >
         <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #2D1546 0%, #4B0082 100%)' }}>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
@@ -870,10 +941,10 @@ const ImitationWebsite = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Customer Reviews Section */}
-      <section className="py-20 bg-white" data-section="customer-reviews">
+      < section className="py-20 bg-white" data-section="customer-reviews" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-green-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
@@ -926,10 +997,10 @@ const ImitationWebsite = () => {
                     loading="lazy"
                   />
                   <div>
-                    <div className="flex items-center space-x-2">
-                      <h4 className="font-bold text-black" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400' }}>{review.name}</h4>
+                    <div className="flex items-center space-x-5">
+                      <h4 className="font-bold text-black" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400', margin: "0" }}>{review.name}</h4>
                       {review.verified && (
-                        <span className="text-xs px-2 py-1 rounded-full text-white animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>✓ Verified</span>
+                        <span className="text-xs px-2 py-1 rounded-full text-white animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}> ✓ Verified</span>
                       )}
                     </div>
                     <p className="text-sm font-medium text-gray-600" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>{review.location}</p>
@@ -957,10 +1028,10 @@ const ImitationWebsite = () => {
             </button>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Newsletter Section */}
-      <section className="py-20" style={{ backgroundColor: '#CC9543' }} data-section="newsletter">
+      < section className="py-20" style={{ backgroundColor: '#CC9543' }} data-section="newsletter" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
@@ -977,13 +1048,13 @@ const ImitationWebsite = () => {
                 className="flex-1 px-6 py-4 rounded-xl text-black bg-white focus:outline-none focus:ring-2 focus:ring-black/20"
                 style={{ fontFamily: 'Raleway', fontWeight: '400' }}
               />
-              <button className="bg-black text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+              <button className="btn btn-primary btn-hover-effect px-8 " style={{ border: "2px solid white", color: "white" }}>
                 Subscribe
               </button>
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Footer */}
       <footer className="bg-black text-white py-16" data-section="footer">
@@ -1084,7 +1155,7 @@ const ImitationWebsite = () => {
 
           <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-gray-400 text-sm" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>© 2025 CB Imitation. All rights reserved.</div>
+              <div className="text-gray-400 text-sm" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>© 2025 CB Imitation is Proudly Powered by <span className='text-white'>EasyWay IT Solutions</span></div>
               <div className="flex space-x-6 mt-4 md:mt-0">
                 <a href="#" className="text-gray-400 hover:text-white text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Privacy Policy</a>
                 <a href="#" className="text-gray-400 hover:text-white text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Terms of Service</a>
@@ -1093,8 +1164,7 @@ const ImitationWebsite = () => {
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </footer>    </div >
   );
 };
 
