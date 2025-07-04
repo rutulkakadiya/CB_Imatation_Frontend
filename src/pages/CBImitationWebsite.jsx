@@ -29,9 +29,16 @@ import nd2 from '../assets/nd2.jpg';
 import nd3 from '../assets/nd3.jpg';
 import nd4 from '../assets/nd4.jpg';
 import Button from '../components/Button';
+import Header from '../Common Components/Header';
+
+
+// Primary Gold: #D4AF37
+// Secondary Gold: #F4E4BC
+// Accent Black: #1A1A1A
+// Background: #FEFDF8
+// Text: #2C2C2C
 
 const ImitationWebsite = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [visibleSections, setVisibleSections] = useState(new Set());
   const [isLoading, setIsLoading] = useState(true);
@@ -235,30 +242,29 @@ const ImitationWebsite = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
   };
 
-  const handleLikeClick = (productId) => {
-    setLikedProducts(prev => {
-      const newLiked = prev.includes(productId)
-        ? prev.filter(id => id !== productId)
-        : [...prev, productId];
+  // const handleLikeClick = (productId) => {
+  //   setLikedProducts(prev => {
+  //     const newLiked = prev.includes(productId)
+  //       ? prev.filter(id => id !== productId)
+  //       : [...prev, productId];
 
-      // Trigger animation
-      const heartElement = document.querySelector(`#heart-${productId}`);
-      if (heartElement) {
-        heartElement.classList.add('animate-heartBeat');
-        setTimeout(() => {
-          heartElement.classList.remove('animate-heartBeat');
-        }, 500);
-      }
+  //     // Trigger animation
+  //     const heartElement = document.querySelector(`#heart-${productId}`);
+  //     if (heartElement) {
+  //       heartElement.classList.add('animate-heartBeat');
+  //       setTimeout(() => {
+  //         heartElement.classList.remove('animate-heartBeat');
+  //       }, 500);
+  //     }
 
-      return newLiked;
-    });
-  };
+  //     return newLiked;
+  //   });
+  // };
   const closePopup = () => {
     setSelectedProduct(null);
   };
@@ -266,7 +272,7 @@ const ImitationWebsite = () => {
   // Loader UI
   if (isLoading) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+      <div className="fixed inset-0 flex items-center justify-center  z-50">
         <div className="flex flex-col items-center">
           <div className="w-16 h-16 border-4 border-t-4 border-gray-200 border-t-[#CC9543] rounded-full animate-spin"></div>
           <p className="mt-4 text-lg font-medium text-gray-700" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
@@ -279,11 +285,11 @@ const ImitationWebsite = () => {
 
   return (
 
-    <div className="min-h-screen bg-white relative overflow-x-hidden">
+    <div className="min-h-screen  bg-[#FEFDF8] relative overflow-x-hidden">
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={closePopup}>
           <div
-            className="relative bg-white p-4 rounded-lg max-w-md w-full"
+            className="relative  p-4 rounded-lg max-w-md w-full"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -304,139 +310,11 @@ const ImitationWebsite = () => {
           </div>
         </div>
       )}
-      {/* Top Announcement Bar */}
-      <div className="bg-black text-white py-2 px-4 text-center relative overflow-hidden animate-gentleFade">
-        <p className="text-sm font-medium" style={{ color: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>
-          ✨ FESTIVE SALE: Up to 50% OFF on Signature Collections!
-          <span className="ml-2 bg-white/10 px-2 py-1 rounded text-xs animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
-            CB IMITATION - Limited Time
-          </span>
-        </p>
-      </div>
+   
 
       {/* Header */}
-      <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-all duration-300 hover:shadow-xl animate-gentleFade">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-18">
-            <div className="flex items-center space-x-3 group">
-              <div className="relative">
-                <div className="w-12 h-12 relative transform transition-transform duration-300 group-hover:scale-110">
-                  <svg viewBox="0 0 100 100" className="w-12 h-12 absolute inset-0" style={{ color: '#CC9543' }}>
-                    <g fill="currentColor" fillOpacity="0.8">
-                      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.3" />
-                      <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.5" />
-                      <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.7" />
-                      {[...Array(8)].map((_, i) => (
-                        <g key={i} transform={`rotate(${i * 45} 50 50)`}>
-                          <path d="M50 15 Q55 25 50 35 Q45 25 50 15" fill="currentColor" opacity="0.6" />
-                          <path d="M50 20 Q52 27 50 34 Q48 27 50 20" fill="currentColor" opacity="0.8" />
-                        </g>
-                      ))}
-                    </g>
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-6 h-6 flex items-center justify-center transform transition-transform duration-300 group-hover:scale-125" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)', backgroundColor: '#CC9543' }}>
-                      <span className="text-black text-xs font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>CB</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="transform transition-transform duration-300 group-hover:translate-x-2">
-                <h1 className="text-2xl font-bold text-black tracking-wider" style={{ fontFamily: 'Verdana', fontWeight: '400', fontSize: "20px", marginBottom: "0" }}>
-                  CB IMITATION
-                </h1>
-                <p className="text-xs text-gray-500 font-medium tracking-widest" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
-                  ELEGANT CRAFTSMANSHIP
-                </p>
-              </div>
-            </div>
-
-            <nav className="hidden md:flex items-center space-x-8">
-              {['Home', 'Categories', 'Collections', 'About', 'Contact'].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className="text-gray-700 hover:text-black font-medium transition-colors relative nav-link royal-nav-item"
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-
-            <div className="flex items-center space-x-4">
-              <div className="hidden md:flex items-center space-x-3">
-                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                  <Search className="w-5 h-5 text-gray-600" />
-                </button>
-                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                  <Heart
-                    className="w-5 h-5"
-                    fill={likedProducts.length > 0 ? '#CC9543' : 'none'}
-                    stroke="#CC9543"
-                  />
-                  {likedProducts.length > 0 && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
-                      {likedProducts.length}
-                    </span>
-                  )}
-                </button>
-                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                  <ShoppingCart className="w-5 h-5 text-gray-600" />
-                  {likedProducts.length > 0 && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
-                      {likedProducts.length}
-                    </span>
-                  )}                </button>
-                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                  <User className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-
-              <button
-                onClick={toggleMenu}
-                className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-110"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t animate-gentleFade">
-            <div className="p-4 space-y-3">
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Home</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Categories</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Collections</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >About</a>
-              <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Contact</a>
-              <div className="flex space-x-4 pt-2">
-                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                  <Search className="w-5 h-5 text-gray-600" />
-                </button>
-                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                  <Heart
-                    className="w-5 h-5"
-                    fill={likedProducts.length > 0 ? '#CC9543' : 'none'}
-                    stroke="#CC9543"
-                  />
-                  {likedProducts.length > 0 && (
-                    <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
-                      {likedProducts.length}
-                    </span>
-                  )}
-                </button>                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                  <ShoppingCart className="w-5 h-5 text-gray-600" />
-                  <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>3</span>
-                </button>
-                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                  <User className="w-5 h-5 text-gray-600" />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </header>
+      <Header/>
+ 
 
       {/* Hero Slider Section */}
       <section className="relative h-[90vh] sm:h-[80vh] md:h-[90vh] overflow-hidden" data-section="hero">
@@ -470,13 +348,13 @@ const ImitationWebsite = () => {
                 >
                   {/* Minimalist Tag */}
                   <div className="mb-4 sm:mb-6">
-                    <span className="inline-block px-3 py-1 rounded-md text-xs font-medium uppercase tracking-wider bg-white/90 text-[#CC9543] backdrop-blur-sm">
+                    <span className="inline-block px-3 py-1 rounded-md text-xs font-medium uppercase tracking-wider /90 text-[#CC9543] backdrop-blur-sm">
                       New Collection
                     </span>
                   </div>
 
                   {/* Slide Title */}
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight text-white">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight text-[#D4AF37]">
                     {slide.title}
                   </h1>
 
@@ -506,7 +384,7 @@ const ImitationWebsite = () => {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-8 h-1 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-[#CC9543]' : 'bg-white/50 hover:bg-white/70'}`}
+              className={`w-8 h-1 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-[#CC9543]' : '/50 hover:/70'}`}
             />
           ))}
         </div>
@@ -516,13 +394,13 @@ const ImitationWebsite = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-gray-50" data-section="categories">
+      <section className="py-12 sm:py-16 md:py-20 bg-[#FEFDF8]" data-section="categories">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-black mb-3 sm:mb-4 animate-gentleFade" >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#D4AF37] mb-3 sm:mb-4 animate-gentleFade" >
               Explore by Category
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" >
+            <p className="text-base sm:text-lg text-[#2C2C2C] max-w-2xl mx-auto animate-gentleFade" >
               Discover our exclusive range of imitation jewelry designs
             </p>
           </div>
@@ -531,7 +409,7 @@ const ImitationWebsite = () => {
             {categories.map((category, index) => (
               <div
                 key={index}
-                className="group cursor-pointer bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group cursor-pointer  rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
               >
                 <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                   <img
@@ -556,7 +434,7 @@ const ImitationWebsite = () => {
       </section>
 
       {/* New Arrivals Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white" data-section="new-arrivals">
+      <section className="py-12 sm:py-16 md:py-20 " data-section="new-arrivals">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <div className="inline-block px-4 sm:px-6 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-3 sm:mb-4 animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
@@ -606,7 +484,7 @@ const ImitationWebsite = () => {
               },
             ].map((product, index) => (
               <div key={index} className="group cursor-pointer">
-                <div className="bg-white rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                <div className=" rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col">
                   <div className="relative pt-[100%] overflow-hidden">
                     <img
                       src={product.image}
@@ -633,9 +511,9 @@ const ImitationWebsite = () => {
                         <Button variant="primary" icon="" className="flex-1 text-sm sm:text-base">
                           Add to Cart
                         </Button>
-                        <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
+                        {/* <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
                           <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>
@@ -653,7 +531,7 @@ const ImitationWebsite = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white" data-section="featured">
+      <section className="py-12 sm:py-16 md:py-20 " data-section="featured">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" >
@@ -667,7 +545,7 @@ const ImitationWebsite = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {products.map((product, index) => (
               <div key={product.id} className="product-card group cursor-pointer" >
-                <div className="bg-white rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                <div className=" rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
                   <div className="relative overflow-hidden flex-grow">
                     <img
                       src={product.image}
@@ -687,20 +565,20 @@ const ImitationWebsite = () => {
                       <div className="flex space-x-2 sm:space-x-3">
                         <button
                           onClick={() => handleProductClick(product)}
-                          className="bg-white text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
+                          className=" text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
                         >
                           <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
-                        <button
+                        {/* <button
                           onClick={() => handleLikeClick(product.id)}
-                          className={`bg-white text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 ${likedProducts.includes(product.id) ? 'text-red-500' : ''
+                          className={` text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 ${likedProducts.includes(product.id) ? 'text-red-500' : ''
                             }`}
                         >
                           <Heart
                             className="w-3 h-3 sm:w-4 sm:h-4"
                             fill={likedProducts.includes(product.id) ? 'currentColor' : 'none'}
                           />
-                        </button>
+                        </button> */}
                       </div>
                     </div>
                   </div>
@@ -734,9 +612,9 @@ const ImitationWebsite = () => {
                       <Button variant="primary" icon="" className="flex-1 text-sm sm:text-base">
                         Add to Cart
                       </Button>
-                      <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
+                      {/* <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
                         <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -753,7 +631,7 @@ const ImitationWebsite = () => {
       </section>
 
       {/* Best Selling Products */}
-      < section className="py-20 bg-white" data-section="best-sellers" >
+      < section className="py-20 " data-section="best-sellers" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-red-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
@@ -831,7 +709,7 @@ const ImitationWebsite = () => {
               },
             ].map((product, index) => (
               <div key={index} className="group cursor-pointer">
-                <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div className=" rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <img
                       src={product.image}
@@ -848,11 +726,11 @@ const ImitationWebsite = () => {
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                       <div className="flex space-x-2">
                         <button onClick={() => handleProductClick(product)}
-                          className="bg-white text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
+                          className=" text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="bg-white text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
+                        <button className=" text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
                           <Heart className="w-4 h-4" />
                         </button>
                       </div>
@@ -878,9 +756,9 @@ const ImitationWebsite = () => {
                       <Button variant="primary" icon="" className="flex-1">
                         Add to Cart
                       </Button>
-                      <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
+                      {/* <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
                         <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
-                      </button>
+                      </button> */}
                     </div>
 
                   </div>
@@ -924,7 +802,7 @@ const ImitationWebsite = () => {
                       <span>Shop Wedding Collection</span>
                     </span>
                   </button>
-                  <button className="px-8 py-4 rounded-xl font-bold border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+                  <button className="px-8 py-4 rounded-xl font-bold border-2 border-white text-white hover: hover:text-black transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
                     View Catalog
                   </button>
                 </div>
@@ -944,7 +822,7 @@ const ImitationWebsite = () => {
       </section >
 
       {/* Customer Reviews Section */}
-      < section className="py-20 bg-white" data-section="customer-reviews" >
+      < section className="py-20 " data-section="customer-reviews" >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-green-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
@@ -1045,7 +923,7 @@ const ImitationWebsite = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-6 py-4 rounded-xl text-black bg-white focus:outline-none focus:ring-2 focus:ring-black/20"
+                className="flex-1 px-6 py-4 rounded-xl text-black  focus:outline-none focus:ring-2 focus:ring-black/20"
                 style={{ fontFamily: 'Raleway', fontWeight: '400' }}
               />
               <button className="btn btn-primary btn-hover-effect px-8 " style={{ border: "2px solid white", color: "white" }}>
