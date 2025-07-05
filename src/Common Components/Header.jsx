@@ -9,7 +9,7 @@ export default function Header() {
 
     return (
         <div>
-            <header className=" bg-[#FAF6EF] h-[100px] backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-all duration-300 hover:shadow-xl animate-gentleFade">
+            <header className=" bg-[var(--bg-color)] h-[100px] backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-all duration-300 hover:shadow-xl animate-gentleFade">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-3 group">
@@ -24,7 +24,7 @@ export default function Header() {
                                 <a
                                     key={item}
                                     href="#"
-                                    className="text-gray-700 hover:text-black font-medium transition-colors relative nav-link royal-nav-item"
+                                    className="text-[var(--text-color)] font-medium transition-colors relative nav-link royal-nav-item"
                                 >
                                     {item}
                                 </a>
@@ -34,7 +34,7 @@ export default function Header() {
                         <div className="flex items-center space-x-4">
                             <div className="hidden md:flex items-center space-x-3">
                                 <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                                    <Search className="w-5 h-5 text-gray-600" />
+                                    <Search className="w-5 h-5 text-[var(--text-color)]" />
                                 </button>
                                 {/* <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
                                     <Heart
@@ -55,14 +55,14 @@ export default function Header() {
                                             {likedProducts.length}
                                         </span>
                                     )}                </button> */}
-                                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                                    <User className="w-5 h-5 text-gray-600" />
+                                <button className="p-2 rounded-full shadow-md hover:bg-[var(--bg-color)] transition-colors duration-300">
+                                    <User className="w-5 h-5 text-[var(--text-color)]" />
                                 </button>
                             </div>
 
                             <button
                                 onClick={toggleMenu}
-                                className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-110"
+                                className="md:hidden p-2 hover:bg-[var(--bg-color)] rounded-lg transition-all duration-300 transform hover:scale-110"
                             >
                                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                             </button>

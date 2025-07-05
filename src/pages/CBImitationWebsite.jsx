@@ -285,7 +285,7 @@ const ImitationWebsite = () => {
 
   return (
 
-    <div className="min-h-screen  bg-[#FEFDF8] relative overflow-x-hidden">
+    <div className="min-h-screen  bg-[var(--bg-color)] relative overflow-x-hidden">
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={closePopup}>
           <div

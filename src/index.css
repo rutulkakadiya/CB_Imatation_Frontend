@@ -1,6 +1,24 @@
 @import "tailwindcss";
 
 
+@import "tailwindcss";
+
+
+/* Primary Color	Gold Gradient	            #FFD700 → #FFB300    	Buttons, highlights, borders
+Background Color	Jet Black	            #0D0D0D	              Main background
+Secondary Color	Charcoal Gray	          #1F1F1F	              Cards, sections
+Accent Color	Champagne White	          #FDF6E3	              Text, icon highlights
+Text Color (Main)	Antique White	        #FAF3E0	              Main readable text
+Hover Effect	Burnt Amber	              #FF8C42	              Button/text hover highlights */
+:root {
+    --bg-color: #0D0D0D;
+    /* --bg1-color: #313234; */
+    --headingText-color: #FFD700;
+    --text-color: #FDF6E3;
+    --text1-color: #FAF3E0;
+    --hover-color: #FF8C42;
+}
+
 body {
   font-family: var(--font-primary);
   color: var(--text-primary);
@@ -387,14 +405,7 @@ h1, h2, h3, h4 {
   font-weight: var(--font-bold);
 }
 
-.royal-nav-item {
-  font-weight: var(--font-medium);
-  color: var(--gray-700);
-}
 
-.royal-nav-item:hover {
-  color: var(--black);
-}
 
 .royal-subtext {
   font-family: var(--font-primary);
