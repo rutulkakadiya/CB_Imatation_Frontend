@@ -1,8 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Star, ArrowRight, Phone, Mail, MapPin, Search, ShoppingCart, User, Heart, Eye, Gift } from 'lucide-react';
-import '../index.css'
-// Import all original images (unchanged)
+import '../index.css';
 import SliderImage1 from '../assets/slider-1.jpg';
 import SliderImage2 from '../assets/slider-2.jpg';
 import SliderImage3 from '../assets/slider-3.jpg';
@@ -31,13 +29,6 @@ import nd4 from '../assets/nd4.jpg';
 import Button from '../components/Button';
 import Header from '../Common Components/Header';
 
-
-// Primary Gold: #D4AF37
-// Secondary Gold: #F4E4BC
-// Accent Black: #1A1A1A
-// Background: #FEFDF8
-// Text: #2C2C2C
-
 const ImitationWebsite = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [visibleSections, setVisibleSections] = useState(new Set());
@@ -45,6 +36,33 @@ const ImitationWebsite = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [likedProducts, setLikedProducts] = useState([]);
+  const [theme, setTheme] = useState('light');
+  const [manualTheme, setManualTheme] = useState(null); // Track manual theme override
+
+  // Theme toggle based on time or manual selection
+  useEffect(() => {
+    const updateTheme = () => {
+      if (manualTheme === null) { // Only update based on time if no manual override
+        const hour = new Date().getHours();
+        const newTheme = hour >= 6 && hour < 19 ? 'light' : 'dark';
+        setTheme(newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
+      }
+    };
+
+    updateTheme();
+    const interval = setInterval(updateTheme, 60000);
+
+    return () => clearInterval(interval);
+  }, [manualTheme]);
+
+  // Handle manual theme toggle
+  const handleThemeToggle = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    setManualTheme(newTheme); // Set manual override
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -192,13 +210,12 @@ const ImitationWebsite = () => {
     };
 
     Promise.all(images.map((src) => preloadImage(src))).catch(() => {
-      setIsLoading(false); // Fallback in case of errors
+      setIsLoading(false);
     });
 
-    // Fallback timeout to ensure loader doesn't persist indefinitely
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 5000); // Reduced to 5 seconds for faster fallback
+    }, 5000);
 
     return () => clearTimeout(timeout);
   }, []);
@@ -217,13 +234,12 @@ const ImitationWebsite = () => {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '50px' } // Adjusted for better visibility detection
+      { threshold: 0.1, rootMargin: '50px' }
     );
 
     const elements = document.querySelectorAll('[data-section]');
     elements.forEach((el) => observer.observe(el));
 
-    // Fallback: Make all sections visible after 3 seconds if observer fails
     const fallback = setTimeout(() => {
       setVisibleSections(new Set(['hero', 'categories', 'new-arrivals', 'featured', 'best-sellers', 'special-offer', 'customer-reviews', 'newsletter', 'footer']));
     }, 3000);
@@ -242,29 +258,10 @@ const ImitationWebsite = () => {
     return () => clearInterval(timer);
   }, []);
 
-
   const handleProductClick = (product) => {
     setSelectedProduct(product);
   };
 
-  // const handleLikeClick = (productId) => {
-  //   setLikedProducts(prev => {
-  //     const newLiked = prev.includes(productId)
-  //       ? prev.filter(id => id !== productId)
-  //       : [...prev, productId];
-
-  //     // Trigger animation
-  //     const heartElement = document.querySelector(`#heart-${productId}`);
-  //     if (heartElement) {
-  //       heartElement.classList.add('animate-heartBeat');
-  //       setTimeout(() => {
-  //         heartElement.classList.remove('animate-heartBeat');
-  //       }, 500);
-  //     }
-
-  //     return newLiked;
-  //   });
-  // };
   const closePopup = () => {
     setSelectedProduct(null);
   };
@@ -272,10 +269,10 @@ const ImitationWebsite = () => {
   // Loader UI
   if (isLoading) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center  z-50">
+      <div className="fixed inset-0 flex items-center justify-center z-50" style={{ backgroundColor: 'var(--bg-color)' }}>
         <div className="flex flex-col items-center">
-          <div className="w-16 h-16 border-4 border-t-4 border-gray-200 border-t-[#CC9543] rounded-full animate-spin"></div>
-          <p className="mt-4 text-lg font-medium text-gray-700" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>
+          <div className="w-16 h-16 border-4 border-t-4 border-gray-200 border-t-[var(--primary-color)] rounded-full animate-spin"></div>
+          <p className="mt-4 text-lg font-medium" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text-color)' }}>
             Loading CB Imitation...
           </p>
         </div>
@@ -284,17 +281,18 @@ const ImitationWebsite = () => {
   }
 
   return (
-
-    <div className="min-h-screen  bg-[var(--bg-color)] relative overflow-x-hidden">
+    <div className="min-h-screen relative overflow-x-hidden" style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
       {selectedProduct && (
         <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" onClick={closePopup}>
           <div
-            className="relative  p-4 rounded-lg max-w-md w-full"
+            className="relative p-4 rounded-lg max-w-md w-full"
+            style={{ backgroundColor: 'var(--bg1-color)', color: 'var(--text-color)' }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={closePopup}
-              className="absolute top-2 right-2 text-gray-500 hover:text-black"
+              className="absolute top-2 right-2"
+              style={{ color: 'var(--text-color)' }}
             >
               <X size={24} />
             </button>
@@ -304,21 +302,18 @@ const ImitationWebsite = () => {
               className="w-full h-96 object-contain"
             />
             <div className="mt-4 text-center">
-              <h3 className="text-lg font-bold">{selectedProduct.name}</h3>
-              <p className="text-gray-600">{selectedProduct.category}</p>
+              <h3 className="text-lg font-bold" style={{ color: 'var(--headingText-color)' }}>{selectedProduct.name}</h3>
+              <p style={{ color: 'var(--text1-color)' }}>{selectedProduct.category}</p>
             </div>
           </div>
         </div>
       )}
-   
 
       {/* Header */}
-      <Header/>
- 
+      <Header handleThemeToggle={handleThemeToggle} theme={theme} />
 
       {/* Hero Slider Section */}
       <section className="relative h-[90vh] sm:h-[80vh] md:h-[90vh] overflow-hidden" data-section="hero">
-        {/* Slider Background Images */}
         <div className="absolute inset-0">
           {heroSlides.map((slide, index) => (
             <div
@@ -331,13 +326,11 @@ const ImitationWebsite = () => {
                 className="w-full h-full object-cover object-center"
                 loading="eager"
               />
-              {/* Subtle overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
             </div>
           ))}
         </div>
 
-        {/* Slider Content - Modern Minimalist Design */}
         <div className="relative z-10 h-full flex items-center px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto w-full">
             <div className="max-w-2xl">
@@ -346,24 +339,17 @@ const ImitationWebsite = () => {
                   key={index}
                   className={`transition-all duration-700 ease-in-out ${index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 absolute'}`}
                 >
-                  {/* Minimalist Tag */}
                   <div className="mb-4 sm:mb-6">
-                    <span className="inline-block px-3 py-1 rounded-md text-xs font-medium uppercase tracking-wider /90 text-[#CC9543] backdrop-blur-sm">
+                    <span className="inline-block px-3 py-1 rounded-md text-xs font-medium uppercase tracking-wider backdrop-blur-sm" style={{ color: 'var(--headingText-color)' }}>
                       New Collection
                     </span>
                   </div>
-
-                  {/* Slide Title */}
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight text-[#D4AF37]">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight" style={{ color: 'var(--headingText-color)' }}>
                     {slide.title}
                   </h1>
-
-                  {/* Slide Subtitle */}
-                  <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 max-w-lg">
+                  <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-lg" style={{ color: 'var(--text1-color)' }}>
                     {slide.subtitle}
                   </p>
-
-                  {/* Slide Buttons */}
                   <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                     <Button variant="primary" icon="arrow">
                       Shop Now
@@ -378,29 +364,27 @@ const ImitationWebsite = () => {
           </div>
         </div>
 
-        {/* Slider Indicators - Minimal Design */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-8 h-1 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-[#CC9543]' : '/50 hover:/70'}`}
+              className={`w-8 h-1 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-[var(--primary-color)]' : 'bg-gray-400 hover:bg-gray-500'}`}
             />
           ))}
         </div>
 
-        {/* Decorative Elements */}
         <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
       </section>
 
       {/* Categories Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-[#FEFDF8]" data-section="categories">
+      <section className="py-12 sm:py-16 md:py-20" data-section="categories">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#D4AF37] mb-3 sm:mb-4 animate-gentleFade" >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" style={{ color: 'var(--headingText-color)' }}>
               Explore by Category
             </h2>
-            <p className="text-base sm:text-lg text-[#2C2C2C] max-w-2xl mx-auto animate-gentleFade" >
+            <p className="text-base sm:text-lg max-w-2xl mx-auto animate-gentleFade" style={{ color: 'var(--text1-color)' }}>
               Discover our exclusive range of imitation jewelry designs
             </p>
           </div>
@@ -409,7 +393,7 @@ const ImitationWebsite = () => {
             {categories.map((category, index) => (
               <div
                 key={index}
-                className="group cursor-pointer  rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
               >
                 <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                   <img
@@ -420,7 +404,7 @@ const ImitationWebsite = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute bottom-0 flex flex-col justify-between w-full p-4 sm:p-6">
-                    <h3 className="text-white text-lg sm:text-xl font-bold" style={{ marginBottom: "0" }} >{category.name}</h3>
+                    <h3 className="text-white text-lg sm:text-xl font-bold" style={{ marginBottom: "0" }}>{category.name}</h3>
                     <p className="text-gray-300 text-xs sm:text-sm font-medium" style={{ marginBottom: "8px sm:10px" }}>{category.count}</p>
                     <Button variant="outline" className="border-2 border-[#CC9543] bg-transparent text-white hover:bg-[#CC9543]/20 p-2 mt-2" style={{ border: "2px solid #CC9543" }}>
                       Explore All
@@ -434,16 +418,16 @@ const ImitationWebsite = () => {
       </section>
 
       {/* New Arrivals Section */}
-      <section className="py-12 sm:py-16 md:py-20 " data-section="new-arrivals">
+      <section className="py-12 sm:py-16 md:py-20" data-section="new-arrivals">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <div className="inline-block px-4 sm:px-6 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-3 sm:mb-4 animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
               SIGNATURE ARRIVALS
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" style={{ color: 'var(--headingText-color)' }}>
               New Designs Unveiled
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade">
+            <p className="text-base sm:text-lg max-w-2xl mx-auto animate-gentleFade" style={{ color: 'var(--text1-color)' }}>
               Explore the latest additions to our CB Imitation collection
             </p>
           </div>
@@ -484,7 +468,7 @@ const ImitationWebsite = () => {
               },
             ].map((product, index) => (
               <div key={index} className="group cursor-pointer">
-                <div className=" rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                <div className="rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col">
                   <div className="relative pt-[100%] overflow-hidden">
                     <img
                       src={product.image}
@@ -494,26 +478,21 @@ const ImitationWebsite = () => {
                     />
                   </div>
                   <div className="p-3 sm:p-4 flex flex-col flex-grow">
-                    <span className="text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">
+                    <span className="text-xs font-medium mb-1 uppercase tracking-wider" style={{ color: 'var(--text1-color)' }}>
                       New Arrival
                     </span>
-
-                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 leading-tight">
+                    <h3 className="text-base sm:text-lg font-semibold mb-2 leading-tight" style={{ color: 'var(--headingText-color)' }}>
                       {product.name}
                     </h3>
                     <div className="mt-auto">
                       <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
-                        <span className="text-base sm:text-lg font-bold text-[#CC9543]">{product.price}</span>
-                        <span className="text-xs sm:text-sm text-gray-500 line-through">{product.originalPrice}</span>
+                        <span className="text-base sm:text-lg font-bold" style={{ color: 'var(--primary-color)' }}>{product.price}</span>
+                        <span className="text-xs sm:text-sm line-through" style={{ color: 'var(--text1-color)' }}>{product.originalPrice}</span>
                       </div>
-
                       <div className="flex gap-2">
                         <Button variant="primary" icon="" className="flex-1 text-sm sm:text-base">
                           Add to Cart
                         </Button>
-                        {/* <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
-                          <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
-                        </button> */}
                       </div>
                     </div>
                   </div>
@@ -523,7 +502,7 @@ const ImitationWebsite = () => {
           </div>
 
           <div className="text-center mt-8 sm:mt-12">
-            <Button variant="primary" icon="" >
+            <Button variant="primary" icon="">
               View All Arrivals
             </Button>
           </div>
@@ -531,21 +510,21 @@ const ImitationWebsite = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-12 sm:py-16 md:py-20 " data-section="featured">
+      <section className="py-12 sm:py-16 md:py-20" data-section="featured">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" style={{ color: 'var(--headingText-color)' }}>
               Signature Masterpieces
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" >
+            <p className="text-base sm:text-lg max-w-2xl mx-auto animate-gentleFade" style={{ color: 'var(--text1-color)' }}>
               Our curated selection of iconic CB Imitation designs
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {products.map((product, index) => (
-              <div key={product.id} className="product-card group cursor-pointer" >
-                <div className=" rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+              <div key={product.id} className="product-card group cursor-pointer">
+                <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
                   <div className="relative overflow-hidden flex-grow">
                     <img
                       src={product.image}
@@ -565,45 +544,35 @@ const ImitationWebsite = () => {
                       <div className="flex space-x-2 sm:space-x-3">
                         <button
                           onClick={() => handleProductClick(product)}
-                          className=" text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
+                          className="text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
                         >
                           <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
                         </button>
-                        {/* <button
-                          onClick={() => handleLikeClick(product.id)}
-                          className={` text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110 ${likedProducts.includes(product.id) ? 'text-red-500' : ''
-                            }`}
-                        >
-                          <Heart
-                            className="w-3 h-3 sm:w-4 sm:h-4"
-                            fill={likedProducts.includes(product.id) ? 'currentColor' : 'none'}
-                          />
-                        </button> */}
                       </div>
                     </div>
                   </div>
 
                   <div className="p-4 sm:p-6 flex-grow flex flex-col">
                     <div className="flex items-center justify-between mb-2 sm:mb-3">
-                      <span className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-wide royal-subtext">
+                      <span className="text-xs sm:text-sm font-semibold uppercase tracking-wide royal-subtext" style={{ color: 'var(--text1-color)' }}>
                         {product.category}
                       </span>
                       <div className="flex items-center space-x-1">
-                        <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current text-[#CC9543]" />
-                        <span className="text-xs sm:text-sm font-semibold text-gray-700">{product.rating}</span>
-                        <span className="text-xs sm:text-sm text-gray-500">({product.reviews})</span>
+                        <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" style={{ color: 'var(--primary-color)' }} />
+                        <span className="text-xs sm:text-sm font-semibold" style={{ color: 'var(--text-color)' }}>{product.rating}</span>
+                        <span className="text-xs sm:text-sm" style={{ color: 'var(--text1-color)' }}>({product.reviews})</span>
                       </div>
                     </div>
 
-                    <h3 className="text-base sm:text-lg font-bold text-black mb-3 sm:mb-4 line-clamp-2 royal-product-title">
+                    <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 line-clamp-2 royal-product-title" style={{ color: 'var(--headingText-color)' }}>
                       {product.name}
                     </h3>
 
                     <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6 mt-auto">
-                      <span className="text-lg sm:text-xl font-bold text-black royal-price">
+                      <span className="text-lg sm:text-xl font-bold royal-price" style={{ color: 'var(--headingText-color)' }}>
                         {product.salePrice}
                       </span>
-                      <span className="text-base sm:text-lg text-gray-500 line-through royal-original-price">
+                      <span className="text-base sm:text-lg line-through royal-original-price" style={{ color: 'var(--text1-color)' }}>
                         {product.originalPrice}
                       </span>
                     </div>
@@ -612,9 +581,6 @@ const ImitationWebsite = () => {
                       <Button variant="primary" icon="" className="flex-1 text-sm sm:text-base">
                         Add to Cart
                       </Button>
-                      {/* <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
-                        <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
-                      </button> */}
                     </div>
                   </div>
                 </div>
@@ -623,7 +589,7 @@ const ImitationWebsite = () => {
           </div>
 
           <div className="text-center mt-12 sm:mt-16">
-            <Button variant="primary" icon="" >
+            <Button variant="primary" icon="">
               View All Products
             </Button>
           </div>
@@ -631,16 +597,16 @@ const ImitationWebsite = () => {
       </section>
 
       {/* Best Selling Products */}
-      < section className="py-20 " data-section="best-sellers" >
+      <section className="py-20" data-section="best-sellers">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-red-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
               BEST SELLING DESIGNS
             </div>
-            <h2 className="text-3xl font-semibold text-black mb-6 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
+            <h2 className="text-3xl font-semibold mb-6 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400', color: 'var(--headingText-color)' }}>
               Most Loved Creations
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+            <p className="text-lg max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
               Timeless pieces cherished by our CB Imitation community
             </p>
           </div>
@@ -659,7 +625,7 @@ const ImitationWebsite = () => {
               },
               {
                 id: 6,
-                name: "Faux Emerald Bracelet",
+                name: "Faux Emeraldmaybe Bracelet",
                 price: "₹3,199",
                 originalPrice: "₹4,499",
                 image: ml2,
@@ -709,7 +675,7 @@ const ImitationWebsite = () => {
               },
             ].map((product, index) => (
               <div key={index} className="group cursor-pointer">
-                <div className=" rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
                   <div className="relative overflow-hidden">
                     <img
                       src={product.image}
@@ -725,12 +691,10 @@ const ImitationWebsite = () => {
                     </div>
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                       <div className="flex space-x-2">
-                        <button onClick={() => handleProductClick(product)}
-                          className=" text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110"
-                        >
+                        <button onClick={() => handleProductClick(product)} className="text-black p-2 sm:p-3 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className=" text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
+                        <button className="text-black p-2 rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-110">
                           <Heart className="w-4 h-4" />
                         </button>
                       </div>
@@ -738,29 +702,22 @@ const ImitationWebsite = () => {
                   </div>
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-semibold text-gray-600" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>CB IMITATION</span>
+                      <span className="text-sm font-semibold" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)' }}>CB IMITATION</span>
                       <div className="flex items-center space-x-1">
-                        <Star className="w-4 h-4 fill-current" style={{ color: '#CC9543' }} />
-                        <span className="text-sm font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>{product.rating}</span>
+                        <Star className="w-4 h-4 fill-current" style={{ color: 'var(--primary-color)' }} />
+                        <span className="text-sm font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700', color: 'var(--text-color)' }}>{product.rating}</span>
                       </div>
                     </div>
-                    <h3 className="text-lg font-bold text-black mb-3" style={{ fontFamily: 'Bodoni Moda', fontWeight: '800' }}>{product.name}</h3>
+                    <h3 className="text-lg font-bold mb-3" style={{ fontFamily: 'Bodoni Moda', fontWeight: '800', color: 'var(--headingText-color)' }}>{product.name}</h3>
                     <div className="flex items-center space-x-3 mb-4">
-                      <span className="text-xl font-bold text-black" style={{ fontFamily: 'Raleway', fontWeight: '600' }}>{product.price}</span>
-                      <span className="text-lg text-gray-500 line-through" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>{product.originalPrice}</span>
+                      <span className="text-xl font-bold" style={{ fontFamily: 'Raleway', fontWeight: '600', color: 'var(--headingText-color)' }}>{product.price}</span>
+                      <span className="text-lg line-through" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>{product.originalPrice}</span>
                     </div>
-                    {/* <button className="btn btn-primary btn-sm w-full btn-hover-effect">
-                      Add to Cart
-                    </button> */}
                     <div className="flex gap-2">
                       <Button variant="primary" icon="" className="flex-1">
                         Add to Cart
                       </Button>
-                      {/* <button className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors" onClick={() => handleLikeClick(product.id)}>
-                        <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill={likedProducts.includes(product.id) ? 'text-red-500' : 'none'} />
-                      </button> */}
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -768,31 +725,27 @@ const ImitationWebsite = () => {
           </div>
 
           <div className="text-center mt-12">
-            <Button variant="primary" icon="" >
+            <Button variant="primary" icon="">
               View All Best Sellers
             </Button>
-
-            {/* <button className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
-              View All Best Sellers
-            </button> */}
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Special Offer Section */}
-      < section className="py-20 relative h-150 overflow-hidden" data-section="special-offer" >
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, #2D1546 0%, #4B0082 100%)' }}>
+      <section className="py-20 relative h-150 overflow-hidden" data-section="special-offer">
+        <div className="absolute inset-0" style={{ background: 'var(--bg1-color)' }}>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
               <div className="text-white">
                 <div className="inline-block px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
                   CB IMITATION - SPECIAL OFFER
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400', color: 'var(--headingText-color)' }}>
                   Get <span style={{ color: '#CC9543' }}>40% OFF</span><br />
                   on <span style={{ color: '#E11D48' }}>Wedding Collection</span>
                 </h2>
-                <p className="text-base text-gray-300 mb-8 animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+                <p className="text-base mb-8 animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
                   Celebrate your special day with our exquisite wedding jewelry. Offer valid for a limited time!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
@@ -802,7 +755,7 @@ const ImitationWebsite = () => {
                       <span>Shop Wedding Collection</span>
                     </span>
                   </button>
-                  <button className="px-8 py-4 rounded-xl font-bold border-2 border-white text-white hover: hover:text-black transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+                  <button className="px-8 py-4 rounded-xl font-bold border-2 border-white text-white hover:bg-gray-100 hover:text-black transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
                     View Catalog
                   </button>
                 </div>
@@ -819,19 +772,19 @@ const ImitationWebsite = () => {
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Customer Reviews Section */}
-      < section className="py-20 " data-section="customer-reviews" >
+      <section className="py-20" data-section="customer-reviews">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-green-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
               CLIENT TESTIMONIALS
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400', color: 'var(--headingText-color)' }}>
               Voices of Elegance
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+            <p className="text-lg max-w-2xl mx-auto animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
               Hear from our delighted clients who adore CB Imitation
             </p>
           </div>
@@ -876,12 +829,12 @@ const ImitationWebsite = () => {
                   />
                   <div>
                     <div className="flex items-center space-x-5">
-                      <h4 className="font-bold text-black" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400', margin: "0" }}>{review.name}</h4>
+                      <h4 className="font-bold" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400', margin: "0", color: 'var(--headingText-color)' }}>{review.name}</h4>
                       {review.verified && (
-                        <span className="text-xs px-2 py-1 rounded-full text-white animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}> ✓ Verified</span>
+                        <span className="text-xs px-2 py-1 rounded-full text-white animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>✓ Verified</span>
                       )}
                     </div>
-                    <p className="text-sm font-medium text-gray-600" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>{review.location}</p>
+                    <p className="text-sm font-medium" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)' }}>{review.location}</p>
                   </div>
                 </div>
 
@@ -891,9 +844,9 @@ const ImitationWebsite = () => {
                   ))}
                 </div>
 
-                <p className="text-gray-700 mb-4 italic" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>"{review.review}"</p>
+                <p className="text-gray-700 mb-4 italic" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text-color)' }}>"{review.review}"</p>
 
-                <div className="text-sm text-gray-500" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+                <div className="text-sm" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
                   <span className="font-medium">Purchased: </span>{review.purchase}
                 </div>
               </div>
@@ -906,16 +859,16 @@ const ImitationWebsite = () => {
             </button>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Newsletter Section */}
-      < section className="py-20" style={{ backgroundColor: '#CC9543' }} data-section="newsletter" >
+      <section className="py-20" style={{ backgroundColor: 'var(--primary-color)' }} data-section="newsletter">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400' }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400', color: 'var(--headingText-color)' }}>
               Join the CB Imitation Family
             </h2>
-            <p className="text-base text-black/80 mb-8 animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+            <p className="text-base mb-8 animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
               Unlock exclusive offers, new arrivals, and styling tips
             </p>
 
@@ -923,19 +876,19 @@ const ImitationWebsite = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-6 py-4 rounded-xl text-black  focus:outline-none focus:ring-2 focus:ring-black/20"
+                className="flex-1 px-6 py-4 rounded-xl text-black focus:outline-none focus:ring-2 focus:ring-black/20"
                 style={{ fontFamily: 'Raleway', fontWeight: '400' }}
               />
-              <button className="btn btn-primary btn-hover-effect px-8 " style={{ border: "2px solid white", color: "white" }}>
+              <button className="btn btn-primary btn-hover-effect px-8" style={{ border: "2px solid white", color: "white" }}>
                 Subscribe
               </button>
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-16" data-section="footer">
+      <footer className="text-white py-16" style={{ backgroundColor: 'var(--bg1-color)' }} data-section="footer">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -962,44 +915,44 @@ const ImitationWebsite = () => {
                     </div>
                   </div>
                 </div>
-                <span className="text-xl font-bold" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400' }}>
+                <span className="text-xl font-bold" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400', color: 'var(--headingText-color)' }}>
                   CB IMITATION
                 </span>
               </div>
-              <p className="text-gray-400 mb-6 leading-relaxed" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>
+              <p className="mb-6 leading-relaxed" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
                 Redefining elegance with timeless jewelry that celebrates life's most cherished moments.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-white transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Facebook</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Instagram</a>
-                <a href="#" className="text-gray-400 hover:text-white transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Pinterest</a>
+                <a href="#" className="transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Facebook</a>
+                <a href="#" className="transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Instagram</a>
+                <a href="#" className="transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Pinterest</a>
               </div>
             </div>
 
             <div>
               <h4 className="font-bold mb-6" style={{ color: '#CC9543', fontFamily: 'Bodoni Moda', fontWeight: '400' }}>Shop</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>New Arrivals</a></li>
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Best Sellers</a></li>
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Collections</a></li>
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Gift Cards</a></li>
+              <ul className="space-y-3" style={{ color: 'var(--text1-color)' }}>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>New Arrivals</a></li>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Best Sellers</a></li>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Collections</a></li>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Gift Cards</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-bold mb-6" style={{ color: '#CC9543', fontFamily: 'Bodoni Moda', fontWeight: '400' }}>Support</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Size Guide</a></li>
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Shipping Info</a></li>
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Returns</a></li>
-                <li><a href="#" className="hover:text-white transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Care Guide</a></li>
+              <ul className="space-y-3" style={{ color: 'var(--text1-color)' }}>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Contact Us</a></li>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Size Guide</a></li>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Shipping Info</a></li>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Returns</a></li>
+                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Care Guide</a></li>
               </ul>
             </div>
 
             <div>
               <h4 className="font-bold mb-6" style={{ color: '#CC9543', fontFamily: 'Bodoni Moda', fontWeight: '400' }}>Contact</h4>
-              <ul className="space-y-4 text-gray-400">
+              <ul className="space-y-4" style={{ color: 'var(--text1-color)' }}>
                 <li className="flex items-center space-x-3">
                   <Phone className="w-4 h-4" style={{ color: '#CC9543' }} />
                   <span style={{ fontFamily: 'Raleway', fontWeight: '400' }}>+91 91234 56789</span>
@@ -1015,7 +968,7 @@ const ImitationWebsite = () => {
               </ul>
 
               <div className="mt-6">
-                <div className="text-gray-400 text-sm mb-2" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>Follow us for inspiration</div>
+                <div className="text-sm mb-2" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>Follow us for inspiration</div>
                 <div className="flex space-x-3">
                   <a href="#" className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-800 transition-all duration-300" style={{ backgroundColor: '#CC9543' }}>
                     <span className="text-black text-sm font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>f</span>
@@ -1033,16 +986,17 @@ const ImitationWebsite = () => {
 
           <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-gray-400 text-sm" style={{ fontFamily: 'Raleway', fontWeight: '400' }}>© 2025 CB Imitation is Proudly Powered by <span className='text-white'>EasyWay IT Solutions</span></div>
+              <div className="text-sm" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>© 2025 CB Imitation is Proudly Powered by <span style={{ color: 'var(--text-color)' }}>EasyWay IT Solutions</span></div>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" className="text-gray-400 hover:text-white text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Privacy Policy</a>
-                <a href="#" className="text-gray-400 hover:text-white text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Terms of Service</a>
-                <a href="#" className="text-gray-400 hover:text-white text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Cookie Policy</a>
+                <a href="#" className="text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Privacy Policy</a>
+                <a href="#" className="text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Terms of Service</a>
+                <a href="#" className="text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Cookie Policy</a>
               </div>
             </div>
           </div>
         </div>
-      </footer>    </div >
+      </footer>
+    </div>
   );
 };
 

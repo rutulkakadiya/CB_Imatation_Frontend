@@ -1,110 +1,70 @@
-import { Heart, Search, ShoppingCart, User, Menu } from 'lucide-react'
-import React, { useState } from 'react'
+import { Menu, Search, ShoppingCart, User, Sun, Moon } from 'lucide-react';
+import React, { useState } from 'react';
 
-export default function Header() {
+const Header = ({ handleThemeToggle, theme }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-
     return (
-        <div>
-            <header className=" bg-[var(--bg-color)] h-[100px] backdrop-blur-sm shadow-lg sticky top-0 z-50 transition-all duration-300 hover:shadow-xl animate-gentleFade">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-center">
-                        <div className="flex items-center space-x-3 group">
-                        
-                            <div className="transform transition-transform duration-300 group-hover:translate-x-2">
-                                <img className='h-[90px]' src="/logo.png" alt="" />
-                            </div>
-                        </div>
-
-                        <nav className="hidden md:flex items-center space-x-8">
-                            {['Home', 'Categories', 'Collections', 'About', 'Contact'].map((item) => (
-                                <a
-                                    key={item}
-                                    href="#"
-                                    className="text-[var(--text-color)] font-medium transition-colors relative nav-link royal-nav-item"
-                                >
-                                    {item}
-                                </a>
-                            ))}
-                        </nav>
-
-                        <div className="flex items-center space-x-4">
-                            <div className="hidden md:flex items-center space-x-3">
-                                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                                    <Search className="w-5 h-5 text-[var(--text-color)]" />
-                                </button>
-                                {/* <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                                    <Heart
-                                        className="w-5 h-5"
-                                        fill={likedProducts.length > 0 ? '#CC9543' : 'none'}
-                                        stroke="#CC9543"
-                                    />
-                                    {likedProducts.length > 0 && (
-                                        <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
-                                            {likedProducts.length}
-                                        </span>
-                                    )}
-                                </button> */}
-                                {/* <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                                    <ShoppingCart className="w-5 h-5 text-gray-600" />
-                                    {likedProducts.length > 0 && (
-                                        <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
-                                            {likedProducts.length}
-                                        </span>
-                                    )}                </button> */}
-                                <button className="p-2 rounded-full shadow-md hover:bg-[var(--bg-color)] transition-colors duration-300">
-                                    <User className="w-5 h-5 text-[var(--text-color)]" />
-                                </button>
-                            </div>
-
-                            <button
-                                onClick={toggleMenu}
-                                className="md:hidden p-2 hover:bg-[var(--bg-color)] rounded-lg transition-all duration-300 transform hover:scale-110"
-                            >
-                                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                            </button>
-                        </div>
+        <header className="header" style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
+                <div className="logo-container">
+                    <div className="transform transition-transform duration-300 group-hover:translate-x-2">
+                        <img className='h-[80px]' src="/logo.png" alt="" />
                     </div>
                 </div>
+                <nav className={`${isMenuOpen ? 'block' : 'hidden'} md:block`}>
+                    <ul className="flex flex-col md:flex-row gap-4 md:gap-8">
+                        <li><a href="#" className="nav-link">Home</a></li>
+                        <li><a href="#" className="nav-link">Shop</a></li>
+                        <li><a href="#" className="nav-link">Collections</a></li>
+                        <li><a href="#" className="nav-link">About</a></li>
+                        <li><a href="#" className="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+                <div className="flex items-center gap-4">
+                    <Search className="w-5 h-5" style={{ color: 'var(--text-color)' }} />
+                    {/* <ShoppingCart className="w-5 h-5" style={{ color: 'var(--text-color)' }} /> */}
+                    <User className="w-5 h-5" style={{ color: 'var(--text-color)' }} />
+                    {/* ---------------------------------------------------------------------------------------------- */}
+                    {/* switch */}
 
-                {isMenuOpen && (
-                    <div className="md:hidden bg-white border-t animate-gentleFade">
-                        <div className="p-4 space-y-3">
-                            <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Home</a>
-                            <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Categories</a>
-                            <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Collections</a>
-                            <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >About</a>
-                            <a href="#" className="block text-gray-700 hover:text-black py-2 px-3 rounded-lg hover:bg-gray-50 transition-all duration-300 transform hover:translate-x-2" >Contact</a>
-                            <div className="flex space-x-4 pt-2">
-                                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                                    <Search className="w-5 h-5 text-gray-600" />
-                                </button>
-                                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                                    <Heart
-                                        className="w-5 h-5"
-                                        fill={likedProducts.length > 0 ? '#CC9543' : 'none'}
-                                        stroke="#CC9543"
-                                    />
-                                    {likedProducts.length > 0 && (
-                                        <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
-                                            {likedProducts.length}
-                                        </span>
-                                    )}
-                                </button>                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300 relative">
-                                    <ShoppingCart className="w-5 h-5 text-gray-600" />
-                                    <span className="absolute -top-1 -right-1 w-4 h-4 text-white text-xs rounded-full flex items-center justify-center font-bold animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>3</span>
-                                </button>
-                                <button className="p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors duration-300">
-                                    <User className="w-5 h-5 text-gray-600" />
-                                </button>
-                            </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                            type="checkbox"
+                            checked={theme === 'dark'}
+                            onChange={handleThemeToggle}
+                            className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-[var(--primary-color)] transition-all duration-300"></div>
+                        <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-5 flex items-center justify-center">
+                            {theme === 'dark' ? (
+                                <Moon className="w-3 h-3" style={{ color: 'var(--black)' }} />
+                            ) : (
+                                <Sun className="w-3 h-3" style={{ color: 'var(--text1-color)' }} />
+                            )}
                         </div>
-                    </div>
-                )}
-            </header>
-        </div>
-    )
-}
+                    </label>
+                    {/* --------------------------------------------------------------------------------------------------- */}
+                    {/* button */}
+
+                    {/* <button
+                        onClick={handleThemeToggle}
+                        className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-2 hover:border-[var(--text-color)] hover:shadow-lg"
+                        style={{color: 'var(--text1-color)' }}
+                    >
+                        {theme === 'dark' ? (
+                            <Sun className="w-4 h-4" />
+                        ) : (
+                            <Moon className="w-4 h-4" />
+                        )}
+                    </button> */}
+                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
+                        <Menu className="w-5 h-5" style={{ color: 'var(--text-color)' }} />
+                    </button>
+                </div>
+            </div>
+        </header>
+    );
+};
+
+export default Header;

@@ -1,28 +1,93 @@
 @import "tailwindcss";
 
-
-@import "tailwindcss";
-
-
-/* Primary Color	Gold Gradient	            #FFD700 → #FFB300    	Buttons, highlights, borders
-Background Color	Jet Black	            #0D0D0D	              Main background
-Secondary Color	Charcoal Gray	          #1F1F1F	              Cards, sections
-Accent Color	Champagne White	          #FDF6E3	              Text, icon highlights
-Text Color (Main)	Antique White	        #FAF3E0	              Main readable text
-Hover Effect	Burnt Amber	              #FF8C42	              Button/text hover highlights */
-:root {
-    --bg-color: #0D0D0D;
-    /* --bg1-color: #313234; */
-    --headingText-color: #FFD700;
-    --text-color: #FDF6E3;
-    --text1-color: #FAF3E0;
-    --hover-color: #FF8C42;
+/* Define light and dark theme variables */
+:root[data-theme="light"] {
+  --bg-color: #FEFDF8;
+  /* Light background */
+  --bg1-color: #F4E4BC;
+  /* Secondary light background */
+  --headingText-color: #D4AF37;
+  /* Gold for headings */
+  --text-color: #2C2C2C;
+  /* Dark text for readability */
+  --text1-color: #1A1A1A;
+  /* Slightly darker text */
+  --hover-color: #FF8C42;
+  /* Burnt Amber for hover */
+  --primary-color: #CC9543;
+  /* Primary Gold */
+  --primary-hover: #b58236;
+  /* Darker Gold for hover */
 }
 
+:root[data-theme="dark"] {
+  --bg-color: #0D0D0D;
+  /* Jet Black background */
+  --bg1-color: #1F1F1F;
+  /* Charcoal Gray for sections */
+  --headingText-color: #FFD700;
+  /* Gold for headings */
+  --text-color: #FDF6E3;
+  /* Champagne White text */
+  --text1-color: #FAF3E0;
+  /* Antique White text */
+  --hover-color: #FF8C42;
+  /* Burnt Amber for hover */
+  --primary-color: #CC9543;
+  /* Primary Gold */
+  --primary-hover: #b58236;
+  /* Darker Gold for hover */
+}
+
+/* Update body to use theme variables */
 body {
   font-family: var(--font-primary);
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+/* Update section backgrounds to respect theme */
+section[data-section="categories"],
+section[data-section="new-arrivals"],
+section[data-section="featured"],
+section[data-section="best-sellers"],
+section[data-section="customer-reviews"] {
+  background-color: var(--bg-color);
+}
+
+/* Update special-offer section to respect theme */
+section[data-section="special-offer"] .absolute.inset-0 {
+  background: var(--bg1-color) !important;
+}
+
+/* Update button styles for theme consistency */
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text1-color);
+  padding: 12px 24px;
+  font-size: 14px;
+  box-shadow: 0 4px 15px rgba(204, 149, 67, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(204, 149, 67, 0.4);
+}
+
+/* Update product card styles */
+.product-card {
+  background-color: var(--bg1-color);
+}
+
+/* Update newsletter section */
+section[data-section="newsletter"] {
+  background-color: var(--primary-color);
+}
+
+/* Update footer */
+footer {
+  background-color: var(--bg1-color);
 }
 
 /* Utility Classes */
@@ -114,25 +179,84 @@ body {
   letter-spacing: 0.1em;
 }
 
-/* Add all other component styles following the same pattern */
-/* ... */
+/* Navigation */
+.nav-link {
+  position: relative;
+  padding-bottom: 5px;
+  color: var(--text-color);
+  /* Use theme text color (light: #2C2C2C, dark: #FDF6E3) */
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  /* Gold underline (#CC9543) */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  /* Underline animates to full width on hover */
+}
 
 /* Animations */
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes gentleFade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.95);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-gentleFade {
+  animation: gentleFade 0.8s ease-out forwards;
+}
+
+.animate-pulseGlow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.5s ease-out forwards;
 }
 
 /* CSS Variables */
 :root {
-  /* Colors */
-  --primary-color: #CC9543;
-  --primary-hover: #b58236;
   --black: #000;
   --white: #fff;
   --gray-100: #f8f9fa;
@@ -154,7 +278,7 @@ body {
   --font-primary: 'Raleway', sans-serif;
   --font-secondary: 'Bodoni Moda', serif;
   --font-decorative: 'Great Vibes', cursive;
-  
+
   /* Font Weights */
   --font-light: 300;
   --font-regular: 400;
@@ -162,7 +286,7 @@ body {
   --font-semi-bold: 600;
   --font-bold: 700;
   --font-extra-bold: 800;
-  
+
   /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -182,43 +306,15 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4 {    
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-decorative);
   font-weight: var(--font-regular);
   letter-spacing: 0.5px;
   margin-bottom: var(--space-lg);
 }
-
-/* Add to your index.css */
-.animate-pulseGlow {
-  animation: pulseGlow 2s infinite;
-}
-
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 0 0 rgba(204, 149, 67, 0.7);
-  }
-  70% {
-    box-shadow: 0 0 0 6px rgba(204, 149, 67, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(204, 149, 67, 0);
-  }
-}
-
-/* Make the heart beat when items are liked */
-.animate-heartBeat {
-  animation: heartBeat 0.5s ease;
-}
-
-@keyframes heartBeat {
-  0% { transform: scale(1); }
-  25% { transform: scale(1.2); }
-  50% { transform: scale(0.95); }
-  75% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
 
 .subheading {
   font-family: var(--font-secondary);
@@ -246,7 +342,7 @@ h1, h2, h3, h4 {
 
 .btn-primary {
   background-color: var(--primary-color);
-  color: var(--black);
+  color: var(--text1-color);
   padding: 12px 24px;
   font-size: 14px;
   box-shadow: 0 4px 15px rgba(204, 149, 67, 0.3);
@@ -304,10 +400,7 @@ h1, h2, h3, h4 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, 
-    transparent, 
-    rgba(255, 255, 255, 0.2), 
-    transparent);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
   transform: translateX(-100%);
   transition: transform 0.6s ease;
 }
@@ -326,7 +419,7 @@ h1, h2, h3, h4 {
 
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
 .product-card::before {
@@ -347,185 +440,75 @@ h1, h2, h3, h4 {
   opacity: 1;
 }
 
-/* Navigation */
-.nav-link {
+/* Underline Grow Animation for Footer Links */
+.underline-grow {
   position: relative;
-  padding-bottom: 5px;
 }
 
-.nav-link::after {
+.underline-grow::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   left: 0;
   width: 0;
-  height: 2px;
-  background: var(--primary-color);
+  height: 1px;
+  background-color: var(--text-color);
   transition: width 0.3s ease;
 }
 
-.nav-link:hover::after {
+.underline-grow:hover::after {
   width: 100%;
 }
 
-/* Animations */
-@keyframes gentleFade {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Heart Animation */
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+
+  75% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
-@keyframes pulseGlow {
-  0% { opacity: 0.8; }
-  50% { opacity: 1; }
-  100% { opacity: 0.8; }
+.animate-heartBeat {
+  animation: heartBeat 0.5s ease;
 }
 
-@keyframes bounceIn {
-  0% { transform: scale(0.95); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-.animate-gentleFade {
-  animation: gentleFade 0.8s ease-out forwards;
-}
-
-.animate-pulseGlow {
-  animation: pulseGlow 2s ease-in-out infinite;
-}
-
-.animate-bounceIn {
-  animation: bounceIn 0.5s ease-out forwards;
-}
-
-/* Utility Classes */
-.royal-badge {
-  background-color: var(--primary-color);
-  color: var(--black);
-  font-weight: var(--font-bold);
-}
-
-
-
-.royal-subtext {
-  font-family: var(--font-primary);
-  font-weight: var(--font-medium);
-  color: var(--gray-600);
-}
-
-.royal-product-title {
-  font-family: var(--font-secondary);
-  font-weight: var(--font-extra-bold);
-  color: var(--black);
-}
-
+/* Royal Theme Enhancements */
 .royal-price {
   font-family: var(--font-primary);
-  font-weight: var(--font-semi-bold);
-  color: var(--black);
+  font-weight: var(--font-bold);
 }
 
 .royal-original-price {
   font-family: var(--font-primary);
   font-weight: var(--font-regular);
-  color: var(--gray-500);
 }
 
-/* Section Styling */
-.section-divider {
-  position: relative;
-  margin: 4rem 0;
-}
-
-.section-divider::after {
-  content: '';
-  display: block;
-  width: 100px;
-  height: 3px;
-  background: var(--primary-color);
-  margin: 0 auto;
-}
-
-/* Cart Button */
-.cart-button {
-  width: 100%;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-family: var(--font-primary);
-  font-weight: var(--font-semi-bold);
-  letter-spacing: 0.5px;
-  background-color: var(--primary-color);
-  color: var(--black);
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0 2px 10px rgba(204, 149, 67, 0.3);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.button-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  position: relative;
-  z-index: 2;
-}
-
-.hover-effect {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,0.3),
-    transparent
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.6s ease;
-  transform: translateX(-100%);
-}
-
-.cart-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(204, 149, 67, 0.4);
-}
-
-.cart-button:hover .hover-effect {
-  opacity: 1;
-  transform: translateX(100%);
-}
-
-/* Product Name Styling */
-.product-name {
+.royal-product-title {
   font-family: var(--font-secondary);
+  font-weight: var(--font-bold);
+}
+
+.royal-subtext {
+  font-family: var(--font-primary);
   font-weight: var(--font-medium);
-  font-size: 1.125rem;
-  line-height: 1.3;
-  color: #222;
-  margin-bottom: 0.5rem;
 }
 
-/* Slider Transitions */
-.slider-image {
-  transition: opacity 800ms ease-in-out;
+.royal-badge {
+  font-family: var(--font-primary);
+  font-weight: var(--font-bold);
 }
-
-/* Logo Styling */
-.logo-text {
-  font-size: 1.25rem;
-  line-height: 1.2;
-}
-
-.logo-subtext {
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
-}
-
-
-
-
-
-
-
