@@ -30,6 +30,7 @@ const Button = ({
   return (
     <button
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${icon ? 'btn-icon' : ''} ${className}`}
+      style={{fontFamily: "Montserrat, sans-serif"}}
       {...props}
     >
       {children}

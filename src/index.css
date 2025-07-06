@@ -1,50 +1,118 @@
 @import "tailwindcss";
 
+*{
+    font-family: var(--font-secondary);
+
+}
+
 /* Define light and dark theme variables */
 :root[data-theme="light"] {
+  /* Fonts */
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Montserrat", sans-serif;
+
+  /* Colors */
   --bg-color: #FEFDF8;
-  /* Light background */
   --bg1-color: #F4E4BC;
-  /* Secondary light background */
-  --headingText-color: #D4AF37;
-  /* Gold for headings */
+  --headingText-color: #CC9543;
   --text-color: #2C2C2C;
-  /* Dark text for readability */
   --text1-color: #1A1A1A;
-  /* Slightly darker text */
   --hover-color: #FF8C42;
-  /* Burnt Amber for hover */
   --primary-color: #CC9543;
-  /* Primary Gold */
   --primary-hover: #b58236;
-  /* Darker Gold for hover */
+
+  /* New Additions */
+  --accent-gem: #046C4E; /* Emerald Green for jewel tone */
+  --gold-gradient: linear-gradient(135deg, #CC9543, #D4AF37);
+  --box-shadow: 0 4px 8px rgba(204, 149, 67, 0.2);
+
+  /* Optional Background Texture */
+  /* --bg-texture: url('/path-to-texture.jpg'); */
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+  --font-extra-bold: 800;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
 }
 
 :root[data-theme="dark"] {
+  --font-primary: "Playfair Display", serif;
+  --font-secondary: "Montserrat", sans-serif;
+
   --bg-color: #0D0D0D;
-  /* Jet Black background */
   --bg1-color: #1F1F1F;
-  /* Charcoal Gray for sections */
-  --headingText-color: #FFD700;
-  /* Gold for headings */
+  --headingText-color: #CC9543;
   --text-color: #FDF6E3;
-  /* Champagne White text */
   --text1-color: #FAF3E0;
-  /* Antique White text */
   --hover-color: #FF8C42;
-  /* Burnt Amber for hover */
   --primary-color: #CC9543;
-  /* Primary Gold */
   --primary-hover: #b58236;
-  /* Darker Gold for hover */
+
+  /* New Additions */
+  --accent-gem: #046C4E; /* Emerald Green */
+  --gold-gradient: linear-gradient(135deg, #CC9543, #D4AF37);
+  --box-shadow: 0 4px 8px rgba(212, 175, 55, 0.3);
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+  --font-extra-bold: 800;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
 }
 
 /* Update body to use theme variables */
+/* Base Styles */
 body {
-  font-family: var(--font-primary);
-  color: var(--text-color);
-  background-color: var(--bg-color);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-regular);
 }
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+  /* font-family: var(--font-primary);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-lg); */
+
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: var(--font-primary);
+}
+
+p{
+    font-family: var(--font-secondary);
+}
+
+
+
+
 
 /* Update section backgrounds to respect theme */
 section[data-section="categories"],
@@ -274,47 +342,10 @@ footer {
   --blue-600: #007bff;
   --orange-600: #fd7e14;
 
-  /* Fonts */
-  --font-primary: 'Raleway', sans-serif;
-  --font-secondary: 'Bodoni Moda', serif;
-  --font-decorative: 'Great Vibes', cursive;
 
-  /* Font Weights */
-  --font-light: 300;
-  --font-regular: 400;
-  --font-medium: 500;
-  --font-semi-bold: 600;
-  --font-bold: 700;
-  --font-extra-bold: 800;
-
-  /* Spacing */
-  --space-xs: 0.25rem;
-  --space-sm: 0.5rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  --space-2xl: 3rem;
-  --space-3xl: 4rem;
 }
 
-/* Base Styles */
-body {
-  font-family: var(--font-primary);
-  font-weight: var(--font-regular);
-  color: var(--gray-900);
-  line-height: 1.6;
-}
 
-/* Typography */
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-decorative);
-  font-weight: var(--font-regular);
-  letter-spacing: 0.5px;
-  margin-bottom: var(--space-lg);
-}
 
 .subheading {
   font-family: var(--font-secondary);

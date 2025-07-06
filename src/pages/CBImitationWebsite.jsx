@@ -4,30 +4,31 @@ import '../index.css';
 import SliderImage1 from '../assets/slider-1.jpg';
 import SliderImage2 from '../assets/slider-2.jpg';
 import SliderImage3 from '../assets/slider-3.jpg';
-import Cat1 from '../assets/new.jpg';
-import Cat2 from '../assets/ring.jpg';
-import Cat3 from '../assets/nackless.jpg';
+import Cat1 from '/Product 1.png';
+import Cat2 from '/Product 3.png';
+import Cat3 from '/Product 9.png';
 import Cat4 from '../assets/earring.jpg';
 import Cat5 from '../assets/bangle.jpg';
 import Cat6 from '../assets/bright.jpg';
-import P1 from '../assets/p1.jpg';
-import p2 from '../assets/p2.jpg';
-import p3 from '../assets/p3.jpg';
-import p4 from '../assets/p4.jpg';
-import p5 from '../assets/p5.jpg';
-import p6 from '../assets/p6.jpg';
+import P1 from '/Product 7.png';
+import p2 from '/Product 8.png';
+import p3 from '/Product 10.png';
+import p4 from '/Product 12.png';
+import p5 from '/Product 13.png';
+import p6 from '/Product 14.png';
 import ml1 from '../assets/ml1.jpg';
 import ml2 from '../assets/ml2.jpg';
 import ml3 from '../assets/ml3.jpg';
 import ml4 from '../assets/ml4.jpg';
 import ml5 from '../assets/ml5.jpg';
 import ml6 from '../assets/ml6.jpg';
-import nd1 from '../assets/nd1.jpg';
-import nd2 from '../assets/nd2.jpg';
-import nd3 from '../assets/nd3.jpg';
-import nd4 from '../assets/nd4.jpg';
+import nd1 from '/Product 2.png';
+import nd2 from '/Product 4.png';
+import nd3 from '/Product 5.png';
+import nd4 from '/Product 6.png';
 import Button from '../components/Button';
 import Header from '../Common Components/Header';
+import Footer from '../Common Components/Footer';
 
 const ImitationWebsite = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -92,24 +93,18 @@ const ImitationWebsite = () => {
   ];
 
   const categories = [
-    { name: "New Arrivals", count: "200+ Designs", image: Cat1 },
-    { name: "Rings", count: "100+ Designs", image: Cat2 },
-    { name: "Necklaces", count: "150+ Designs", image: Cat3 },
-    { name: "Earrings", count: "120+ Designs", image: Cat4 },
-    { name: "Bangles", count: "80+ Designs", image: Cat5 },
-    { name: "Bridal Sets", count: "60+ Designs", image: Cat6 },
+    { name: "Earings", count: "100+ Designs", image: Cat1 },
+    { name: "Pendant and Earings", count: "150+ Designs", image: Cat2 },
+    { name: "New Arrivals", count: "200+ Designs", image: Cat3 },
   ];
 
   const products = [
     {
       id: 11,
       name: "Crystal Glow Necklace",
-      category: "Bridal Collection",
       originalPrice: "₹49,999",
       salePrice: "₹34,999",
       discount: "30",
-      rating: 4.9,
-      reviews: 298,
       image: P1,
       badge: "BESTSELLER",
       badgeColor: "bg-red-600",
@@ -117,12 +112,9 @@ const ImitationWebsite = () => {
     {
       id: 12,
       name: "Faux Pearl Earrings",
-      category: "Luxury Earrings",
       originalPrice: "₹15,999",
       salePrice: "₹10,999",
       discount: "31",
-      rating: 4.8,
-      reviews: 182,
       image: p2,
       badge: "NEW ARRIVAL",
       badgeColor: "bg-green-600",
@@ -130,12 +122,9 @@ const ImitationWebsite = () => {
     {
       id: 13,
       name: "CZ Bangles Set",
-      category: "Heritage Collection",
       originalPrice: "₹29,999",
       salePrice: "₹21,999",
       discount: "27",
-      rating: 4.7,
-      reviews: 105,
       image: p3,
       badge: "LIMITED",
       badgeColor: "bg-purple-600",
@@ -143,12 +132,9 @@ const ImitationWebsite = () => {
     {
       id: 14,
       name: "Imitation Gold Ring",
-      category: "Engagement Collection",
       originalPrice: "₹39,999",
       salePrice: "₹32,999",
       discount: "18",
-      rating: 4.9,
-      reviews: 350,
       image: p4,
       badge: "PREMIUM",
       badgeColor: "bg-blue-600",
@@ -156,28 +142,44 @@ const ImitationWebsite = () => {
     {
       id: 15,
       name: "Faux Diamond Chain",
-      category: "Signature Collection",
       originalPrice: "₹32,999",
       salePrice: "₹24,999",
       discount: "24",
-      rating: 4.6,
-      reviews: 92,
       image: p5,
     },
     {
       id: 16,
       name: "Imitation Bracelet",
-      category: "Modern Collection",
       originalPrice: "₹22,999",
       salePrice: "₹17,999",
       discount: "22",
-      rating: 4.8,
-      reviews: 175,
       image: p6,
       badge: "TRENDING",
       badgeColor: "bg-orange-600",
     },
   ];
+
+  const promises = [
+    {
+      icon: "👥",
+      title: "1000+",
+      subtitle: "Happy Clients",
+      description: "Satisfied customers trust our quality"
+    },
+    {
+      icon: "🏭",
+      title: "Direct",
+      subtitle: "Manufacturer",
+      description: "Factory direct pricing & quality"
+    },
+    {
+      icon: "✨",
+      title: "Premium",
+      subtitle: "Designs",
+      description: "Endless variety to choose from"
+    }
+  ];
+
 
   // Preload images to ensure loader hides after images are loaded
   useEffect(() => {
@@ -339,23 +341,28 @@ const ImitationWebsite = () => {
                   key={index}
                   className={`transition-all duration-700 ease-in-out ${index === currentSlide ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 absolute'}`}
                 >
-                  <div className="mb-4 sm:mb-6">
+                  <div className="mb-4 sm:mb-6"
+                    data-aos="fade-right"
+                    data-aos-duration="1500">
                     <span className="inline-block px-3 py-1 rounded-md text-xs font-medium uppercase tracking-wider backdrop-blur-sm" style={{ color: 'var(--headingText-color)' }}>
                       New Collection
                     </span>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight" style={{ color: 'var(--headingText-color)' }}>
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-4 sm:mb-6 leading-tight" style={{ color: 'var(--headingText-color)' }}
+                    data-aos="fade-right"
+                    data-aos-duration="1500">
                     {slide.title}
                   </h1>
-                  <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-lg" style={{ color: 'var(--text1-color)' }}>
+                  <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 max-w-lg" style={{ color: 'var(--text1-color)' }}
+                    data-aos="fade-right"
+                    data-aos-duration="1500">
                     {slide.subtitle}
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <div className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+                    data-aos="fade-right"
+                    data-aos-duration="1500">
                     <Button variant="primary" icon="arrow">
                       Shop Now
-                    </Button>
-                    <Button variant="secondary">
-                      View Lookbook
                     </Button>
                   </div>
                 </div>
@@ -377,57 +384,208 @@ const ImitationWebsite = () => {
         <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-12 sm:py-16 md:py-20" data-section="categories">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" style={{ color: 'var(--headingText-color)' }}>
-              Explore by Category
+
+      <div className="text-center mt-[100px]">
+        <div className="inline-block"
+          data-aos="fade-up"
+          data-aos-duration="1500">
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-wide"
+            style={{
+              textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}
+          >
+            About CB Imitation
+          </h2>
+          {/* Bottom Decorative Element */}
+          <div className="flex items-center justify-center space-x-2">
+            <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--primary-color)] rounded-full"></div>
+            <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse"></div>
+            <div className="w-3 h-0.5 bg-[var(--primary-color)] rounded-full"></div>
+            <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse delay-75"></div>
+            <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--primary-color)] rounded-full"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <section
+        className="mt-[50px] flex items-center justify-center">
+
+        <div className="grid md:grid-cols-2 gap-12 items-center max-w-7xl w-full">
+
+          {/* Text Section */}
+          <div data-aos="fade-right"
+            data-aos-duration="1500" className="space-y-6">
+            <h2
+              className="text-4xl sm:text-5xl font-bold"
+              style={{
+                fontFamily: "var(--font-primary)", color: "var(--headingText-color)", textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}
+            >
+              Who are we?
             </h2>
-            <p className="text-base sm:text-lg max-w-2xl mx-auto animate-gentleFade" style={{ color: 'var(--text1-color)' }}>
-              Discover our exclusive range of imitation jewelry designs
+            <div
+              className="h-1 w-24 rounded-full"
+              style={{ background: "var(--gold-gradient)" }}
+            ></div>
+            <p
+              className="text-lg sm:text-md leading-relaxed"
+              style={{
+                fontFamily: "var(--font-secondary)",
+                fontWeight: "var(--font-regular)",
+                color: "var(--text2-color)",
+              }}
+            >
+              Established in 2010, <strong>CB Imitation</strong> has grown to become a trusted name in the world of imitation jewellery. With a deep commitment to quality and design excellence, we specialize in crafting jewellery that blends traditional elegance with contemporary trends. Our pieces are thoughtfully designed to reflect beauty, durability, and affordability—making timeless style accessible to everyone.
+
             </p>
+
+            <blockquote
+              className="border-l-4 pl-4 italic text-lg"
+              style={{ borderColor: "var(--accent-color)", color: "var(--text2-color)" }}
+            >
+              “Luxury is not just how something looks, but how it’s made and who it touches.”
+            </blockquote>
+
+
+            <Button variant="primary" icon="">
+              Explore Our Story
+            </Button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {categories.map((category, index) => (
-              <div
-                key={index}
-                className="group cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                  <img
-                    src={category.image}
-                    alt={category.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-0 flex flex-col justify-between w-full p-4 sm:p-6">
-                    <h3 className="text-white text-lg sm:text-xl font-bold" style={{ marginBottom: "0" }}>{category.name}</h3>
-                    <p className="text-gray-300 text-xs sm:text-sm font-medium" style={{ marginBottom: "8px sm:10px" }}>{category.count}</p>
-                    <Button variant="outline" className="border-2 border-[#CC9543] bg-transparent text-white hover:bg-[#CC9543]/20 p-2 mt-2" style={{ border: "2px solid #CC9543" }}>
-                      Explore All
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          {/* Image Section */}
+          <div className="relative w-full flex justify-center items-center" data-aos="fade-left" data-aos-duration="1500">
+            <img
+              src="/logo.png"
+              alt="Heritage Craftsmanship"
+              className="h-[400px] object-cover transform transition-transform duration-500 hover:scale-105"
+            />
+
           </div>
         </div>
       </section>
 
-      {/* New Arrivals Section */}
-      <section className="py-12 sm:py-16 md:py-20" data-section="new-arrivals">
+      {/* Categories Section */}
+      <section className="py-16 sm:py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <div className="inline-block px-4 sm:px-6 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-3 sm:mb-4 animate-pulseGlow" style={{ backgroundColor: '#CC9543' }}>
-              SIGNATURE ARRIVALS
+          {/* Header Section */}
+          <div className="text-center mb-16 sm:mb-20" data-aos="fade-up"
+            data-aos-duration="1000">
+            <div className="inline-block"
+            >
+              <h2
+                className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-wide"
+                style={{
+                  textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                }}
+              >
+                Explore by Category
+              </h2>
+              {/* Bottom Decorative Element */}
+              <div className="flex items-center justify-center space-x-2">
+                <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--primary-color)] rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse"></div>
+                <div className="w-3 h-0.5 bg-[var(--primary-color)] rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse delay-75"></div>
+                <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--primary-color)] rounded-full"></div>
+              </div>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" style={{ color: 'var(--headingText-color)' }}>
-              New Designs Unveiled
+            <p
+              className="text-md sm:text-lg max-w-3xl mx-auto mt-3 leading-relaxed"
+              style={{
+                color: 'var(--text1-color)',
+                fontFamily: 'var(--font-secondary)'
+              }}
+            >
+              Discover our exclusive collection of premium imitation jewelry,
+              crafted with precision and elegance
+            </p>
+          </div>
+
+          {/* Categories Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10" data-aos="fade-up"
+            data-aos-duration="1500">
+            {categories.map((category, index) => (
+              <div
+                key={index}
+                className="group cursor-pointer transform transition-all duration-500 hover:scale-105"
+              >
+                {/* Circle Container */}
+                <div className="relative mb-6">
+                  <div className="w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded-full overflow-hidden shadow-2xl ring-4 ring-white/20 group-hover:ring-[var(--headingText-color)]/30 transition-all duration-500">
+                    <img
+                      src={category.image}
+                      alt={category.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+
+                  </div>
+
+                  {/* Decorative Ring */}
+                  <div className="absolute inset-0 w-64 h-64 sm:w-72 sm:h-72 mx-auto rounded-full border-2 border-dashed border-[var(--headingText-color)]/30 group-hover:border-[var(--headingText-color)]/60 transition-all duration-500 group-hover:rotate-45"></div>
+
+
+                </div>
+
+                {/* Content */}
+                <div className="text-center space-y-4">
+                  <h3
+                    className="text-xl sm:text-2xl font-bold tracking-wide transform group-hover:scale-105 transition-transform duration-300"
+                    style={{
+                      color: 'var(--headingText-color)',
+                      fontFamily: 'var(--font-primary)'
+                    }}
+                  >
+                    {category.name}
+                  </h3>
+
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-8 h-0.5 bg-gradient-to-r from-transparent to-[var(--headingText-color)] rounded-full"></div>
+                    <span
+                      className="text-sm font-medium tracking-widest uppercase"
+                      style={{
+                        color: 'var(--text1-color)',
+                        fontFamily: 'var(--font-secondary)'
+                      }}
+                    >
+                      {category.count}
+                    </span>
+                    <div className="w-8 h-0.5 bg-gradient-to-l from-transparent to-[var(--headingText-color)] rounded-full"></div>
+                  </div>
+
+
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* Explore Button */}
+          <center>
+            <Button className='mt-[50px]' variant="primary" icon="" data-aos="fade-up"
+              data-aos-duration="1000">
+              Explore Collection
+            </Button>
+          </center>
+
+
+        </div>
+      </section>
+
+      {/* New Arrivals Section */}
+      <section className="py-12" data-section="new-arrivals">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 sm:mb-16" data-aos="fade-up"
+            data-aos-duration="1500">
+            <h2
+              className="text-4xl sm:text-5xl font-bold"
+              style={{
+                fontFamily: "var(--font-primary)", color: "var(--headingText-color)", textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}
+            >
+              New Arrivals
             </h2>
-            <p className="text-base sm:text-lg max-w-2xl mx-auto animate-gentleFade" style={{ color: 'var(--text1-color)' }}>
+            <p className="text-base sm:text-md max-w-2xl mx-auto animate-gentleFade mt-3" style={{ color: 'var(--text1-color)' }}>
               Explore the latest additions to our CB Imitation collection
             </p>
           </div>
@@ -467,7 +625,8 @@ const ImitationWebsite = () => {
                 isNew: true,
               },
             ].map((product, index) => (
-              <div key={index} className="group cursor-pointer">
+              <div key={index} className="group cursor-pointer" data-aos="fade-up"
+                data-aos-duration="1500">
                 <div className="rounded-lg sm:rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 h-full flex flex-col">
                   <div className="relative pt-[100%] overflow-hidden">
                     <img
@@ -478,16 +637,16 @@ const ImitationWebsite = () => {
                     />
                   </div>
                   <div className="p-3 sm:p-4 flex flex-col flex-grow">
-                    <span className="text-xs font-medium mb-1 uppercase tracking-wider" style={{ color: 'var(--text1-color)' }}>
+                    <p className="text-xs font-medium mb-1 uppercase tracking-wider" style={{ color: 'var(--text1-color)' }}>
                       New Arrival
-                    </span>
-                    <h3 className="text-base sm:text-lg font-semibold mb-2 leading-tight" style={{ color: 'var(--headingText-color)' }}>
+                    </p>
+                    <p className="text-base sm:text-lg font-semibold mb-2 leading-tight" style={{ color: 'var(--headingText-color)' }}>
                       {product.name}
-                    </h3>
+                    </p>
                     <div className="mt-auto">
                       <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
-                        <span className="text-base sm:text-lg font-bold" style={{ color: 'var(--primary-color)' }}>{product.price}</span>
-                        <span className="text-xs sm:text-sm line-through" style={{ color: 'var(--text1-color)' }}>{product.originalPrice}</span>
+                        <span className="text-base sm:text-md font-bold" style={{ color: 'var(--headingText-color)' }}>{product.price}</span>
+                        <span className="text-xs line-through" style={{ color: 'var(--text1-color)' }}>{product.originalPrice}</span>
                       </div>
                       <div className="flex gap-2">
                         <Button variant="primary" icon="" className="flex-1 text-sm sm:text-base">
@@ -501,7 +660,8 @@ const ImitationWebsite = () => {
             ))}
           </div>
 
-          <div className="text-center mt-8 sm:mt-12">
+          <div className="text-center mt-8 sm:mt-12" data-aos="fade-up"
+            data-aos-duration="1500">
             <Button variant="primary" icon="">
               View All Arrivals
             </Button>
@@ -509,37 +669,48 @@ const ImitationWebsite = () => {
         </div>
       </section>
 
+
+
+
       {/* Featured Products Section */}
       <section className="py-12 sm:py-16 md:py-20" data-section="featured">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 animate-gentleFade" style={{ color: 'var(--headingText-color)' }}>
-              Signature Masterpieces
+          <div className="text-center mb-12 sm:mb-16" data-aos="fade-up"
+            data-aos-duration="1500">
+            <h2
+              className="text-4xl sm:text-5xl font-bold"
+              style={{
+                fontFamily: "var(--font-primary)", color: "var(--headingText-color)", textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}
+            >
+              Best Sellers
             </h2>
-            <p className="text-base sm:text-lg max-w-2xl mx-auto animate-gentleFade" style={{ color: 'var(--text1-color)' }}>
+
+            <p className="text-base sm:text-md max-w-2xl mx-auto animate-gentleFade mt-3" style={{ color: 'var(--text1-color)' }}>
               Our curated selection of iconic CB Imitation designs
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {products.map((product, index) => (
-              <div key={product.id} className="product-card group cursor-pointer">
-                <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+              <div key={product.id} className="product-card group cursor-pointer" data-aos="fade-up"
+                data-aos-duration="1500">
+                <div className="card rounded-xl sm:rounded-2xl overflow-hidden shadow-lg transition-all duration-300 h-full flex flex-col">
                   <div className="relative overflow-hidden flex-grow">
                     <img
                       src={product.image}
                       alt={product.name}
-                      className="w-full h-48 sm:h-56 md:h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-[300px] sm:h-[350px] object-cover transition-transform duration-300 group-hover:scale-105"
                       loading="lazy"
                     />
-                    {product.badge && (
-                      <div className={`absolute top-3 sm:top-4 left-3 sm:left-4 ${product.badgeColor} text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow royal-badge`}>
+                    {/* {product.badge && (
+                      <div className={`absolute top-3 sm:top-4 left-3 sm:left-4 ${product.badgeColor} text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow royal-badge`} style={{ fontFamily: "var(--font-secondary)" }}>
                         {product.badge}
                       </div>
-                    )}
-                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-[#CC9543] text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow royal-badge">
+                    )} */}
+                    {/* <div className="absolute top-3 sm:top-4 right-3 sm:right-4 bg-[var(--headingText-color)] text-white px-2 sm:px-3 py-1 rounded-full text-xs font-bold animate-pulseGlow royal-badge" style={{ fontFamily: "var(--font-secondary)" }}>
                       {product.discount}% OFF
-                    </div>
+                    </div> */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                       <div className="flex space-x-2 sm:space-x-3">
                         <button
@@ -553,26 +724,16 @@ const ImitationWebsite = () => {
                   </div>
 
                   <div className="p-4 sm:p-6 flex-grow flex flex-col">
-                    <div className="flex items-center justify-between mb-2 sm:mb-3">
-                      <span className="text-xs sm:text-sm font-semibold uppercase tracking-wide royal-subtext" style={{ color: 'var(--text1-color)' }}>
-                        {product.category}
-                      </span>
-                      <div className="flex items-center space-x-1">
-                        <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" style={{ color: 'var(--primary-color)' }} />
-                        <span className="text-xs sm:text-sm font-semibold" style={{ color: 'var(--text-color)' }}>{product.rating}</span>
-                        <span className="text-xs sm:text-sm" style={{ color: 'var(--text1-color)' }}>({product.reviews})</span>
-                      </div>
-                    </div>
 
                     <h3 className="text-base sm:text-lg font-bold mb-3 sm:mb-4 line-clamp-2 royal-product-title" style={{ color: 'var(--headingText-color)' }}>
                       {product.name}
                     </h3>
 
                     <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6 mt-auto">
-                      <span className="text-lg sm:text-xl font-bold royal-price" style={{ color: 'var(--headingText-color)' }}>
+                      <span className="text-md font-bold royal-price" style={{ color: 'var(--headingText-color)', fontFamily: "var(--font-secondary)" }}>
                         {product.salePrice}
                       </span>
-                      <span className="text-base sm:text-lg line-through royal-original-price" style={{ color: 'var(--text1-color)' }}>
+                      <span className="text-base sm:text-sm line-through royal-original-price" style={{ color: 'var(--text1-color)', fontFamily: "var(--font-secondary)" }}>
                         {product.originalPrice}
                       </span>
                     </div>
@@ -588,7 +749,8 @@ const ImitationWebsite = () => {
             ))}
           </div>
 
-          <div className="text-center mt-12 sm:mt-16">
+          <div className="text-center mt-12 sm:mt-16" data-aos="fade-up"
+            data-aos-duration="1500">
             <Button variant="primary" icon="">
               View All Products
             </Button>
@@ -597,7 +759,7 @@ const ImitationWebsite = () => {
       </section>
 
       {/* Best Selling Products */}
-      <section className="py-20" data-section="best-sellers">
+      {/* <section className="py-20" data-section="best-sellers">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-red-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
@@ -730,38 +892,38 @@ const ImitationWebsite = () => {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Special Offer Section */}
       <section className="py-20 relative h-150 overflow-hidden" data-section="special-offer">
         <div className="absolute inset-0" style={{ background: 'var(--bg1-color)' }}>
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
-              <div className="text-white">
-                <div className="inline-block px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulseGlow" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
+              <div className="text-white"
+                data-aos="fade-right"
+                data-aos-duration="1500">
+                <div className="inline-block px-4 py-2 rounded-full text-sm font-bold mb-6 animate-pulseGlow" style={{ backgroundColor: 'var(--headingText-color)', color: '#000', fontWeight: '700' }}>
                   CB IMITATION - SPECIAL OFFER
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400', color: 'var(--headingText-color)' }}>
-                  Get <span style={{ color: '#CC9543' }}>40% OFF</span><br />
-                  on <span style={{ color: '#E11D48' }}>Wedding Collection</span>
+                <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-gentleFade text-[var(--text1-color)]">
+                  Get 40% OFF<br />
+                  on Earing and Pendant
                 </h2>
-                <p className="text-base mb-8 animate-gentleFade" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
+                <p className="text-base mb-8 animate-gentleFade" style={{ color: 'var(--text1-color)' }}>
                   Celebrate your special day with our exquisite wedding jewelry. Offer valid for a limited time!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="px-8 py-4 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
-                    <span className="flex items-center space-x-2">
-                      <Gift className="w-5 h-5" />
-                      <span>Shop Wedding Collection</span>
-                    </span>
-                  </button>
-                  <button className="px-8 py-4 rounded-xl font-bold border-2 border-white text-white hover:bg-gray-100 hover:text-black transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
+
+
+                  <Button variant="primary" icon="">
                     View Catalog
-                  </button>
+                  </Button>
+
                 </div>
               </div>
 
-              <div className="relative px-4 py-10">
+              <div className="relative px-4 py-10" data-aos="fade-left"
+                data-aos-duration="1500">
                 <img
                   src={nd1}
                   alt="Wedding Collection"
@@ -775,7 +937,7 @@ const ImitationWebsite = () => {
       </section>
 
       {/* Customer Reviews Section */}
-      <section className="py-20" data-section="customer-reviews">
+      {/* <section className="py-20" data-section="customer-reviews">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-block px-6 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-4 bg-green-600 text-white animate-pulseGlow" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
@@ -831,7 +993,7 @@ const ImitationWebsite = () => {
                     <div className="flex items-center space-x-5">
                       <h4 className="font-bold" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400', margin: "0", color: 'var(--headingText-color)' }}>{review.name}</h4>
                       {review.verified && (
-                        <span className="text-xs px-2 py-1 rounded-full text-white animate-pulseGlow" style={{ backgroundColor: '#CC9543', fontFamily: 'Raleway', fontWeight: '700' }}>✓ Verified</span>
+                        <span className="text-xs px-2 py-1 rounded-full text-white animate-pulseGlow" style={{ backgroundColor: 'var(--headingText-color)', fontFamily: 'Raleway', fontWeight: '700' }}>✓ Verified</span>
                       )}
                     </div>
                     <p className="text-sm font-medium" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)' }}>{review.location}</p>
@@ -840,7 +1002,7 @@ const ImitationWebsite = () => {
 
                 <div className="flex items-center mb-3">
                   {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-current" style={{ color: '#CC9543' }} />
+                    <Star key={i} className="w-4 h-4 fill-current" style={{ color: 'var(--headingText-color)' }} />
                   ))}
                 </div>
 
@@ -854,15 +1016,15 @@ const ImitationWebsite = () => {
           </div>
 
           <div className="text-center mt-12">
-            <button className="px-8 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ backgroundColor: '#CC9543', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
+            <button className="px-8 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 animate-bounceIn" style={{ backgroundColor: 'var(--headingText-color)', color: '#000', fontFamily: 'Raleway', fontWeight: '700' }}>
               Read More Testimonials
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Newsletter Section */}
-      <section className="py-20" style={{ backgroundColor: 'var(--primary-color)' }} data-section="newsletter">
+      {/* <section className="py-20" style={{ backgroundColor: 'var(--primary-color)' }} data-section="newsletter">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-gentleFade" style={{ fontFamily: 'Great Vibes', fontWeight: '400', color: 'var(--headingText-color)' }}>
@@ -885,117 +1047,180 @@ const ImitationWebsite = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Footer */}
-      <footer className="text-white py-16" style={{ backgroundColor: 'var(--bg1-color)' }} data-section="footer">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 relative">
-                  <svg viewBox="0 0 100 100" className="w-8 h-8" style={{ color: '#CC9543' }}>
-                    <g fill="none">
-                      <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.5" />
-                      <span className="text-center text-sm text-black font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>
-                        CB
-                      </span>
-                      {[...Array(6)].map((_, i) => (
-                        <g key={i} transform={`rotate(${i * 60} 50 50)`}>
-                          <path d="M50 20 Q50 30 50 40 Q50 30 50 20" fill="currentColor" opacity="0.6" />
-                        </g>
-                      ))}
-                    </g>
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-4 h-4 flex items-center justify-center" style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)', backgroundColor: '#CC9543' }}>
-                      <span className="text-black text-xs font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700', fontSize: '6px' }}>
-                        CB
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <span className="text-xl font-bold" style={{ fontFamily: 'Bodoni Moda', fontWeight: '400', color: 'var(--headingText-color)' }}>
-                  CB IMITATION
-                </span>
-              </div>
-              <p className="mb-6 leading-relaxed" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>
-                Redefining elegance with timeless jewelry that celebrates life's most cherished moments.
-              </p>
-              <div className="flex space-x-4">
-                <a href="#" className="transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Facebook</a>
-                <a href="#" className="transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Instagram</a>
-                <a href="#" className="transition-all duration-300" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Pinterest</a>
-              </div>
+      <section className="py-16 sm:py-20 md:py-24 relative overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-10 left-10 w-32 h-32 border border-[var(--headingText-color)] rounded-full animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-24 h-24 border border-[var(--headingText-color)] rounded-full animate-pulse delay-300"></div>
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-[var(--headingText-color)] rounded-full animate-pulse delay-150"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16 sm:mb-20" data-aos="fade-up"
+            data-aos-duration="1500">
+            <h2
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-wide"
+              style={{
+                color: 'var(--headingText-color)',
+                fontFamily: 'var(--font-primary)',
+              }}
+            >
+              Why Choose Us?
+            </h2>
+
+            {/* Decorative Element Under Heading */}
+            <div className="flex items-center justify-center space-x-2 mb-6">
+              <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-[var(--headingText-color)] rounded-full"></div>
+              <div className="text-[var(--headingText-color)] text-lg animate-pulse">✦</div>
+              <div className="w-6 h-0.5 bg-[var(--headingText-color)] rounded-full"></div>
+              <div className="text-[var(--headingText-color)] text-lg animate-pulse delay-150">✦</div>
+              <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-[var(--headingText-color)] rounded-full"></div>
             </div>
 
-            <div>
-              <h4 className="font-bold mb-6" style={{ color: '#CC9543', fontFamily: 'Bodoni Moda', fontWeight: '400' }}>Shop</h4>
-              <ul className="space-y-3" style={{ color: 'var(--text1-color)' }}>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>New Arrivals</a></li>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Best Sellers</a></li>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Collections</a></li>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Gift Cards</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-6" style={{ color: '#CC9543', fontFamily: 'Bodoni Moda', fontWeight: '400' }}>Support</h4>
-              <ul className="space-y-3" style={{ color: 'var(--text1-color)' }}>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Contact Us</a></li>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Size Guide</a></li>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Shipping Info</a></li>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Returns</a></li>
-                <li><a href="#" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500' }}>Care Guide</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold mb-6" style={{ color: '#CC9543', fontFamily: 'Bodoni Moda', fontWeight: '400' }}>Contact</h4>
-              <ul className="space-y-4" style={{ color: 'var(--text1-color)' }}>
-                <li className="flex items-center space-x-3">
-                  <Phone className="w-4 h-4" style={{ color: '#CC9543' }} />
-                  <span style={{ fontFamily: 'Raleway', fontWeight: '400' }}>+91 91234 56789</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <Mail className="w-4 h-4" style={{ color: '#CC9543' }} />
-                  <span style={{ fontFamily: 'Raleway', fontWeight: '400' }}>support@cbimitation.com</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <MapPin className="w-4 h-4" style={{ color: '#CC9543' }} />
-                  <span style={{ fontFamily: 'Raleway', fontWeight: '400' }}>Jaipur & Mumbai, India</span>
-                </li>
-              </ul>
-
-              <div className="mt-6">
-                <div className="text-sm mb-2" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>Follow us for inspiration</div>
-                <div className="flex space-x-3">
-                  <a href="#" className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-800 transition-all duration-300" style={{ backgroundColor: '#CC9543' }}>
-                    <span className="text-black text-sm font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>f</span>
-                  </a>
-                  <a href="#" className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-800 transition-all duration-300" style={{ backgroundColor: '#CC9543' }}>
-                    <span className="text-black text-sm font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>ig</span>
-                  </a>
-                  <a href="#" className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-800 transition-all duration-300" style={{ backgroundColor: '#CC9543' }}>
-                    <span className="text-black text-sm font-bold" style={{ fontFamily: 'Raleway', fontWeight: '700' }}>pin</span>
-                  </a>
-                </div>
-              </div>
-            </div>
+            <p
+              className="text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed"
+              style={{
+                color: 'var(--text1-color)',
+                fontFamily: 'var(--font-secondary)',
+              }}
+            >
+              Excellence delivered through commitment and trust
+            </p>
           </div>
 
-          <div className="border-t border-gray-800 mt-12 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm" style={{ fontFamily: 'Raleway', fontWeight: '400', color: 'var(--text1-color)' }}>© 2025 CB Imitation is Proudly Powered by <span style={{ color: 'var(--text-color)' }}>EasyWay IT Solutions</span></div>
-              <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" className="text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Privacy Policy</a>
-                <a href="#" className="text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Terms of Service</a>
-                <a href="#" className="text-sm transition-all duration-300 underline-grow" style={{ fontFamily: 'Raleway', fontWeight: '500', color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Cookie Policy</a>
+          {/* Promises Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {promises.map((promise, index) => (
+              <div
+                key={index}
+                className="group relative isolate"
+                style={{ pointerEvents: 'auto' }}
+                data-aos="fade-up"
+                data-aos-duration="1500"
+              >
+                {/* Main Card */}
+                <div className="relative bg-white/5 backdrop-blur-sm border-2 border-[var(--headingText-color)]/30 rounded-2xl p-8 text-center transition-all duration-500 ease-out hover:border-[var(--headingText-color)] hover:shadow-2xl hover:shadow-[var(--headingText-color)]/30 hover:scale-105 will-change-transform will-change-border will-change-shadow">
+                  {/* Premium Corner Decorations */}
+                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--headingText-color)] rounded-tl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+                  <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--headingText-color)] rounded-tr-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--headingText-color)] rounded-bl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--headingText-color)] rounded-br-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+
+                  {/* Icon/Number */}
+                  <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out relative">
+                    <div className="w-20 h-20 mx-auto rounded-full bg-[var(--headingText-color)] flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:shadow-[var(--headingText-color)]/40 transition-shadow duration-500 ease-out">
+                      <span
+                        className="text-white text-2xl"
+                        style={{ fontFamily: 'var(--font-primary)' }}
+                      >
+                        {promise.icon}
+                      </span>
+                    </div>
+
+                    {/* Floating Ring */}
+                    <div
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-dashed border-[var(--headingText-color)]/50 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-spin-slow transition-opacity duration-500 ease-out will-change-transform will-change-opacity"
+                    ></div>
+                  </div>
+
+                  {/* Content */}
+                  <div>
+                    <h3
+                      className="text-xl font-bold tracking-wide"
+                      style={{
+                        color: 'var(--headingText-color)',
+                        fontFamily: 'var(--font-primary)',
+                      }}
+                    >
+                      {promise.title}
+                    </h3>
+
+                    <h4
+                      className="text-lg font-semibold"
+                      style={{
+                        color: 'var(--headingText-color)',
+                        fontFamily: 'var(--font-primary)',
+                      }}
+                    >
+                      {promise.subtitle}
+                    </h4>
+
+                    {/* Decorative Line */}
+                    <div className="flex items-center justify-center space-x-2 my-4">
+                      <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--headingText-color)] rounded-full"></div>
+                      <div className="w-1.5 h-1.5 bg-[var(--headingText-color)] rounded-full animate-pulse"></div>
+                      <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--headingText-color)] rounded-full"></div>
+                    </div>
+
+                    <p
+                      className="text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500 ease-out"
+                      style={{
+                        color: 'var(--text1-color)',
+                        fontFamily: 'var(--font-secondary)',
+                      }}
+                    >
+                      {promise.description}
+                    </p>
+                  </div>
+
+                  {/* Shine Effect */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out rounded-2xl will-change-transform pointer-events-none"
+                  ></div>
+                </div>
               </div>
+            ))}
+          </div>
+
+          {/* Bottom Decorative Element */}
+          <div className="mt-16 flex justify-center">
+            <div className="flex items-center space-x-3">
+              <div className="w-2 h-2 bg-[var(--headingText-color)] rounded-full animate-bounce"></div>
+              <div className="w-16 h-0.5 bg-gradient-to-r from-[var(--headingText-color)] to-transparent rounded-full"></div>
+              <div className="w-3 h-3 bg-[var(--headingText-color)] rounded-full animate-pulse"></div>
+              <div className="w-8 h-0.5 bg-[var(--headingText-color)] rounded-full"></div>
+              <div className="w-3 h-3 bg-[var(--headingText-color)] rounded-full animate-pulse delay-150"></div>
+              <div className="w-16 h-0.5 bg-gradient-to-l from-[var(--headingText-color)] to-transparent rounded-full"></div>
+              <div className="w-2 h-2 bg-[var(--headingText-color)] rounded-full animate-bounce delay-300"></div>
             </div>
           </div>
         </div>
-      </footer>
+
+        <style jsx>{`
+    @keyframes spin-slow {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .animate-spin-slow {
+      animation: spin-slow 8s linear infinite;
+    }
+
+    /* Ensure smooth hover transitions */
+    .group {
+      transform: translateZ(0); /* Force hardware acceleration */
+      will-change: transform;
+    }
+
+    /* Prevent hover conflicts */
+    .group:hover .group-hover\\:opacity-100 {
+      opacity: 1;
+    }
+
+    /* Optimize shine effect */
+    .group-hover\\:translate-x-full {
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  `}</style>
+      </section>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
