@@ -14,11 +14,11 @@ const Header = ({ handleThemeToggle, theme }) => {
                 </div>
                 <nav className={`${isMenuOpen ? 'block' : 'hidden'} md:block`}>
                     <ul className="flex flex-col md:flex-row gap-4 md:gap-8">
-                        <li><a href="#" className="nav-link">Home</a></li>
+                        <li><a href="/" className="nav-link">Home</a></li>
                         <li><a href="#" className="nav-link">Shop</a></li>
                         <li><a href="#" className="nav-link">Collections</a></li>
                         <li><a href="#" className="nav-link">About</a></li>
-                        <li><a href="#" className="nav-link">Contact</a></li>
+                        <li><a href="/contact" className="nav-link">Contact</a></li>
                     </ul>
                 </nav>
                 <div className="flex items-center gap-4">
