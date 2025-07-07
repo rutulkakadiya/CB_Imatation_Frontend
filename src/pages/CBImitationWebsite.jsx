@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Star, ArrowRight, Phone, Mail, MapPin, Search, ShoppingCart, User, Heart, Eye, Gift } from 'lucide-react';
+import { Menu, X, ChevronDown, Star, ArrowRight, Phone, Mail, MapPin, Search, ShoppingCart, User, Heart, Eye, Gift, Users, Zap, Factory, Sparkles, Award } from 'lucide-react';
 import '../index.css';
 import SliderImage1 from '../assets/slider-1.jpg';
 import SliderImage2 from '../assets/slider-2.jpg';
@@ -161,19 +161,19 @@ const ImitationWebsite = () => {
 
   const promises = [
     {
-      icon: "👥",
+      icon: <Users className="w-8 h-8" />,
       title: "1000+",
       subtitle: "Happy Clients",
       description: "Satisfied customers trust our quality"
     },
     {
-      icon: "🏭",
+      icon: <Factory className="w-8 h-8" />,
       title: "Direct",
       subtitle: "Manufacturer",
       description: "Factory direct pricing & quality"
     },
     {
-      icon: "✨",
+      icon: <Sparkles className="w-8 h-8" />,
       title: "Premium",
       subtitle: "Designs",
       description: "Endless variety to choose from"
@@ -585,6 +585,13 @@ const ImitationWebsite = () => {
             >
               New Arrivals
             </h2>
+            <div className="flex items-center justify-center space-x-2 mt-3">
+              <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--primary-color)] rounded-full"></div>
+              <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse"></div>
+              <div className="w-3 h-0.5 bg-[var(--primary-color)] rounded-full"></div>
+              <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse delay-75"></div>
+              <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--primary-color)] rounded-full"></div>
+            </div>
             <p className="text-base sm:text-md max-w-2xl mx-auto animate-gentleFade mt-3" style={{ color: 'var(--text1-color)' }}>
               Explore the latest additions to our CB Imitation collection
             </p>
@@ -685,7 +692,13 @@ const ImitationWebsite = () => {
             >
               Best Sellers
             </h2>
-
+            <div className="flex items-center justify-center space-x-2 mt-3">
+              <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--primary-color)] rounded-full"></div>
+              <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse"></div>
+              <div className="w-3 h-0.5 bg-[var(--primary-color)] rounded-full"></div>
+              <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse delay-75"></div>
+              <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--primary-color)] rounded-full"></div>
+            </div>
             <p className="text-base sm:text-md max-w-2xl mx-auto animate-gentleFade mt-3" style={{ color: 'var(--text1-color)' }}>
               Our curated selection of iconic CB Imitation designs
             </p>
@@ -1057,136 +1070,136 @@ const ImitationWebsite = () => {
           <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-[var(--headingText-color)] rounded-full animate-pulse delay-150"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16 sm:mb-20" data-aos="fade-up"
-            data-aos-duration="1500">
-            <h2
-              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 tracking-wide"
-              style={{
-                color: 'var(--headingText-color)',
-                fontFamily: 'var(--font-primary)',
-              }}
-            >
-              Why Choose Us?
-            </h2>
-
-            {/* Decorative Element Under Heading */}
-            <div className="flex items-center justify-center space-x-2 mb-6">
-              <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-[var(--headingText-color)] rounded-full"></div>
-              <div className="text-[var(--headingText-color)] text-lg animate-pulse">✦</div>
-              <div className="w-6 h-0.5 bg-[var(--headingText-color)] rounded-full"></div>
-              <div className="text-[var(--headingText-color)] text-lg animate-pulse delay-150">✦</div>
-              <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-[var(--headingText-color)] rounded-full"></div>
-            </div>
-
-            <p
-              className="text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed"
-              style={{
-                color: 'var(--text1-color)',
-                fontFamily: 'var(--font-secondary)',
-              }}
-            >
-              Excellence delivered through commitment and trust
-            </p>
-          </div>
-
+    
           {/* Promises Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {promises.map((promise, index) => (
-              <div
-                key={index}
-                className="group relative isolate"
-                style={{ pointerEvents: 'auto' }}
-                data-aos="fade-up"
-                data-aos-duration="1500"
-              >
-                {/* Main Card */}
-                <div className="relative bg-white/5 backdrop-blur-sm border-2 border-[var(--headingText-color)]/30 rounded-2xl p-8 text-center transition-all duration-500 ease-out hover:border-[var(--headingText-color)] hover:shadow-2xl hover:shadow-[var(--headingText-color)]/30 hover:scale-105 will-change-transform will-change-border will-change-shadow">
-                  {/* Premium Corner Decorations */}
-                  <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--headingText-color)] rounded-tl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
-                  <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--headingText-color)] rounded-tr-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
-                  <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--headingText-color)] rounded-bl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
-                  <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--headingText-color)] rounded-br-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+          <div className="w-full min-h-screen py-20 px-4">
+            <style dangerouslySetInnerHTML={{
+              __html: `
+          @keyframes spin-slow {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+          }
+          
+          .animate-spin-slow {
+            animation: spin-slow 8s linear infinite;
+          }
+        `
+            }} />
 
-                  {/* Icon/Number */}
-                  <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out relative">
-                    <div className="w-20 h-20 mx-auto rounded-full bg-[var(--headingText-color)] flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:shadow-[var(--headingText-color)]/40 transition-shadow duration-500 ease-out">
-                      <span
-                        className="text-white text-2xl"
-                        style={{ fontFamily: 'var(--font-primary)' }}
-                      >
-                        {promise.icon}
-                      </span>
-                    </div>
-
-                    {/* Floating Ring */}
-                    <div
-                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-dashed border-[var(--headingText-color)]/50 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-spin-slow transition-opacity duration-500 ease-out will-change-transform will-change-opacity"
-                    ></div>
-                  </div>
-
-                  {/* Content */}
-                  <div>
-                    <h3
-                      className="text-xl font-bold tracking-wide"
-                      style={{
-                        color: 'var(--headingText-color)',
-                        fontFamily: 'var(--font-primary)',
-                      }}
-                    >
-                      {promise.title}
-                    </h3>
-
-                    <h4
-                      className="text-lg font-semibold"
-                      style={{
-                        color: 'var(--headingText-color)',
-                        fontFamily: 'var(--font-primary)',
-                      }}
-                    >
-                      {promise.subtitle}
-                    </h4>
-
-                    {/* Decorative Line */}
-                    <div className="flex items-center justify-center space-x-2 my-4">
-                      <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--headingText-color)] rounded-full"></div>
-                      <div className="w-1.5 h-1.5 bg-[var(--headingText-color)] rounded-full animate-pulse"></div>
-                      <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--headingText-color)] rounded-full"></div>
-                    </div>
-
-                    <p
-                      className="text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500 ease-out"
-                      style={{
-                        color: 'var(--text1-color)',
-                        fontFamily: 'var(--font-secondary)',
-                      }}
-                    >
-                      {promise.description}
-                    </p>
-                  </div>
-
-                  {/* Shine Effect */}
-                  <div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out rounded-2xl will-change-transform pointer-events-none"
-                  ></div>
+            <div className="max-w-7xl mx-auto">
+              {/* Section Header */}
+              <div className="text-center mb-16">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6"
+                  style={{ backgroundColor: 'var(--headingText-color)' }}>
+                  <Award className="w-8 h-8 text-white" />
                 </div>
+                <h2 className="text-4xl md:text-5xl font-bold mb-4"
+                  style={{ color: 'var(--headingText-color)', fontFamily: 'var(--font-primary)' }}>
+                  Why Choose Us
+                </h2>
+                <div className="flex items-center justify-center space-x-2 mt-3">
+                  <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--primary-color)] rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse"></div>
+                  <div className="w-3 h-0.5 bg-[var(--primary-color)] rounded-full"></div>
+                  <div className="w-1.5 h-1.5 bg-[var(--primary-color)] rounded-full animate-pulse delay-75"></div>
+                  <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--primary-color)] rounded-full"></div>
+                </div>
+                <p className="text-md mt-3 max-w-2xl mx-auto"
+                  style={{ color: 'var(--text1-color)', fontFamily: 'var(--font-secondary)' }}>
+                  Experience excellence with our proven track record and commitment to quality
+                </p>
               </div>
-            ))}
-          </div>
 
-          {/* Bottom Decorative Element */}
-          <div className="mt-16 flex justify-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-[var(--headingText-color)] rounded-full animate-bounce"></div>
-              <div className="w-16 h-0.5 bg-gradient-to-r from-[var(--headingText-color)] to-transparent rounded-full"></div>
-              <div className="w-3 h-3 bg-[var(--headingText-color)] rounded-full animate-pulse"></div>
-              <div className="w-8 h-0.5 bg-[var(--headingText-color)] rounded-full"></div>
-              <div className="w-3 h-3 bg-[var(--headingText-color)] rounded-full animate-pulse delay-150"></div>
-              <div className="w-16 h-0.5 bg-gradient-to-l from-[var(--headingText-color)] to-transparent rounded-full"></div>
-              <div className="w-2 h-2 bg-[var(--headingText-color)] rounded-full animate-bounce delay-300"></div>
+              {/* Cards Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {promises.map((promise, index) => (
+                  <div
+                    key={index}
+                    className="group relative isolate"
+                    style={{ pointerEvents: 'auto' }}
+                    data-aos="fade-up"
+                    data-aos-duration="1500"
+                  >
+                    {/* Main Card */}
+                    <div className="relative bg-white/5 backdrop-blur-sm border-2 border-[var(--headingText-color)]/30 rounded-2xl p-8 text-center transition-all duration-500 ease-out hover:border-[var(--headingText-color)] hover:shadow-2xl hover:shadow-[var(--headingText-color)]/30 hover:scale-105 will-change-transform will-change-border will-change-shadow">
+                      {/* Premium Corner Decorations */}
+                      <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-[var(--headingText-color)] rounded-tl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+                      <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-[var(--headingText-color)] rounded-tr-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+                      <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-[var(--headingText-color)] rounded-bl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+                      <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-[var(--headingText-color)] rounded-br-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-out"></div>
+
+                      {/* Icon/Number */}
+                      <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500 ease-out relative">
+                        <div className="w-20 h-20 mx-auto rounded-full bg-[var(--headingText-color)] flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:shadow-[var(--headingText-color)]/40 transition-shadow duration-500 ease-out">
+                          <span
+                            className="text-white text-2xl"
+                            style={{ fontFamily: 'var(--font-primary)' }}
+                          >
+                            {promise.icon}
+                          </span>
+                        </div>
+
+                        {/* Floating Ring */}
+                        <div
+                          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border-2 border-dashed border-[var(--headingText-color)]/50 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-spin-slow transition-opacity duration-500 ease-out will-change-transform will-change-opacity"
+                        ></div>
+                      </div>
+
+                      {/* Content */}
+                      <div>
+                        <h3
+                          className="text-xl font-bold tracking-wide"
+                          style={{
+                            color: 'var(--headingText-color)',
+                            fontFamily: 'var(--font-primary)',
+                          }}
+                        >
+                          {promise.title}
+                        </h3>
+
+                        <h4
+                          className="text-lg font-semibold"
+                          style={{
+                            color: 'var(--headingText-color)',
+                            fontFamily: 'var(--font-primary)',
+                          }}
+                        >
+                          {promise.subtitle}
+                        </h4>
+
+                        {/* Decorative Line */}
+                        <div className="flex items-center justify-center space-x-2 my-4">
+                          <div className="w-4 h-0.5 bg-gradient-to-r from-transparent to-[var(--headingText-color)] rounded-full"></div>
+                          <div className="w-1.5 h-1.5 bg-[var(--headingText-color)] rounded-full animate-pulse"></div>
+                          <div className="w-4 h-0.5 bg-gradient-to-l from-transparent to-[var(--headingText-color)] rounded-full"></div>
+                        </div>
+
+                        <p
+                          className="text-sm leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity duration-500 ease-out"
+                          style={{
+                            color: 'var(--text1-color)',
+                            fontFamily: 'var(--font-secondary)',
+                          }}
+                        >
+                          {promise.description}
+                        </p>
+                      </div>
+
+                      {/* Shine Effect */}
+                      <div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out rounded-2xl will-change-transform pointer-events-none"
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+            
             </div>
           </div>
-        </div>
+
+       
+ 
 
         <style jsx>{`
     @keyframes spin-slow {
