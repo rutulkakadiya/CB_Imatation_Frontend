@@ -9,7 +9,7 @@ import ProductPage from './pages/ProductPage';
 export default function App() {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // animation duration in ms
+      duration: 1500, // animation duration in ms
     });
   }, []);
   return (

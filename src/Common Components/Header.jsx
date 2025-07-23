@@ -1,70 +1,64 @@
-import { Menu, Search, ShoppingCart, User, Sun, Moon } from 'lucide-react';
-import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const Header = ({ handleThemeToggle, theme }) => {
+export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const navigateToContact = ()=>{
+        navigate("/contact")
+    }
 
     return (
-        <header className="header" style={{ backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
-                <div className="logo-container">
-                    <div className="transform transition-transform duration-300 group-hover:translate-x-2">
-                        <img className='h-[80px]' src="/logo.png" alt="" />
+        <div>
+            <header className='h-[120px] w-[100%] absolute flex items-center justify-center z-50 top-0 bg-transparent'>
+                <nav className='flex justify-between items-center w-[95%]'>
+                    <div className="logo">
+                        <img className='h-[100px]' src="/Group 1 black.png" alt="" />
+                    </div>
+
+                    {/* Desktop Navigation */}
+                    <div className="pagination hidden md:flex items-center gap-[30px]">
+                        <Link to={"/"}><p className='hover:text-[var(--smallText-color)] font-semibold cursor-pointer'>Home</p></Link>
+                        <Link to={"/product"}><p className='hover:text-[var(--smallText-color)] font-semibold cursor-pointer'>Collection</p></Link>
+                        <Link to={"contact"}><p className='hover:text-[var(--smallText-color)] font-semibold cursor-pointer'>Contact Us</p></Link>
+                        <button onClick={navigateToContact} className='px-5 py-3 text-white bg-[var(--smallText-color)] hover:bg-black'>Get A Quote</button>
+                    </div>
+
+                    {/* Mobile Hamburger Button */}
+                    <button
+                        className={`md:hidden flex flex-col items-center justify-center w-10 h-10 relative z-60 transition-transform duration-500 ${isMenuOpen ? 'rotate-180' : ''}`}
+                        onClick={toggleMenu}
+                    >
+                        <span className={`absolute h-1 rounded bg-[var(--smallText-color)] transition-all duration-500 ${isMenuOpen ? 'rotate-45 w-full' : 'w-[70%] top-2'}`}></span>
+                        <span className={`h-1 w-full rounded bg-[var(--smallText-color)] transition-all duration-500 ${isMenuOpen ? 'scale-x-0' : ''}`}></span>
+                        <span className={`absolute h-1 rounded bg-[var(--smallText-color)] transition-all duration-500 ${isMenuOpen ? '-rotate-45 w-full' : 'w-[70%] bottom-2'}`}></span>
+                    </button>
+
+                </nav>
+
+                {/* Mobile Slide Menu */}
+                <div className={`fixed top-0 right-0 h-full w-80 bg-[#fffefc] shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
+                    <div className="flex flex-col p-8 pt-32 gap-8">
+                        <p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Home</p>
+                        <p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Collection</p>
+                        <p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Contact Us</p>
+                        <button className='px-6 py-4 text-white bg-[var(--smallText-color)] hover:bg-black text-lg mt-4'>Get A Quote</button>
                     </div>
                 </div>
-                <nav className={`${isMenuOpen ? 'block' : 'hidden'} md:block`}>
-                    <ul className="flex flex-col md:flex-row gap-4 md:gap-8">
-                        <li><a href="/" className="nav-link">Home</a></li>
-                        <li><a href="#" className="nav-link">Shop</a></li>
-                        <li><a href="/product" className="nav-link">Collections</a></li>
-                        <li><a href="#" className="nav-link">About</a></li>
-                        <li><a href="/contact" className="nav-link">Contact</a></li>
-                    </ul>
-                </nav>
-                <div className="flex items-center gap-4">
-                    <Search className="w-5 h-5" style={{ color: 'var(--text-color)' }} />
-                    {/* <ShoppingCart className="w-5 h-5" style={{ color: 'var(--text-color)' }} /> */}
-                    <User className="w-5 h-5" style={{ color: 'var(--text-color)' }} />
-                    {/* ---------------------------------------------------------------------------------------------- */}
-                    {/* switch */}
 
-                    <label className="relative inline-flex items-center cursor-pointer">
-                        <input
-                            type="checkbox"
-                            checked={theme === 'dark'}
-                            onChange={handleThemeToggle}
-                            className="sr-only peer"
-                        />
-                        <div className="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-[var(--primary-color)] transition-all duration-300"></div>
-                        <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 peer-checked:translate-x-5 flex items-center justify-center">
-                            {theme === 'dark' ? (
-                                <Moon className="w-3 h-3" style={{ color: 'var(--black)' }} />
-                            ) : (
-                                <Sun className="w-3 h-3" style={{ color: 'var(--text1-color)' }} />
-                            )}
-                        </div>
-                    </label>
-                    {/* --------------------------------------------------------------------------------------------------- */}
-                    {/* button */}
-
-                    {/* <button
-                        onClick={handleThemeToggle}
-                        className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 hover:border-2 hover:border-[var(--text-color)] hover:shadow-lg"
-                        style={{color: 'var(--text1-color)' }}
-                    >
-                        {theme === 'dark' ? (
-                            <Sun className="w-4 h-4" />
-                        ) : (
-                            <Moon className="w-4 h-4" />
-                        )}
-                    </button> */}
-                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
-                        <Menu className="w-5 h-5" style={{ color: 'var(--text-color)' }} />
-                    </button>
-                </div>
-            </div>
-        </header>
-    );
-};
-
-export default Header;
+                {/* Overlay */}
+                {isMenuOpen && (
+                    <div
+                        className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+                        onClick={toggleMenu}
+                    ></div>
+                )}
+            </header>
+        </div>
+    )
+}

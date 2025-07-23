@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-xs: 350px;
+}
+
 * {
   font-family: var(--font-primary);
 
@@ -16,4 +20,19 @@ font-family: var(--font-primary);
   --font-secondary: "Montserrat", sans-serif;
 
     --smallText-color: #ab7f5c;
+}
+
+@keyframes horizontalFloatRotateFade {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: rotate(5deg);
+    opacity: 0.6;
+  }
+}
+
+.animate-horizontal-float {
+  animation: horizontalFloatRotateFade 6s ease-in-out infinite;
 }
