@@ -72,14 +72,14 @@ export default function FourthSection() {
                     >
                         <div className="border-[6px] border-[#d8a14f] rounded-t-full h-[350px] xs:h-[550px] lg:h-[650px] w-full max-w-[500px] mx-auto overflow-hidden">
                             <img
-                                src="/img5.png"
+                                src="/img5.webp"
                                 alt="model"
                                 className="w-full h-full object-cover rounded-t-full"
                             />
                         </div>
                         <div className="absolute hidden sm:block top-[65%] left-[5%] md:left-[10%] lg:left-[15%] border-4 border-white rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 overflow-hidden shadow-xl bg-white">
                             <img
-                                src="/img6.png"
+                                src="/img6.webp"
                                 alt="earring"
                                 className="w-full h-full object-cover"
                             />

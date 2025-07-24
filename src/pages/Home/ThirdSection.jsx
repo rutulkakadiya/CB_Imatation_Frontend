@@ -16,26 +16,26 @@ const ThirdSection = () => {
             title: 'Pendants',
             description: 'Elegant collection of rings crafted with precision. From engagement rings to fashion statements, discover pieces that celebrate every moment and milestone in life.',
             items: '( Explore 75+ items )',
-            bgImage: '/catbg2.png'
+            bgImage: '/catbg2.webp'
         },
         {
             id: 'bangles',
             title: 'Bangles',
             description: 'Stunning bracelets that add grace to your wrists. From delicate chains to bold statement pieces, each bracelet tells its own unique story.',
             items: '( Explore 60+ items )',
-            bgImage: '/catbg3.png'
+            bgImage: '/catbg3.webp'
         },
         {
             id: 'necklace',
             title: 'Necklace',
             description: 'Beautiful pendants that capture hearts. Each piece is meticulously designed to complement your style and add a touch of elegance to any outfit.',
             items: '( Explore 40+ items )',
-            bgImage: '/catbg4.png'
+            bgImage: '/catbg4.webp'
         }
     ];
 
     return (
-        <div className="w-full min-h-screen relative overflow-hidden">
+        <div className="w-full h-[95vh] relative overflow-hidden">
             {/* Background Image */}
             {activeSection && (
                 <div
@@ -47,7 +47,7 @@ const ThirdSection = () => {
                 </div>
             )}
 
-            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 min-h-screen">
+            <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 h-[100%]">
                 {sections.map((section, index) => {
                     const isActive = activeSection === section.id;
 

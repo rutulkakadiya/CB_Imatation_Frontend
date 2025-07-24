@@ -9,7 +9,7 @@ export default function Header() {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const navigateToContact = ()=>{
+    const navigateToContact = () => {
         navigate("/contact")
     }
 
@@ -18,14 +18,14 @@ export default function Header() {
             <header className='h-[120px] w-[100%] absolute flex items-center justify-center z-50 top-0 bg-transparent'>
                 <nav className='flex justify-between items-center w-[95%]'>
                     <div className="logo">
-                        <img className='h-[100px]' src="/Group 1 black.png" alt="" />
+                        <Link to={"/"}><img className='h-[100px]' src="/cb_logo.png" alt="" /></Link>
                     </div>
 
                     {/* Desktop Navigation */}
                     <div className="pagination hidden md:flex items-center gap-[30px]">
                         <Link to={"/"}><p className='hover:text-[var(--smallText-color)] font-semibold cursor-pointer'>Home</p></Link>
                         <Link to={"/product"}><p className='hover:text-[var(--smallText-color)] font-semibold cursor-pointer'>Collection</p></Link>
-                        <Link to={"contact"}><p className='hover:text-[var(--smallText-color)] font-semibold cursor-pointer'>Contact Us</p></Link>
+                        <Link to={"/contact"}><p className='hover:text-[var(--smallText-color)] font-semibold cursor-pointer'>Contact Us</p></Link>
                         <button onClick={navigateToContact} className='px-5 py-3 text-white bg-[var(--smallText-color)] hover:bg-black'>Get A Quote</button>
                     </div>
 
@@ -44,10 +44,10 @@ export default function Header() {
                 {/* Mobile Slide Menu */}
                 <div className={`fixed top-0 right-0 h-full w-80 bg-[#fffefc] shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
                     <div className="flex flex-col p-8 pt-32 gap-8">
-                        <p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Home</p>
-                        <p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Collection</p>
-                        <p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Contact Us</p>
-                        <button className='px-6 py-4 text-white bg-[var(--smallText-color)] hover:bg-black text-lg mt-4'>Get A Quote</button>
+                        <Link to={"/"}><p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Home</p></Link>
+                        <Link to={"/product"}><p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Collection</p></Link>
+                        <Link to={"/contact"}><p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Contact Us</p></Link>
+                        <Link to={"/contact"}><button className='px-6 py-4 text-white bg-[var(--smallText-color)] hover:bg-black text-lg mt-4'>Get A Quote</button></Link>
                     </div>
                 </div>
 

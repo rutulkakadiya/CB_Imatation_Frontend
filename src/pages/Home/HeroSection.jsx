@@ -55,13 +55,13 @@ export default function HeroSection() {
                         {/* Image */}
                         <div className="imageDiv flex justify-center items-center md:col-span-5 xl:col-span-4 h-[70vh] xs:h-[80vh] sm:h-[100vh] relative">
                             <div
-                                className="image overflow-hidden h-[80%] z-10 w-[80%] xs:h-[90%] xs:w-[70%] sm:h-[90%] sm:w-[70%] md:h-[70%] md:w-[80%] lg:h-[70%] lg:w-[80%] bg-gray-300 rounded-t-[200px] flex justify-center items-center"
+                                className="image overflow-hidden h-[80%] z-10 w-[80%] xs:h-[90%] xs:w-[90%] sm:h-[90%] sm:w-[70%] md:h-[70%] md:w-[80%] lg:h-[70%] lg:w-[80%] bg-gray-300 rounded-t-[200px] flex justify-center items-center"
                                 data-aos="fade"
                                 data-aos-offset="200"
                                 data-aos-duration="1000"
                                 data-aos-easing="ease-in-out"
                             >
-                                <img className="h-full w-full z-10" src="/slider1.png" alt="" />
+                                <img className="h-full w-full z-10" src="/slider1.webp" alt="" />
                             </div>
 
 
@@ -136,20 +136,18 @@ export default function HeroSection() {
                             className="hidden rounded-[10px] md:flex absolute top-[3%] xl:top-[5%] right-[30%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] bg-gray-300 border overflow-hidden items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.3, 0.05, true) }}
                         >
-                            <img className='rounded-[10px]' src="/Product 9.png" alt="" />
+                            <img className='rounded-[10px]' src="/slider_product_1.webp" alt="" />
                         </div>
                         <div
                             className="hidden rounded-[10px] md:flex absolute top-[18%] right-[5%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] overflow-hidden bg-gray-300 items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
-                            style={{ transform: getTransform(0.05, 0.25, false) }}
-                        >
-                            <img className='rounded-[10px]' src="/Product 8.png" alt="" />
+                            style={{ transform: getTransform(0.05, 0.25, false) }}>
+                            <img className='rounded-[10px]' src="/slider_product_2.webp" alt="" />
                         </div>
                         <div
                             className="hidden rounded-[10px] sm:flex absolute bottom-[3%] xxl:bottom-[18%] right-[50%] md:right-[25%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] overflow-hidden bg-gray-300 items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.25, 0.82, false) }}
-
                         >
-                            <img className='rounded-[10px]' src="/Product 10.png" alt="" />
+                            <img className='rounded-[10px]' src="/slider_product_3.webp" alt="" />
                         </div>
 
                         <div
@@ -176,13 +174,13 @@ export default function HeroSection() {
                         {/* Image */}
                         <div className="imageDiv flex justify-center items-center md:col-span-5 xl:col-span-4 h-[70vh] xs:h-[80vh] sm:h-[100vh] relative">
                             <div
-                                className="image overflow-hidden h-[80%] z-10 w-[80%] xs:h-[90%] xs:w-[70%] sm:h-[90%] sm:w-[70%] bg-gray-300 rounded-t-[200px] flex justify-center items-center md:h-[70%] md:w-[80%] lg:h-[70%] lg:w-[80%]"
+                                className="image overflow-hidden h-[80%] z-10 w-[80%] xs:h-[90%] xs:w-[90%] sm:h-[90%] sm:w-[70%] bg-gray-300 rounded-t-[200px] flex justify-center items-center md:h-[70%] md:w-[80%] lg:h-[70%] lg:w-[80%]"
                                 data-aos="fade"
                                 data-aos-offset="200"
                                 data-aos-duration="1000"
                                 data-aos-easing="ease-in-out"
                             >
-                                <img className="h-full w-full z-10" src="/slider2.png" alt="" />
+                                <img className="h-full w-full z-10" src="/slider2.webp" alt="" />
                             </div>
 
                             <img className='absolute bottom-0 h-full' src="/leaf_bg.png" alt="" />
@@ -256,29 +254,29 @@ export default function HeroSection() {
                             className="hidden rounded-[10px] md:flex absolute top-[3%] xl:top-[5%] right-[30%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] bg-gray-300 border overflow-hidden items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.3, 0.05, true) }}
                         >
-                            <img className='rounded-[10px]' src="/Product 9.png" alt="" />
+                            <img className='rounded-[10px]' src="/slider_product_4.webp" alt="" />
                         </div>
                         <div
                             className="hidden rounded-[10px] md:flex absolute top-[18%] right-[5%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] overflow-hidden bg-gray-300 items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.05, 0.25, false) }}
                         >
-                            <img className='rounded-[10px]' src="/Product 8.png" alt="" />
+                            <img className='rounded-[10px]' src="/slider_product_5.webp" alt="" />
                         </div>
                         <div
                             className="hidden rounded-[10px] sm:flex absolute bottom-[3%] xxl:bottom-[18%] right-[50%] md:right-[25%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] overflow-hidden bg-gray-300 items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.25, 0.82, false) }}
 
                         >
-                            <img className='rounded-[10px]' src="/Product 10.png" alt="" />
+                            <img className='rounded-[10px]' src="/slider_product_6.webp" alt="" />
                         </div>
 
-                        <div
+                        {/* <div
                             className="flex absolute bottom-[0%] sm:bottom-[5%] right-[5%] h-[80px] sm:h-[100px] transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.25, 0.82, false) }}
 
                         >
                             <img className='rounded-[10px]' src="/sliderImage_1.png" alt="" />
-                        </div>
+                        </div> */}
 
                     </div>
                 </SwiperSlide>
@@ -296,13 +294,13 @@ export default function HeroSection() {
                         {/* Image */}
                         <div className="imageDiv flex justify-center items-center md:col-span-5 xl:col-span-4 h-[70vh] xs:h-[80vh] sm:h-[100vh] relative">
                             <div
-                                className="image overflow-hidden h-[80%] z-10 w-[80%] xs:h-[90%] xs:w-[70%] sm:h-[90%] sm:w-[70%] bg-gray-300 rounded-t-[200px] flex justify-center items-center md:h-[70%] md:w-[80%] lg:h-[70%] lg:w-[80%]"
+                                className="image overflow-hidden h-[80%] z-10 w-[80%] xs:h-[90%] xs:w-[90%] sm:h-[90%] sm:w-[70%] bg-gray-300 rounded-t-[200px] flex justify-center items-center md:h-[70%] md:w-[80%] lg:h-[70%] lg:w-[80%]"
                                 data-aos="fade"
                                 data-aos-offset="200"
                                 data-aos-duration="1000"
                                 data-aos-easing="ease-in-out"
                             >
-                                <img className="h-full w-full z-10" src="/slider3.png" alt="" />
+                                <img className="h-full w-full z-10" src="/slider3.webp" alt="" />
                             </div>
 
 
@@ -375,26 +373,26 @@ export default function HeroSection() {
                             className="hidden rounded-[10px] md:flex absolute top-[3%] xl:top-[5%] right-[30%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] bg-gray-300 border overflow-hidden items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.3, 0.05, true) }}
                         >
-                            <img className='rounded-[10px]' src="/Product 9.png" alt="" />
+                            <img className='rounded-[10px]' src="/slider_product_7.webp" alt="" />
                         </div>
                         <div
                             className="hidden rounded-[10px] md:flex absolute top-[18%] right-[5%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] overflow-hidden bg-gray-300 items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.05, 0.25, false) }}>
-                            <img className='rounded-[10px]' src="/Product 8.png" alt="" />
+                            <img className='rounded-[10px]' src="/slider3.webp" alt="" />
                         </div>
                         <div
                             className="hidden rounded-[10px] sm:flex absolute bottom-[3%] xxl:bottom-[18%] right-[50%] md:right-[25%] w-[80px] lg:w-[100px] h-[80px] lg:h-[100px] overflow-hidden bg-gray-300 items-center justify-center text-gray-500 transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.25, 0.82, false) }}
                         >
-                            <img className='rounded-[10px]' src="/Product 10.png" alt="" />
+                            <img className='rounded-[10px] h-full' src="/catbg3.webp" alt="" />
                         </div>
 
-                        <div
+                        {/* <div
                             className="flex absolute bottom-[0%] sm:bottom-[5%] right-[5%] h-[80px] sm:h-[100px] transition-transform duration-300 ease-out"
                             style={{ transform: getTransform(0.25, 0.82, false) }}
                         >
                             <img className='rounded-[10px]' src="/sliderImage_1.png" alt="" />
-                        </div>
+                        </div> */}
 
                     </div>
                 </SwiperSlide>

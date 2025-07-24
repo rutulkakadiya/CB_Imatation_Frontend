@@ -1,245 +1,274 @@
 import React, { useEffect, useState } from 'react';
-import { MapPin, Send, Sun, Moon, Search, X } from 'lucide-react';
-import Footer from '../Common Components/Footer';
+import { MapPin, Send, Sun, Moon, Search, X, Heart, Star, ShoppingBag, Eye, Sparkles } from 'lucide-react';
 import Header from '../Common Components/Header';
-import "../index.css";
+import Whatsapp from '../Common Components/WhatsApp';
 
 const ProductPage = () => {
-    const [theme, setTheme] = useState('light');
-    const [manualTheme, setManualTheme] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
     const [materialFilter, setMaterialFilter] = useState('');
-    const [priceRange, setPriceRange] = useState([0, 100000]);
+    const [priceRange, setPriceRange] = useState([0, 1000]);
+    const [hoveredProduct, setHoveredProduct] = useState(null);
+    const [sortBy, setSortBy] = useState('name');
 
-    useEffect(() => {
-        const updateTheme = () => {
-            if (manualTheme === null) {
-                const hour = new Date().getHours();
-                const newTheme = hour >= 6 && hour < 19 ? 'light' : 'dark';
-                setTheme(newTheme);
-                document.documentElement.setAttribute('data-theme', newTheme);
-            }
-        };
 
-        updateTheme();
-        const interval = setInterval(updateTheme, 60000);
-        return () => clearInterval(interval);
-    }, [manualTheme]);
-
-    const handleThemeToggle = () => {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        setTheme(newTheme);
-        setManualTheme(newTheme);
-        document.documentElement.setAttribute('data-theme', newTheme);
-    };
-
-    // Sample product data
     const products = [
-        { id: 1, name: "Gold Plated Kundan Necklace", price: 25000, image: "/images/kundan-necklace.jpg", material: "Gold Plated" },
-        { id: 2, name: "Temple Jewelry Set", price: 35000, image: "/images/temple-set.jpg", material: "Gold Plated" },
-        { id: 3, name: "CZ Earring Pair", price: 15000, image: "/images/cz-earrings.jpg", material: "Silver Plated" },
-        { id: 4, name: "Polki Bridal Set", price: 45000, image: "/images/polki-set.jpg", material: "Rose Gold Plated" },
-        { id: 5, name: "Silver Kundan Bangle", price: 20000, image: "/images/kundan-bangle.jpg", material: "Silver Plated" },
-        { id: 6, name: "Rose Gold Anklet", price: 30000, image: "/images/rose-anklet.jpg", material: "Rose Gold Plated" },
+        {
+            id: 1,
+            name: 'Gold Bangle',
+            originalPrice: '24.00$',
+            salePrice: '23.00$',
+            defaultImage: '/Product_Images/Product_1_1.webp',
+            hoverImage: '/Product_Images/Product_1_2.webp'
+        },
+        {
+            id: 2,
+            name: 'Adjustable Gold Chain',
+            originalPrice: '22.00$',
+            salePrice: '20.00$',
+            defaultImage: '/Product_Images/Product_2_1.webp',
+            hoverImage: '/Product_Images/Product_2_2.webp'
+        },
+        {
+            id: 3,
+            name: 'Couple Ring',
+            originalPrice: '19.00$',
+            salePrice: '17.00$',
+            defaultImage: '/Product_Images/Product_3_1.webp',
+            hoverImage: '/Product_Images/Product_3_2.webp'
+        },
+        {
+            id: 4,
+            name: 'Premium Necklace',
+            originalPrice: '45.00$',
+            salePrice: '39.00$',
+            defaultImage: '/Product_Images/Product_4_1.webp',
+            hoverImage: '/Product_Images/Product_4_2.webp'
+        }
     ];
 
-    // Filter products based on search and filters
-    const filteredProducts = products.filter((product) => {
-        const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesMaterial = materialFilter ? product.material === materialFilter : true;
-        const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
-        return matchesSearch && matchesMaterial && matchesPrice;
-    });
+
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleInquiry = () => {
-        alert(`Inquiry sent for ${selectedProduct?.name || 'selected product'}!`);
-    };
 
     const handleClearFilters = () => {
         setSearchQuery('');
         setMaterialFilter('');
-        setPriceRange([0, 100000]);
+        setPriceRange([0, 1000]);
+        setSortBy('name');
+    };
+
+    const getBadgeColor = (badge) => {
+        const colors = {
+            'Best Seller': 'bg-gradient-to-r from-[#d4a373] to-[#ab7f5c]',
+            'New': 'bg-gradient-to-r from-[#4a7043] to-[#6b8e23]',
+            'Popular': 'bg-gradient-to-r from-[#ab7f5c] to-[#d4a373]',
+            'Premium': 'bg-gradient-to-r from-[#3c2f2f] to-[#5c4033]',
+            'Trending': 'bg-gradient-to-r from-[#4a7043] to-[#ab7f5c]',
+            'Limited': 'bg-gradient-to-r from-[#8b3a3a] to-[#ab7f5c]'
+        };
+        return colors[badge] || 'bg-gray-500';
     };
 
     return (
-        <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: 'var(--bg-color)' }}>
-            <Header handleThemeToggle={handleThemeToggle} theme={theme} />
-
+        <div className="min-h-screen bg-[#fefaf6] text-[#3c2f2f] font-sans">
             {/* Hero Section */}
-            <div className="text-center py-20 px-4 relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg1-color)]/20 to-transparent pointer-events-none"></div>
-                <div className="flex items-center justify-center space-x-3 animate-[fadeInUp_0.6s_ease-out]">
-                    <div className="w-6 h-1 bg-gradient-to-r from-transparent to-[var(--primary-color)] rounded-full"></div>
-                    <div className="w-2 h-2 bg-[var(--primary-color)] rounded-full animate-pulse"></div>
-                    <p className="text-base uppercase tracking-widest text-accent font-medium subheading">
-                        OUR COLLECTION
+            <Header />
+            <Whatsapp/>
+            <div className="text-center py-16 px-4">
+                <div className="flex items-center justify-center space-x-3 mb-6 mt-[100px]">
+                    <div className="w-6 h-1 bg-[#ab7f5c] rounded-full"></div>
+                    <p className="text-base uppercase tracking-widest font-bold font-serif">
+                        EXQUISITE COLLECTION
                     </p>
-                    <div className="w-2 h-2 bg-[var(--primary-color)] rounded-full animate-pulse delay-75"></div>
-                    <div className="w-6 h-1 bg-gradient-to-l from-transparent to-[var(--primary-color)] rounded-full"></div>
+                    <div className="w-6 h-1 bg-[#ab7f5c] rounded-full"></div>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-bold mb-8 royal-heading" style={{ fontFamily: 'var(--font-primary)' }}>
-                    Exquisite <span className="text-accent">Imitation Jewelry</span>
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 font-serif text-[#3c2f2f]">
+                    Luxury Imitation Jewelry
                 </h1>
-                <p className="text-xl max-w-3xl mx-auto text-primary" style={{ fontFamily: 'var(--font-secondary)' }}>
-                    Discover our handcrafted collection, blending traditional craftsmanship with modern elegance.
+                <p className="text-lg max-w-3xl mx-auto text-[#212121] leading-relaxed mb-8">
+                    Discover our handcrafted collection where traditional artistry meets contemporary elegance. Each piece tells a story of timeless beauty.
                 </p>
+                <button className="bg-[#ab7f5c] text-white px-8 py-3 font-medium hover:bg-[#d4a373] transition-all duration-300 rounded-md shadow-md">
+                    Explore Collection
+                </button>
             </div>
 
-            {/* Search and Filter Section */}
-            <div className="max-w-7xl mx-auto px-4 pt-12">
-                <div className="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-                    {/* Search Bar */}
-                    <div className="relative w-full md:w-1/3">
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Search products..."
-                            className="form-input w-full p-4 pr-12 rounded-2xl"
-                            style={{ fontFamily: 'var(--font-secondary)' }}
-                        />
-                        <Search className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary" />
-                    </div>
+            <div className="w-[95%] mx-auto pb-16">
+                {/* Search and Filter Section */}
+                <div className="py-10 px-4">
+                    <div className="bg-[#f4e7d6] rounded-xl shadow-lg p-6 mb-12 border border-[#ab7f5c]/30 mx-auto">
+                        <div className="flex flex-col lg:flex-row gap-6 items-center">
+                            {/* Search Bar */}
+                            <div className="relative flex-1">
+                                <input
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder="Search our beautiful collection..."
+                                    className="w-full p-3 pr-10 rounded-md border border-[#ab7f5c]/50 focus:border-[#ab7f5c] focus:ring-2 focus:ring-[#d4a373]/30 focus:outline-none bg-[#fefaf6] text-[#212121] placeholder-[#3c2f2f]/50 shadow-sm transition-all duration-300"
+                                />
+                                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#ab7f5c]" />
+                            </div>
 
-                    {/* Filters */}
-                    <div className="flex flex-col sm:flex-row gap-4 w-full md:w-2/3 justify-end">
-                        <div className="flex-1">
-                            <label className="block text-base font-medium mb-2 text-secondary" style={{ fontFamily: 'var(--font-secondary)', fontWeight: 'var(--font-medium)' }}>
-                                Material
-                            </label>
-                            <select
-                                value={materialFilter}
-                                onChange={(e) => setMaterialFilter(e.target.value)}
-                                className="form-input w-full p-4 rounded-2xl"
-                                style={{ fontFamily: 'var(--font-secondary)' }}
-                            >
-                                <option value="">All Materials</option>
-                                <option value="Gold Plated">Gold Plated</option>
-                                <option value="Silver Plated">Silver Plated</option>
-                                <option value="Rose Gold Plated">Rose Gold Plated</option>
-                            </select>
-                        </div>
-                        <div className="flex-1">
-                            <label className="block text-base font-medium mb-2 text-secondary" style={{ fontFamily: 'var(--font-secondary)', fontWeight: 'var(--font-medium)' }}>
-                                Price Range
-                            </label>
-                            <div className="flex items-center gap-2">
-                                <input
-                                    type="number"
-                                    value={priceRange[0]}
-                                    onChange={(e) => setPriceRange([Number(e.target.value), priceRange[1]])}
-                                    placeholder="Min"
-                                    className="form-input w-1/2 p-4 rounded-2xl"
-                                    style={{ fontFamily: 'var(--font-secondary)' }}
-                                />
-                                <span className="text-primary">-</span>
-                                <input
-                                    type="number"
-                                    value={priceRange[1]}
-                                    onChange={(e) => setPriceRange([priceRange[0], Number(e.target.value)])}
-                                    placeholder="Max"
-                                    className="form-input w-1/2 p-4 rounded-2xl"
-                                    style={{ fontFamily: 'var(--font-secondary)' }}
-                                />
+                            {/* Filters Row */}
+                            <div className="flex flex-wrap gap-4 items-center">
+                                <select
+                                    value={materialFilter}
+                                    onChange={(e) => setMaterialFilter(e.target.value)}
+                                    className="p-3 rounded-md border border-[#ab7f5c]/50 focus:border-[#ab7f5c] focus:ring-2 focus:ring-[#d4a373]/30 focus:outline-none bg-[#fefaf6] text-[#212121] min-w-[140px] shadow-sm transition-all duration-300"
+                                >
+                                    <option value="">All Materials</option>
+                                    <option value="Gold Plated">Gold Plated</option>
+                                    <option value="Silver Plated">Silver Plated</option>
+                                    <option value="Rose Gold Plated">Rose Gold</option>
+                                </select>
+
+                                <select
+                                    value={sortBy}
+                                    onChange={(e) => setSortBy(e.target.value)}
+                                    className="p-3 rounded-md border border-[#ab7f5c]/50 focus:border-[#ab7f5c] focus:ring-2 focus:ring-[#d4a373]/30 focus:outline-none bg-[#fefaf6] text-[#212121] min-w-[140px] shadow-sm transition-all duration-300"
+                                >
+                                    <option value="name">Sort by Name</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="rating">Highest Rated</option>
+                                </select>
+
+                                <div className="flex items-center gap-2">
+                                    <input
+                                        type="number"
+                                        value={priceRange[0]}
+                                        onChange={(e) =>
+                                            setPriceRange([Math.max(0, Number(e.target.value)), priceRange[1]])
+                                        }
+                                        placeholder="Min"
+                                        className="w-20 p-3 rounded-md border border-[#ab7f5c]/50 focus:border-[#ab7f5c] focus:ring-2 focus:ring-[#d4a373]/30 focus:outline-none bg-[#fefaf6] text-[#212121] shadow-sm transition-all duration-300"
+                                        min="0"
+                                    />
+                                    <span className="text-[#3c2f2f] font-medium">to</span>
+                                    <input
+                                        type="number"
+                                        value={priceRange[1]}
+                                        onChange={(e) =>
+                                            setPriceRange([
+                                                priceRange[0],
+                                                Math.max(priceRange[0], Number(e.target.value)),
+                                            ])
+                                        }
+                                        placeholder="Max"
+                                        className="w-20 p-3 rounded-md border border-[#ab7f5c]/50 focus:border-[#ab7f5c] focus:ring-2 focus:ring-[#d4a373]/30 focus:outline-none bg-[#fefaf6] text-[#212121] shadow-sm transition-all duration-300"
+                                        min={priceRange[0]}
+                                    />
+                                </div>
+
+                                <button
+                                    onClick={handleClearFilters}
+                                    className="bg-[#8b3a3a] text-white px-6 py-3 rounded-md hover:bg-[#ab7f5c] transition-all duration-300 font-medium flex items-center gap-2 shadow-md"
+                                >
+                                    <X size={18} />
+                                    Clear
+                                </button>
                             </div>
                         </div>
-                        <button
-                            onClick={handleClearFilters}
-                            className="btn-primary inline-flex items-center space-x-2 px-4 py-2 self-end"
-                            style={{ background: 'var(--gold-gradient)' }}
-                        >
-                            <X size={18} />
-                            <span>Clear Filters</span>
-                        </button>
                     </div>
+                </div>
+
+                {/* Results Header */}
+                <div className="flex justify-between items-center mb-8">
+                    <h2 className="text-3xl font-bold text-[#3c2f2f] font-serif">
+                        Featured Products ({products.length})
+                    </h2>
                 </div>
 
                 {/* Product Grid */}
-                <h2 className="text-3xl font-bold mb-10 royal-heading" style={{ fontFamily: 'var(--font-primary)' }}>
-                    Featured Products
-                </h2>
-                {filteredProducts.length === 0 ? (
-                    <p className="text-lg text-primary text-center" style={{ fontFamily: 'var(--font-secondary)' }}>
-                        No products found. Try adjusting your filters.
-                    </p>
+                {products.length === 0 ? (
+                    <div className="text-center py-20">
+                        <div className="text-6xl mb-4">💍</div>
+                        <p className="text-2xl text-[#3c2f2f] mb-4 font-serif">No products found</p>
+                        <p className="text-lg text-[#212121]">Try adjusting your search or filters</p>
+                    </div>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {filteredProducts.map((product) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                        {products.map((product) => (
                             <div
                                 key={product.id}
-                                className="product-card p-6 rounded-3xl cursor-pointer transition-all duration-300 hover:shadow-[var(--box-shadow)]"
-                                style={{ backgroundColor: 'var(--bg1-color)', boxShadow: 'var(--box-shadow)' }}
-                                onClick={() => handleProductClick(product)}
+                                className="group cursor-pointer transform transition-all duration-500 hover:-translate-y-3"
+                                onMouseEnter={() => setHoveredProduct(product.id)}
+                                onMouseLeave={() => setHoveredProduct(null)}
                             >
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    className="w-full h-64 object-cover rounded-2xl mb-4"
-                                />
-                                <h3 className="text-xl font-semibold text-secondary" style={{ fontFamily: 'var(--font-secondary)', fontWeight: 'var(--font-semi-bold)' }}>
-                                    {product.name}
-                                </h3>
-                                <p className="text-lg text-primary" style={{ fontFamily: 'var(--font-secondary)' }}>
-                                    ₹{product.price.toLocaleString()}
-                                </p>
+                                {/* Product Image Container */}
+                                <div className="relative mb-8 overflow-hidden bg-gradient-to-br from-white to-amber-50 shadow-xl group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105">
+                                    <div className="h-[350px] relative">
+                                        {/* Default Image */}
+                                        <img
+                                            src={product.defaultImage}
+                                            alt={product.name}
+                                            className={`w-full h-full object-cover transition-all duration-700 ease-in-out ${hoveredProduct === product.id
+                                                ? 'opacity-0 scale-110'
+                                                : 'opacity-100 scale-100'
+                                                }`}
+                                        />
+
+                                        {/* Hover Image */}
+                                        <img
+                                            src={product.hoverImage}
+                                            alt={`${product.name} alternate view`}
+                                            className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${hoveredProduct === product.id
+                                                ? 'opacity-100 scale-100'
+                                                : 'opacity-0 scale-110'
+                                                }`}
+                                        />
+                                    </div>
+
+                                    {/* Overlay Effect */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                                    {/* Floating Add to Cart Button */}
+                                    <div className={`absolute bottom-4 left-1/2 w-[95%] transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
+                                        ? 'translate-y-0 opacity-100'
+                                        : 'translate-y-10 opacity-0'
+                                        }`}>
+                                        <button className="bg-[#ab7f5c] backdrop-blur-sm text-white w-[100%] py-2 rounded-[5px] text-sm font-medium shadow-lg hover:bg-white hover:border border-[#ab7f5c] hover:text-[#ab7f5c] hover:shadow-xl transition-all duration-300">
+                                            Buy Now
+                                        </button>
+                                    </div>
+                                </div>
+
+                                {/* Product Info */}
+                                <div className="text-center">
+                                    <h3 className="text-xl font-light text-black mb-3 group-hover:text-[var(--smallText-color)] transition-colors duration-300">
+                                        {product.name}
+                                    </h3>
+
+                                    <div className="flex items-center justify-center space-x-3">
+                                        <span className="text-xl font-medium text-gray-800">
+                                            {product.salePrice}
+                                        </span>
+                                        <span className="text-gray-400 line-through text-sm">
+                                            {product.originalPrice}
+                                        </span>
+
+                                    </div>
+
+                                    <button className="bg-[#ab7f5c] block sm:hidden mt-[15px] backdrop-blur-sm text-white w-[100%] py-2 rounded-[5px] text-sm font-medium shadow-lg hover:bg-white hover:border border-[#ab7f5c] hover:text-[#ab7f5c] hover:shadow-xl transition-all duration-300">
+                                        Buy Now
+                                    </button>
+
+                                    {/* Hover Underline Effect */}
+                                    <div className={`h-px bg-[var(--smallText-color)] mt-4 transition-all duration-500 ${hoveredProduct === product.id ? 'w-full opacity-100' : 'w-0 opacity-0'
+                                        }`} />
+                                </div>
                             </div>
                         ))}
                     </div>
                 )}
 
-                {/* Product Detail Section */}
-                {selectedProduct && (
-                    <div className="mt-20">
-                        <div className="contact-card p-10 rounded-3xl" style={{ backgroundColor: 'var(--bg1-color)', boxShadow: 'var(--box-shadow)' }}>
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                                <div>
-                                    <img
-                                        src={selectedProduct.image}
-                                        alt={selectedProduct.name}
-                                        className="w-full h-96 object-cover rounded-2xl"
-                                    />
-                                </div>
-                                <div>
-                                    <h2 className="text-3xl font-bold mb-4 royal-heading" style={{ fontFamily: 'var(--font-primary)' }}>
-                                        {selectedProduct.name}
-                                    </h2>
-                                    <p className="text-xl mb-4 text-primary" style={{ fontFamily: 'var(--font-secondary)' }}>
-                                        ₹{selectedProduct.price.toLocaleString()}
-                                    </p>
-                                    <p className="text-lg mb-6 text-primary" style={{ fontFamily: 'var(--font-secondary)' }}>
-                                        Material: {selectedProduct.material}
-                                    </p>
-                                    <div className="mb-6">
-                                        <label className="block text-base font-medium mb-3 text-secondary" style={{ fontFamily: 'var(--font-secondary)', fontWeight: 'var(--font-medium)' }}>
-                                            Select Material
-                                        </label>
-                                        <select className="form-input w-full p-4 rounded-2xl">
-                                            <option value="gold">Gold Plated</option>
-                                            <option value="silver">Silver Plated</option>
-                                            <option value="rose">Rose Gold Plated</option>
-                                        </select>
-                                    </div>
-                                    <button
-                                        onClick={handleInquiry}
-                                        className="btn-primary inline-flex items-center space-x-3"
-                                        style={{ background: 'var(--gold-gradient)', transition: 'background 0.3s ease' }}
-                                    >
-                                        <span>Inquire Now</span>
-                                        <Send size={18} />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </div>
-
-            <Footer />
         </div>
     );
 };

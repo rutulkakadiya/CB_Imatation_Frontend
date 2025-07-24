@@ -4,6 +4,7 @@ import Footer from '../Common Components/Footer';
 import Header from '../Common Components/Header';
 import "../index.css";
 import 'aos/dist/aos.css'; // Import AOS styles
+import Whatsapp from '../Common Components/WhatsApp';
 
 const ContactForm = ({ theme, handleThemeToggle }) => {
     const [formData, setFormData] = useState({
@@ -45,37 +46,37 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
     return (
         <div className="min-h-screen relative overflow-hidden">
             <Header />
-
+            <Whatsapp />
             {/* Header Section */}
             <div className="text-center py-20 px-4 relative mt-[100px]">
 
-    {/* Stars */}
-    <img src="/star.svg" className="absolute top-[10%] left-[20%] h-[30px] animate-pulse opacity-30" alt="" />
-    <img src="/star.svg" className="absolute top-[15%] right-[25%] h-[15px] animate-pulse opacity-30" alt="" />
-    <img src="/star.svg" className="absolute bottom-[20%] left-[30%] h-[30px] animate-pulse opacity-30" alt="" />
-    <img src="/star.svg" className="absolute bottom-[15%] right-[15%] h-[15px] animate-pulse opacity-30" alt="" />
+                {/* Stars */}
+                <img src="/star.svg" className="absolute top-[10%] left-[20%] h-[30px] animate-pulse opacity-30" alt="" />
+                <img src="/star.svg" className="absolute top-[15%] right-[25%] h-[15px] animate-pulse opacity-30" alt="" />
+                <img src="/star.svg" className="absolute bottom-[20%] left-[30%] h-[30px] animate-pulse opacity-30" alt="" />
+                <img src="/star.svg" className="absolute bottom-[15%] right-[15%] h-[15px] animate-pulse opacity-30" alt="" />
 
-    {/* Section Title */}
-    <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-3" data-aos="fade-up" data-aos-duration="1000">
-        <div className="w-6 h-1 bg-gradient-to-r from-transparent to-[var(--smallText-color)] rounded-full"></div>
-        <div className="w-2 h-2 bg-[var(--smallText-color)] rounded-full animate-pulse"></div>
-        <p className="text-sm sm:text-base md:text-lg uppercase tracking-widest text-[var(--smallText-color)] font-medium">
-            GET IN TOUCH
-        </p>
-        <div className="w-2 h-2 bg-[var(--smallText-color)] rounded-full animate-pulse delay-75"></div>
-        <div className="w-6 h-1 bg-gradient-to-l from-transparent to-[var(--smallText-color)] rounded-full"></div>
-    </div>
+                {/* Section Title */}
+                <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-3" data-aos="fade-up" data-aos-duration="1000">
+                    <div className="w-6 h-1 bg-gradient-to-r from-transparent to-[var(--smallText-color)] rounded-full"></div>
+                    <div className="w-2 h-2 bg-[var(--smallText-color)] rounded-full animate-pulse"></div>
+                    <p className="text-sm sm:text-base md:text-lg uppercase tracking-widest text-[var(--smallText-color)] font-medium">
+                        GET IN TOUCH
+                    </p>
+                    <div className="w-2 h-2 bg-[var(--smallText-color)] rounded-full animate-pulse delay-75"></div>
+                    <div className="w-6 h-1 bg-gradient-to-l from-transparent to-[var(--smallText-color)] rounded-full"></div>
+                </div>
 
-    {/* Heading */}
-    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6" data-aos="fade-up" data-aos-duration="1000">
-        Let's <span className="text-[var(--smallText-color)]">Connect</span>
-    </h1>
+                {/* Heading */}
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6" data-aos="fade-up" data-aos-duration="1000">
+                    Let's <span className="text-[var(--smallText-color)]">Connect</span>
+                </h1>
 
-    {/* Paragraph */}
-    <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-black" data-aos="fade-up" data-aos-duration="1000">
-        Ready to transform your vision into reality? Let's create something extraordinary together.
-    </p>
-</div>
+                {/* Paragraph */}
+                <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto text-black" data-aos="fade-up" data-aos-duration="1000">
+                    Ready to transform your vision into reality? Let's create something extraordinary together.
+                </p>
+            </div>
 
 
             {/* Main Content */}

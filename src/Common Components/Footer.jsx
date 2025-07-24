@@ -9,33 +9,31 @@ export default function Footer() {
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                         <div>
                             <div className="flex items-center space-x-2 mb-4">
-                                <img className='h-[100px]' src="/Group 1 black.png" alt="" />
+                                <img className='h-[100px]' src="/cb_logo.png" alt="" />
                             </div>
                             <p className="mb-6 leading-relaxed" style={{ color: 'var(--text1-color)' }}>
                                 Redefining elegance with timeless jewelry that celebrates life's most cherished moments.
                             </p>
-                            <div className="flex space-x-4">
+                            {/* <div className="flex space-x-4">
                                 <a href="#" className="transition-all duration-300" style={{ color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Facebook</a>
                                 <a href="#" className="transition-all duration-300" style={{ color: 'var(--text1-color)', hover: { color: 'var(--text-color)' } }}>Instagram</a>
-                            </div>
+                            </div> */}
                         </div>
 
                         <div>
                             <h4 className="font-bold mb-6 text-[var(--smallText-color)]">Shop</h4>
                             <ul className="space-y-3" style={{ color: 'var(--text1-color)' }}>
-                                <li><a href="/new-arrivals" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">New Arrivals</a></li>
-                                <li><a href="/products" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Products</a></li>
+                                <li><a href="#newArrival" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">New Arrivals</a></li>
+                                <li><a href="/product" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Products</a></li>
                             </ul>
                         </div>
 
                         <div>
-                            <h4 className="font-bold mb-6 text-[var(--smallText-color)]">Support</h4>
+                            <h4 className="font-bold mb-6 text-[var(--smallText-color)]">Pages</h4>
                             <ul className="space-y-3" style={{ color: 'var(--text1-color)' }}>
-                                <li><a href="/contact-us" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Contact Us</a></li>
-                                <li><a href="/size-guide" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Size Guide</a></li>
-                                <li><a href="/shipping-info" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Shipping Info</a></li>
-                                <li><a href="/returns" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Returns</a></li>
-                                <li><a href="/care-guide" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Care Guide</a></li>
+                                <li><a href="/" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Home</a></li>
+                                <li><a href="/product" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Collection</a></li>
+                                <li><a href="/contact" className="hover:text-[var(--text-color)] transition-all duration-300 underline-grow">Contact Us</a></li>
                             </ul>
                         </div>
 
@@ -44,15 +42,15 @@ export default function Footer() {
                             <ul className="space-y-4">
                                 <li className="flex items-center space-x-3">
                                     <Phone className="w-4 h-4 text-[var(--smallText-color)]" />
-                                    <span>+91 91234 56789</span>
+                                    <span>+91 97240 76944</span>
                                 </li>
                                 <li className="flex items-center space-x-3">
                                     <Mail className="w-4 h-4 text-[var(--smallText-color)]" />
-                                    <span>support@cbimitation.com</span>
+                                    <span>cbimitation@gmail.com</span>
                                 </li>
                                 <li className="flex items-center space-x-3">
                                     <MapPin className="w-4 h-4 text-[var(--smallText-color)]" />
-                                    <span>Jaipur & Mumbai, India</span>
+                                    <span>Pedak Main Road, Rajkot, Gujarat.</span>
                                 </li>
                             </ul>
 

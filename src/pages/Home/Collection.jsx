@@ -9,37 +9,37 @@ const Collection = () => {
             name: 'Gold Bangle',
             originalPrice: '24.00$',
             salePrice: '23.00$',
-            defaultImage: '/Product_Images/Product_1_1.png',
-            hoverImage: '/Product_Images/Product_1_2.png'
+            defaultImage: '/Product_Images/Product_1_1.webp',
+            hoverImage: '/Product_Images/Product_1_2.webp'
         },
         {
             id: 2,
             name: 'Adjustable Gold Chain',
             originalPrice: '22.00$',
             salePrice: '20.00$',
-            defaultImage: '/Product_Images/Product_2_1.png',
-            hoverImage: '/Product_Images/Product_2_2.png'
+            defaultImage: '/Product_Images/Product_2_1.webp',
+            hoverImage: '/Product_Images/Product_2_2.webp'
         },
         {
             id: 3,
             name: 'Couple Ring',
             originalPrice: '19.00$',
             salePrice: '17.00$',
-            defaultImage: '/Product_Images/Product_3_1.png',
-            hoverImage: '/Product_Images/Product_3_2.png'
+            defaultImage: '/Product_Images/Product_3_1.webp',
+            hoverImage: '/Product_Images/Product_3_2.webp'
         },
         {
             id: 4,
             name: 'Premium Necklace',
             originalPrice: '45.00$',
             salePrice: '39.00$',
-            defaultImage: '/Product_Images/Product_4_1.png',
-            hoverImage: '/Product_Images/Product_4_2.png'
+            defaultImage: '/Product_Images/Product_4_1.webp',
+            hoverImage: '/Product_Images/Product_4_2.webp'
         }
     ];
 
     return (
-        <div className="min-h-screen bg-[#fef9f3] py-16 px-6">
+        <div className="min-h-screen bg-[#fef9f3] py-16 px-6" id='newArrival'>
             {/* Decorative Elements */}
             <div className="fixed top-10 right-10 text-6xl text-amber-200/30 rotate-12 pointer-events-none">
                 ✦
@@ -76,8 +76,8 @@ const Collection = () => {
                                         src={product.defaultImage}
                                         alt={product.name}
                                         className={`w-full h-full object-cover transition-all duration-700 ease-in-out ${hoveredProduct === product.id
-                                                ? 'opacity-0 scale-110'
-                                                : 'opacity-100 scale-100'
+                                            ? 'opacity-0 scale-110'
+                                            : 'opacity-100 scale-100'
                                             }`}
                                     />
 
@@ -86,8 +86,8 @@ const Collection = () => {
                                         src={product.hoverImage}
                                         alt={`${product.name} alternate view`}
                                         className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${hoveredProduct === product.id
-                                                ? 'opacity-100 scale-100'
-                                                : 'opacity-0 scale-110'
+                                            ? 'opacity-100 scale-100'
+                                            : 'opacity-0 scale-110'
                                             }`}
                                     />
                                 </div>
@@ -96,11 +96,11 @@ const Collection = () => {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                 {/* Floating Add to Cart Button */}
-                                <div className={`absolute bottom-4 left-1/2 transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
-                                        ? 'translate-y-0 opacity-100'
-                                        : 'translate-y-10 opacity-0'
+                                <div className={`absolute bottom-4 left-1/2 w-[95%] transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
+                                    ? 'translate-y-0 opacity-100'
+                                    : 'translate-y-10 opacity-0'
                                     }`}>
-                                    <button className="bg-white/90 backdrop-blur-sm text-gray-800 px-6 py-2 rounded-full text-sm font-medium shadow-lg hover:bg-white hover:shadow-xl transition-all duration-300">
+                                    <button className="bg-[#ab7f5c] backdrop-blur-sm text-white w-[100%] py-2 rounded-[5px] text-sm font-medium shadow-lg hover:bg-white hover:border border-[#ab7f5c] hover:text-[#ab7f5c] hover:shadow-xl transition-all duration-300">
                                         Buy Now
                                     </button>
                                 </div>
@@ -121,6 +121,10 @@ const Collection = () => {
                                     </span>
 
                                 </div>
+
+                                <button className="bg-[#ab7f5c] block sm:hidden mt-[15px] backdrop-blur-sm text-white w-[100%] py-2 rounded-[5px] text-sm font-medium shadow-lg hover:bg-white hover:border border-[#ab7f5c] hover:text-[#ab7f5c] hover:shadow-xl transition-all duration-300">
+                                    Buy Now
+                                </button>
 
                                 {/* Hover Underline Effect */}
                                 <div className={`h-px bg-[var(--smallText-color)] mt-4 transition-all duration-500 ${hoveredProduct === product.id ? 'w-full opacity-100' : 'w-0 opacity-0'
