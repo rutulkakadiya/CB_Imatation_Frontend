@@ -39,15 +39,13 @@ export default function FourthSection() {
 
                         <button
                             type="submit"
-                            class="relative z-10 px-6 py-3 overflow-hidden rounded-[5px] bg-black text-white font-semibold flex items-center justify-center gap-2 group transition-all duration-300 shadow-xl"
-                            data-aos="fade-right"
-                            data-aos-duration="1500"
+                            class="relative z-10 px-3 sm:px-6 py-2 sm:py-3 mt-[15px] overflow-hidden rounded-[5px] bg-black text-white font-semibold flex items-center justify-center gap-2 group transition-all duration-300 shadow-xl"
                         >
-                            <span class="relative z-10 transition-colors duration-300 group-hover:text-black">
+                            <span class="relative z-10 text-[14px] sm:text-[16px] transition-colors duration-300 group-hover:text-black">
                                 Know More
                             </span>
                             <svg
-                                class="w-8 h-8 p-2 border border-white rounded-full transition-all duration-300 rotate-45 group-hover:rotate-90 group-hover:bg-white group-hover:border-transparent group-hover:text-black"
+                                class="w-6 sm:w-8 h-6 sm:h-8 p-[5px] sm:p-2 border border-white rounded-full transition-all duration-300 rotate-45 group-hover:rotate-90 group-hover:bg-white group-hover:border-transparent group-hover:text-black"
                                 viewBox="0 0 16 19"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
@@ -77,7 +75,7 @@ export default function FourthSection() {
                                 className="w-full h-full object-cover rounded-t-full"
                             />
                         </div>
-                        <div className="absolute hidden sm:block top-[65%] left-[5%] md:left-[10%] lg:left-[15%] border-4 border-white rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 overflow-hidden shadow-xl bg-white">
+                        <div className="absolute hidden sm:block top-[65%] left-[5%] md:left-[-15%] lg:left-[0%] xl:left-[5%] border-4 border-white rounded-full w-24 h-24 sm:w-28 sm:h-28 md:w-36 md:h-36 overflow-hidden shadow-xl bg-white">
                             <img
                                 src="/img6.webp"
                                 alt="earring"

@@ -22,17 +22,17 @@ export default function SectionSection() {
     ];
 
     return (
-        <div className=' bg-[#fef9f3] overflow-hidden relative'>
+        <div className='bg-[#fef9f3] overflow-hidden relative'>
         <img className='absolute top-0 left-0 h-[300px] sm:h-[600px] animate-horizontal-float' src="/leaf_bg2.png" alt="" />
         <img className='absolute bottom-0 right-0 h-[150px] sm:h-[300px]' src="/leaf_bg3.png" alt="" />
             <div className='flex justify-center items-center'>
 
 
-                <div className="div1 w-[95%] pt-[100px]">
-                    <p className=' tracking-[5px] text-center text-sm md:text-base'
+                <div className="div1 w-[95%] pt-[0px] sm:pt-[100px]">
+                    <p className='hidden sm:block tracking-[5px] text-center text-sm md:text-base'
                     >JEWELS AS UNIQUE AS YOU ARE</p>
                     <br />
-                    <h1 className="text-center text-2xl sm:text-4xl uppercase leading-[35px] sm:leading-[70px] flex flex-wrap justify-center gap-2 text-balance">
+                    <h1 className="text-center text-2xl sm:text-4xl hidden sm:flex uppercase leading-[35px] sm:leading-[70px]  flex-wrap justify-center gap-2 text-balance">
                         Elegance is timeless, and so is our&nbsp;
                         <span className="flex items-center gap-2">
                             jewelry

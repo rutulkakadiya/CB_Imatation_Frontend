@@ -1,38 +1,39 @@
 import React, { useState } from 'react';
 
 const Collection = () => {
+    
     const [hoveredProduct, setHoveredProduct] = useState(null);
 
     const products = [
-        {
+       {
             id: 1,
-            name: 'Gold Bangle',
-            originalPrice: '24.00$',
-            salePrice: '23.00$',
+            name: '1 Gram Gold Plated Traditional Hanging Stud Earrings',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_1_1.webp',
             hoverImage: '/Product_Images/Product_1_2.webp'
         },
         {
             id: 2,
-            name: 'Adjustable Gold Chain',
-            originalPrice: '22.00$',
-            salePrice: '20.00$',
+            name: 'Geometric Spark Gold Studs',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_2_1.webp',
             hoverImage: '/Product_Images/Product_2_2.webp'
         },
         {
             id: 3,
-            name: 'Couple Ring',
-            originalPrice: '19.00$',
-            salePrice: '17.00$',
+            name: 'Floral Swirl Drop Earrings',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_3_1.webp',
             hoverImage: '/Product_Images/Product_3_2.webp'
         },
         {
             id: 4,
-            name: 'Premium Necklace',
-            originalPrice: '45.00$',
-            salePrice: '39.00$',
+            name: 'Festive Bloom Gold Drops',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_4_1.webp',
             hoverImage: '/Product_Images/Product_4_2.webp'
         }
@@ -50,11 +51,11 @@ const Collection = () => {
 
             <div className="w-[95%] mx-auto">
                 {/* Header Section */}
-                <div className="text-left mb-20">
+                <div className="text-left mb-10 sm:mb-20">
                     <p className="text-sm text-[var(--smallText-color)] tracking-[0.3em] uppercase font-light mb-4">
                         Fresh Arrivals, Just For You
                     </p>
-                    <h1 className="text-5xl md:text-6xl font-light text-gray-800 tracking-tight leading-tight">
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl font-light text-gray-800 tracking-tight leading-tight">
                         New Arrivals, Endless Choices
                     </h1>
                 </div>
@@ -96,7 +97,7 @@ const Collection = () => {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                 {/* Floating Add to Cart Button */}
-                                <div className={`absolute bottom-4 left-1/2 w-[95%] transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
+                                <div className={`hidden sm:block absolute bottom-4 left-1/2 w-[95%] transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
                                     ? 'translate-y-0 opacity-100'
                                     : 'translate-y-10 opacity-0'
                                     }`}>

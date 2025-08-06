@@ -5,6 +5,7 @@ import "aos/dist/aos.css"; // Import AOS styles
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import ContactPage from './pages/ContactPage';
 import ProductPage from './pages/ProductPage';
+import ScrollToTop from './Common Components/ScrollToTop';
 
 export default function App() {
   useEffect(() => {
@@ -14,6 +15,7 @@ export default function App() {
   }, []);
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<ImitationWebsite />} />
         <Route path="/product" element={<ProductPage/>} />

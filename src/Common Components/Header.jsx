@@ -31,7 +31,7 @@ export default function Header() {
 
                     {/* Mobile Hamburger Button */}
                     <button
-                        className={`md:hidden flex flex-col items-center justify-center w-10 h-10 relative z-60 transition-transform duration-500 ${isMenuOpen ? 'rotate-180' : ''}`}
+                        className={`md:hidden flex flex-col items-center justify-center w-8 sm:w-10 h-8 sm:h-10 relative z-60 transition-transform duration-500 ${isMenuOpen ? 'rotate-180' : ''}`}
                         onClick={toggleMenu}
                     >
                         <span className={`absolute h-1 rounded bg-[var(--smallText-color)] transition-all duration-500 ${isMenuOpen ? 'rotate-45 w-full' : 'w-[70%] top-2'}`}></span>
@@ -42,7 +42,7 @@ export default function Header() {
                 </nav>
 
                 {/* Mobile Slide Menu */}
-                <div className={`fixed top-0 right-0 h-full w-80 bg-[#fffefc] shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
+                <div className={`fixed top-0 right-0 h-full w-full sm:w-80 bg-[#fffefc] shadow-xl transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
                     <div className="flex flex-col p-8 pt-32 gap-8">
                         <Link to={"/"}><p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Home</p></Link>
                         <Link to={"/product"}><p className='hover:text-[var(--smallText-color)] font-semibold text-xl cursor-pointer border-b border-gray-200 pb-4'>Collection</p></Link>

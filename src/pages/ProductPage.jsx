@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapPin, Send, Sun, Moon, Search, X, Heart, Star, ShoppingBag, Eye, Sparkles } from 'lucide-react';
 import Header from '../Common Components/Header';
 import Whatsapp from '../Common Components/WhatsApp';
+import ScrollToTop2 from '../Common Components/ScrollToTop2';
 
 const ProductPage = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -15,39 +16,109 @@ const ProductPage = () => {
     const products = [
         {
             id: 1,
-            name: 'Gold Bangle',
-            originalPrice: '24.00$',
-            salePrice: '23.00$',
+            name: '1 Gram Gold Plated Traditional Hanging Stud Earrings',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_1_1.webp',
             hoverImage: '/Product_Images/Product_1_2.webp'
         },
         {
             id: 2,
-            name: 'Adjustable Gold Chain',
-            originalPrice: '22.00$',
-            salePrice: '20.00$',
+            name: 'Geometric Spark Gold Studs',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_2_1.webp',
             hoverImage: '/Product_Images/Product_2_2.webp'
         },
         {
             id: 3,
-            name: 'Couple Ring',
-            originalPrice: '19.00$',
-            salePrice: '17.00$',
+            name: 'Floral Swirl Drop Earrings',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_3_1.webp',
             hoverImage: '/Product_Images/Product_3_2.webp'
         },
         {
             id: 4,
-            name: 'Premium Necklace',
-            originalPrice: '45.00$',
-            salePrice: '39.00$',
+            name: 'Festive Bloom Gold Drops',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
             defaultImage: '/Product_Images/Product_4_1.webp',
             hoverImage: '/Product_Images/Product_4_2.webp'
+        },
+        {
+            id: 5,
+            name: 'Elegant Leaf Gold Drops',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_5_1.webp',
+            hoverImage: '/Product_Images/Product_5_2.webp'
+        },
+        {
+            id: 6,
+            name: 'Classic Cluster Triangle Drops',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_6_1.webp',
+            hoverImage: '/Product_Images/Product_6_2.webp'
+        },
+        {
+            id: 7,
+            name: '1 Gram Gold Plated Octagon Stud Earrings with Red & White Stones',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_7_1.webp',
+            hoverImage: '/Product_Images/Product_7_2.webp'
+        },
+        {
+            id: 8,
+            name: 'Pendant Set with Red Stone and Diamond Detailing',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_8_1.webp',
+            hoverImage: '/Product_Images/Product_8_2.webp'
+        },
+        {
+            id: 9,
+            name: '1 Gram Gold Plated Floral Pendant Set with Earrings – Red Stone & CZ Accents',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_9_1.webp',
+            hoverImage: '/Product_Images/Product_9_2.webp'
+        },
+        {
+            id: 10,
+            name: '1 Gram Gold Plated Arch Drop Earrings with CZ Stones',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_10_1.webp',
+            hoverImage: '/Product_Images/Product_10_2.webp'
+        },
+        {
+            id: 11,
+            name: 'Diamond-studded Teardrop Gold Earrings',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_11_1.webp',
+            hoverImage: '/Product_Images/Product_11_2.webp'
+        },
+        {
+            id: 12,
+            name: 'Bold Gold Stud on Model with Hanging Floral Design',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_12_1.webp',
+            hoverImage: '/Product_Images/Product_12_2.webp'
+        },
+        {
+            id: 13,
+            name: 'Floral Drop Gold Earrings',
+            originalPrice: '₹ 199.00',
+            salePrice: '₹ 99.00',
+            defaultImage: '/Product_Images/Product_13_1.webp',
+            hoverImage: '/Product_Images/Product_13_2.webp'
         }
     ];
-
-
 
     const handleProductClick = (product) => {
         setSelectedProduct(product);
@@ -78,7 +149,8 @@ const ProductPage = () => {
         <div className="min-h-screen bg-[#fefaf6] text-[#3c2f2f] font-sans">
             {/* Hero Section */}
             <Header />
-            <Whatsapp/>
+            <ScrollToTop2 />
+            <Whatsapp />
             <div className="text-center py-16 px-4">
                 <div className="flex items-center justify-center space-x-3 mb-6 mt-[100px]">
                     <div className="w-6 h-1 bg-[#ab7f5c] rounded-full"></div>
@@ -87,10 +159,10 @@ const ProductPage = () => {
                     </p>
                     <div className="w-6 h-1 bg-[#ab7f5c] rounded-full"></div>
                 </div>
-                <h1 className="text-5xl md:text-6xl font-bold mb-6 font-serif text-[#3c2f2f]">
+                <h1 className="text-3xl sm:text-6xl font-bold mb-6 font-serif text-[#3c2f2f]">
                     Luxury Imitation Jewelry
                 </h1>
-                <p className="text-lg max-w-3xl mx-auto text-[#212121] leading-relaxed mb-8">
+                <p className="text-[16px] sm:text-lg max-w-3xl mx-auto text-[#212121] leading-relaxed mb-8">
                     Discover our handcrafted collection where traditional artistry meets contemporary elegance. Each piece tells a story of timeless beauty.
                 </p>
                 <button className="bg-[#ab7f5c] text-white px-8 py-3 font-medium hover:bg-[#d4a373] transition-all duration-300 rounded-md shadow-md">
@@ -229,7 +301,7 @@ const ProductPage = () => {
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                                     {/* Floating Add to Cart Button */}
-                                    <div className={`absolute bottom-4 left-1/2 w-[95%] transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
+                                    <div className={`hidden sm:block absolute bottom-4 left-1/2 w-[95%] transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
                                         ? 'translate-y-0 opacity-100'
                                         : 'translate-y-10 opacity-0'
                                         }`}>

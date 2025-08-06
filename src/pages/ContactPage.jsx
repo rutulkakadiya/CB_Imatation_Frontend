@@ -5,6 +5,7 @@ import Header from '../Common Components/Header';
 import "../index.css";
 import 'aos/dist/aos.css'; // Import AOS styles
 import Whatsapp from '../Common Components/WhatsApp';
+import ScrollToTop2 from '../Common Components/ScrollToTop2';
 
 const ContactForm = ({ theme, handleThemeToggle }) => {
     const [formData, setFormData] = useState({
@@ -46,6 +47,7 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
     return (
         <div className="min-h-screen relative overflow-hidden">
             <Header />
+            <ScrollToTop2 />
             <Whatsapp />
             {/* Header Section */}
             <div className="text-center py-20 px-4 relative mt-[100px]">

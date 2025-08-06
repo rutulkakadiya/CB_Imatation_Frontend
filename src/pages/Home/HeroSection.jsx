@@ -55,13 +55,13 @@ export default function HeroSection() {
                         {/* Image */}
                         <div className="imageDiv flex justify-center items-center md:col-span-5 xl:col-span-4 h-[70vh] xs:h-[80vh] sm:h-[100vh] relative">
                             <div
-                                className="image overflow-hidden h-[80%] z-10 w-[80%] xs:h-[90%] xs:w-[90%] sm:h-[90%] sm:w-[70%] md:h-[70%] md:w-[80%] lg:h-[70%] lg:w-[80%] bg-gray-300 rounded-t-[200px] flex justify-center items-center"
+                                className="image overflow-hidden z-10 rounded-t-full h-[350px] xs:h-[550px] lg:h-[600px] w-full max-w-[500px] mx-[30px] flex justify-center items-center"
                                 data-aos="fade"
                                 data-aos-offset="200"
                                 data-aos-duration="1000"
                                 data-aos-easing="ease-in-out"
                             >
-                                <img className="h-full w-full z-10" src="/slider1.webp" alt="" />
+                                <img className="w-full h-full object-cover rounded-t-full" src="/slider1.webp" alt="" />
                             </div>
 
 
@@ -72,7 +72,7 @@ export default function HeroSection() {
                         <div className="descriptionDiv flex justify-center items-start sm:items-center md:col-span-7 xl:col-span-8 p-4 md:p-0">
                             <div className="description relative text-left">
                                 <p
-                                    className="text-[var(--smallText-color)] tracking-widest text-sm md:text-base"
+                                    className="text-[var(--smallText-color)] tracking-widest text-[14px] sm:text-sm md:text-base"
                                     style={{ fontFamily: "var(--font-primary)" }}
                                     data-aos="fade"
                                     data-aos-offset="200"
@@ -81,7 +81,7 @@ export default function HeroSection() {
                                 >
                                     RADIANT SPARKLE ✦
                                 </p>
-                                <h1 className="text-3xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-7xl leading-[1.2] w-full md:w-[80%] mx-auto md:mx-0"
+                                <h1 className="text-2xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-7xl leading-[1.2] w-full md:w-[80%] mx-auto md:mx-0"
                                     data-aos="fade"
                                     data-aos-offset="200"
                                     data-aos-duration="1500"
@@ -89,7 +89,7 @@ export default function HeroSection() {
                                 >
                                     LET YOURS EARS SPARKLE, EACH PAIR TELLS STORY!
                                 </h1>
-                                <p className='mt-4 xl:absolute right-[0%] xl:right-[10%] bottom-[0%] xl:bottom-[25%] w-[90%] xl:w-[45%]' data-aos="fade-left"
+                                <p className='mt-4 text-[14px] sm:text-[18px] xl:absolute right-[0%] xl:right-[10%] bottom-[0%] xl:bottom-[25%] w-[90%] xl:w-[45%]' data-aos="fade-left"
                                     data-aos-duration="1500">
                                     Let your ears do the talking. Our intricately crafted
                                     earrings are more than just ornaments — they’re expressions
@@ -97,13 +97,13 @@ export default function HeroSection() {
                                 </p>
                                 <button
                                     type="submit"
-                                    class="relative z-10 px-6 py-3 mt-[15px] overflow-hidden rounded-[5px] bg-black text-white font-semibold flex items-center justify-center gap-2 group transition-all duration-300 shadow-xl"
+                                    class="relative z-10 px-3 sm:px-6 py-2 sm:py-3 mt-[15px] overflow-hidden rounded-[5px] bg-black text-white font-semibold flex items-center justify-center gap-2 group transition-all duration-300 shadow-xl"
                                 >
-                                    <span class="relative z-10 transition-colors duration-300 group-hover:text-black">
+                                    <span class="relative z-10 text-[14px] sm:text-[16px] transition-colors duration-300 group-hover:text-black">
                                         Know More
                                     </span>
                                     <svg
-                                        class="w-8 h-8 p-2 border border-white rounded-full transition-all duration-300 rotate-45 group-hover:rotate-90 group-hover:bg-white group-hover:border-transparent group-hover:text-black"
+                                        class="w-6 sm:w-8 h-6 sm:h-8 p-[5px] sm:p-2 border border-white rounded-full transition-all duration-300 rotate-45 group-hover:rotate-90 group-hover:bg-white group-hover:border-transparent group-hover:text-black"
                                         viewBox="0 0 16 19"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
