@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 import ContactPage from './pages/ContactPage';
 import ProductPage from './pages/ProductPage';
 import ScrollToTop from './Common Components/ScrollToTop';
+import DetailedProduct from './Common Components/DetailedProduct';
+import HomePage from 'c:/Users/rutul/Downloads/cb_imitation_redesign';
 
 export default function App() {
   useEffect(() => {
@@ -17,8 +19,10 @@ export default function App() {
     <BrowserRouter>
     <ScrollToTop />
       <Routes>
+        <Route path='/redesign' element={<HomePage/>}></Route>
         <Route path="/" element={<ImitationWebsite />} />
         <Route path="/product" element={<ProductPage/>} />
+        <Route path="/detailedProduct" element={<DetailedProduct/>} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
     </BrowserRouter>

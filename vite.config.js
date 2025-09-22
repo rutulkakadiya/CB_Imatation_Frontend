@@ -8,7 +8,7 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), tailwindcss(), svgr()],
   server: {
-    host: true, // Enables network access
-    port: 5173, // Optional: set your preferred port
+    host: true, 
+    port: 5173, 
   },
 })

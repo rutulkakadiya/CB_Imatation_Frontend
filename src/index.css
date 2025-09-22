@@ -1,29 +1,42 @@
 @import "tailwindcss";
 
-@theme {
-  --breakpoint-xs: 350px;
-}
-
 * {
   font-family: var(--font-primary);
   scroll-behavior: smooth;
 }
 
-h1{
-font-family: var(--font-primary);
+@theme{
+  --breakpoint-xs: 480px;
 }
-/* Define light and dark theme variables */
-:root{
-  /* Fonts */
-  /* --font-primary: "Playfair Display", serif; */
+
+h1 {
+  font-family: var(--font-primary);
+}
+
+:root {
   --font-primary: "Marcellus", serif;
   --font-secondary: "Montserrat", sans-serif;
 
-    --smallText-color: #ab7f5c;
+  --primary-gold: #ab7f5c;
+  --secondary-gold: #8b6b4a;
+  --accent-gold: #c49a7a;
+  --cream-bg: #fdf8f3;
+  --warm-white: #fefefe;
+  --dark-brown: #2c1810;
+  --medium-brown: #6b4c3a;
+  --light-brown: #d2b48c;
+  --text-dark: #1a1a1a;
+  --text-light: #666666;
+  --border-gold: #ab7f5c;
+
+  /* Legacy support */
+  --smallText-color: #ab7f5c;
 }
 
+/* Luxury animations */
 @keyframes horizontalFloatRotateFade {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0) rotate(0deg);
     opacity: 1;
   }
@@ -35,4 +48,110 @@ font-family: var(--font-primary);
 
 .animate-horizontal-float {
   animation: horizontalFloatRotateFade 6s ease-in-out infinite;
+}
+
+/* Luxury button styles */
+.luxury-btn {
+  background: linear-gradient(
+    135deg,
+    var(--primary-gold),
+    var(--secondary-gold)
+  );
+  border: 2px solid var(--primary-gold);
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(171, 127, 92, 0.3);
+  background: linear-gradient(
+    135deg,
+    var(--secondary-gold),
+    var(--primary-gold)
+  );
+}
+
+.luxury-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.luxury-btn:hover::before {
+  left: 100%;
+}
+
+.mobile-nav {
+  backdrop-filter: blur(10px);
+  background: rgba(253, 248, 243, 0.95);
+  border-left: 3px solid var(--primary-gold);
+}
+
+.hero-mobile {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--cream-bg) 0%, #f5f5dc 100%);
+}
+
+
+/* Updated CSS - Add this to your stylesheet */
+.swiper-button-prev,
+.swiper-button-next {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  color: white !important; /* Fallback for icon visibility */
+  background-color: var(--primary-gold) !important; /* Matches your style */
+  border-radius: 50% !important;
+  z-index: 10 !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: var(--secondary-gold) !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 16px !important; /* Adjust icon size if needed */
+  font-weight: bold !important;
+}
+
+/* Optional: Hide pagination if not wanted */
+.swiper-pagination {
+  margin-top: 30px;
+}
+
+/* Pagination bullet color */
+.swiper-pagination-bullet {
+  background-color: #ab7f5c !important;
+  opacity: 0.5; /* optional: makes inactive dots lighter */
+}
+
+/* Active pagination bullet color */
+.swiper-pagination-bullet-active {
+  background-color: #ab7f5c !important;
+  opacity: 1;
+}
+
+
+.truncate-ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* Truncate after 1 line */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

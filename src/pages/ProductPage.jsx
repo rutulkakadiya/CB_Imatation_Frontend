@@ -3,6 +3,8 @@ import { MapPin, Send, Sun, Moon, Search, X, Heart, Star, ShoppingBag, Eye, Spar
 import Header from '../Common Components/Header';
 import Whatsapp from '../Common Components/WhatsApp';
 import ScrollToTop2 from '../Common Components/ScrollToTop2';
+import Footer from '../Common Components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const ProductPage = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
@@ -11,7 +13,6 @@ const ProductPage = () => {
     const [priceRange, setPriceRange] = useState([0, 1000]);
     const [hoveredProduct, setHoveredProduct] = useState(null);
     const [sortBy, setSortBy] = useState('name');
-
 
     const products = [
         {
@@ -27,7 +28,7 @@ const ProductPage = () => {
             name: 'Geometric Spark Gold Studs',
             originalPrice: '₹ 199.00',
             salePrice: '₹ 99.00',
-            defaultImage: '/Product_Images/Product_2_1.webp',
+            defaultImage: '/Product_Images/Product_2_1.jpg',
             hoverImage: '/Product_Images/Product_2_2.webp'
         },
         {
@@ -120,33 +121,17 @@ const ProductPage = () => {
         }
     ];
 
-    const handleProductClick = (product) => {
-        setSelectedProduct(product);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    const navigate = useNavigate("");
 
+    const handleProduct = (product) => {
+        console.log("dsdqsw");
+        
+        navigate("/detailedProduct", { state: product })
+    }
 
-    const handleClearFilters = () => {
-        setSearchQuery('');
-        setMaterialFilter('');
-        setPriceRange([0, 1000]);
-        setSortBy('name');
-    };
-
-    const getBadgeColor = (badge) => {
-        const colors = {
-            'Best Seller': 'bg-gradient-to-r from-[#d4a373] to-[#ab7f5c]',
-            'New': 'bg-gradient-to-r from-[#4a7043] to-[#6b8e23]',
-            'Popular': 'bg-gradient-to-r from-[#ab7f5c] to-[#d4a373]',
-            'Premium': 'bg-gradient-to-r from-[#3c2f2f] to-[#5c4033]',
-            'Trending': 'bg-gradient-to-r from-[#4a7043] to-[#ab7f5c]',
-            'Limited': 'bg-gradient-to-r from-[#8b3a3a] to-[#ab7f5c]'
-        };
-        return colors[badge] || 'bg-gray-500';
-    };
 
     return (
-        <div className="min-h-screen bg-[#fefaf6] text-[#3c2f2f] font-sans">
+        <div className="min-h-screen bg-[#faf8ec] text-[#3c2f2f] font-sans">
             {/* Hero Section */}
             <Header />
             <ScrollToTop2 />
@@ -165,17 +150,16 @@ const ProductPage = () => {
                 <p className="text-[16px] sm:text-lg max-w-3xl mx-auto text-[#212121] leading-relaxed mb-8">
                     Discover our handcrafted collection where traditional artistry meets contemporary elegance. Each piece tells a story of timeless beauty.
                 </p>
-                <button className="bg-[#ab7f5c] text-white px-8 py-3 font-medium hover:bg-[#d4a373] transition-all duration-300 rounded-md shadow-md">
+                {/* <button className="bg-[#ab7f5c] text-white px-8 py-3 font-medium hover:bg-[#d4a373] transition-all duration-300 rounded-md shadow-md">
                     Explore Collection
-                </button>
+                </button> */}
             </div>
 
             <div className="w-[95%] mx-auto pb-16">
                 {/* Search and Filter Section */}
-                <div className="py-10 px-4">
+                {/* <div className="py-10 px-4">
                     <div className="bg-[#f4e7d6] rounded-xl shadow-lg p-6 mb-12 border border-[#ab7f5c]/30 mx-auto">
                         <div className="flex flex-col lg:flex-row gap-6 items-center">
-                            {/* Search Bar */}
                             <div className="relative flex-1">
                                 <input
                                     type="text"
@@ -187,7 +171,6 @@ const ProductPage = () => {
                                 <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#ab7f5c]" />
                             </div>
 
-                            {/* Filters Row */}
                             <div className="flex flex-wrap gap-4 items-center">
                                 <select
                                     value={materialFilter}
@@ -248,9 +231,8 @@ const ProductPage = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
-                {/* Results Header */}
                 <div className="flex justify-between items-center mb-8">
                     <h2 className="text-3xl font-bold text-[#3c2f2f] font-serif">
                         Featured Products ({products.length})
@@ -299,21 +281,11 @@ const ProductPage = () => {
 
                                     {/* Overlay Effect */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                                    {/* Floating Add to Cart Button */}
-                                    <div className={`hidden sm:block absolute bottom-4 left-1/2 w-[95%] transform -translate-x-1/2 transition-all duration-500 ${hoveredProduct === product.id
-                                        ? 'translate-y-0 opacity-100'
-                                        : 'translate-y-10 opacity-0'
-                                        }`}>
-                                        <button className="bg-[#ab7f5c] backdrop-blur-sm text-white w-[100%] py-2 rounded-[5px] text-sm font-medium shadow-lg hover:bg-white hover:border border-[#ab7f5c] hover:text-[#ab7f5c] hover:shadow-xl transition-all duration-300">
-                                            Buy Now
-                                        </button>
-                                    </div>
                                 </div>
 
                                 {/* Product Info */}
                                 <div className="text-center">
-                                    <h3 className="text-xl font-light text-black mb-3 group-hover:text-[var(--smallText-color)] transition-colors duration-300">
+                                    <h3 className="text-xl font-light text-black mb-3 group-hover:text-[var(--smallText-color)] transition-colors duration-300 truncate whitespace-nowrap overflow-hidden">
                                         {product.name}
                                     </h3>
 
@@ -324,12 +296,18 @@ const ProductPage = () => {
                                         <span className="text-gray-400 line-through text-sm">
                                             {product.originalPrice}
                                         </span>
-
                                     </div>
 
-                                    <button className="bg-[#ab7f5c] block sm:hidden mt-[15px] backdrop-blur-sm text-white w-[100%] py-2 rounded-[5px] text-sm font-medium shadow-lg hover:bg-white hover:border border-[#ab7f5c] hover:text-[#ab7f5c] hover:shadow-xl transition-all duration-300">
-                                        Buy Now
-                                    </button>
+                                    <div className="mt-auto">
+                                        <button
+                                            className="luxury-btn cursor-pointer w-full py-3 text-white font-semibold rounded-lg shadow-lg text-sm"
+                                            onClick={() => handleProduct(product)}
+                                        >
+                                            <span className="relative z-10 transition-colors duration-300">
+                                                Add to Cart
+                                            </span>
+                                        </button>
+                                    </div>
 
                                     {/* Hover Underline Effect */}
                                     <div className={`h-px bg-[var(--smallText-color)] mt-4 transition-all duration-500 ${hoveredProduct === product.id ? 'w-full opacity-100' : 'w-0 opacity-0'
@@ -339,8 +317,9 @@ const ProductPage = () => {
                         ))}
                     </div>
                 )}
-
             </div>
+
+            <Footer />
         </div>
     );
 };

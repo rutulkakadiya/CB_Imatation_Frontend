@@ -27,10 +27,26 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
         }));
     };
 
+    const orderToWhatsapp = () => {
+        const phoneNumber = "919724076944";
+        console.log("click");
+
+        const message = `📩 New Inquiry!\n\n👤 *Name:* ${formData.fullName}\n📧 *Email:* ${formData.email}\n📱 *Contact Number:* ${formData.phone}\n📦 *Quantity:* N/A\n📝 *Description:* ${formData.message}\n📑 *Subject:* ${formData.subject}`;
+
+        const encodedMessage = encodeURIComponent(message);
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const whatsappURL = isMobile
+            ? `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`
+            : `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+        window.open(whatsappURL, "_blank");
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
+        // Simulate form submission
         setTimeout(() => {
             setIsSubmitting(false);
             setSubmitMessage('Thank you for your message! We\'ll get back to you within 24 hours.');
@@ -41,17 +57,19 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
                 subject: '',
                 message: ''
             });
+
+            // Trigger WhatsApp message after submission
+            orderToWhatsapp();
         }, 1500);
     };
 
     return (
-        <div className="min-h-screen relative overflow-hidden">
+        <div className="min-h-screen bg-[#faf8ec] relative overflow-hidden">
             <Header />
             <ScrollToTop2 />
             <Whatsapp />
             {/* Header Section */}
             <div className="text-center py-20 px-4 relative mt-[100px]">
-
                 {/* Stars */}
                 <img src="/star.svg" className="absolute top-[10%] left-[20%] h-[30px] animate-pulse opacity-30" alt="" />
                 <img src="/star.svg" className="absolute top-[15%] right-[25%] h-[15px] animate-pulse opacity-30" alt="" />
@@ -79,7 +97,6 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
                     Ready to transform your vision into reality? Let's create something extraordinary together.
                 </p>
             </div>
-
 
             {/* Main Content */}
             <div className="w-[95%] mx-auto px-4 pb-20 pt-12 relative">
@@ -139,8 +156,6 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
                                     </p>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
@@ -167,7 +182,6 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
                             ></iframe>
                         </div>
                     </div>
-
                 </div>
 
                 {/* Contact Form Section */}
@@ -199,129 +213,131 @@ const ContactForm = ({ theme, handleThemeToggle }) => {
                                 </div>
                             )}
 
-                            <div className="space-y-8">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {/* Full Name */}
-                                    <div>
-                                        <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
-                                            Full Name *
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="fullName"
-                                            value={formData.fullName}
-                                            onChange={handleInputChange}
-                                            placeholder="Enter your full name"
-                                            className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
-                                            required
-                                        />
+                            <form onSubmit={handleSubmit}>
+                                <div className="space-y-8">
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        {/* Full Name */}
+                                        <div>
+                                            <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
+                                                Full Name *
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="fullName"
+                                                value={formData.fullName}
+                                                onChange={handleInputChange}
+                                                placeholder="Enter your full name"
+                                                className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
+                                                required
+                                            />
+                                        </div>
+
+                                        {/* Email */}
+                                        <div>
+                                            <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
+                                                Email Address *
+                                            </label>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                value={formData.email}
+                                                onChange={handleInputChange}
+                                                placeholder="Enter your email"
+                                                className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
+                                                style={{ fontFamily: 'var(--font-primary)' }}
+                                                required
+                                            />
+                                        </div>
                                     </div>
 
-                                    {/* Email */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        {/* Phone */}
+                                        <div>
+                                            <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
+                                                Phone Number
+                                            </label>
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                value={formData.phone}
+                                                onChange={handleInputChange}
+                                                placeholder="Enter your phone number"
+                                                className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
+                                            />
+                                        </div>
+
+                                        {/* Subject */}
+                                        <div>
+                                            <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
+                                                Subject *
+                                            </label>
+                                            <select
+                                                name="subject"
+                                                value={formData.subject}
+                                                onChange={handleInputChange}
+                                                className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
+                                                required
+                                            >
+                                                <option value="">Select a subject</option>
+                                                <option value="general">General Inquiry</option>
+                                                <option value="custom">Custom Jewelry</option>
+                                                <option value="repair">Jewelry Repair</option>
+                                                <option value="appointment">Schedule Appointment</option>
+                                                <option value="wholesale">Wholesale Orders</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {/* Message */}
                                     <div>
                                         <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
-                                            Email Address *
+                                            Message *
                                         </label>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            value={formData.email}
+                                        <textarea
+                                            name="message"
+                                            value={formData.message}
                                             onChange={handleInputChange}
-                                            placeholder="Enter your email"
-                                            className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
+                                            placeholder="Tell us about your project or inquiry..."
+                                            className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black resize-vertical min-h-40"
                                             style={{ fontFamily: 'var(--font-primary)' }}
                                             required
                                         />
                                     </div>
-                                </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    {/* Phone */}
-                                    <div>
-                                        <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
-                                            Phone Number
-                                        </label>
-                                        <input
-                                            type="tel"
-                                            name="phone"
-                                            value={formData.phone}
-                                            onChange={handleInputChange}
-                                            placeholder="Enter your phone number"
-                                            className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
-                                        />
-                                    </div>
-
-                                    {/* Subject */}
-                                    <div>
-                                        <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
-                                            Subject *
-                                        </label>
-                                        <select
-                                            name="subject"
-                                            value={formData.subject}
-                                            onChange={handleInputChange}
-                                            className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black"
-                                            required
+                                    {/* Submit Button */}
+                                    <div className="text-center">
+                                        <button
+                                            type="submit"
+                                            disabled={isSubmitting}
+                                            className="relative z-10 px-6 py-3 overflow-hidden rounded-[5px] bg-[var(--smallText-color)] text-white font-semibold flex items-center justify-center gap-2 group transition-all duration-300 shadow-xl"
                                         >
-                                            <option value="">Select a subject</option>
-                                            <option value="general">General Inquiry</option>
-                                            <option value="custom">Custom Jewelry</option>
-                                            <option value="repair">Jewelry Repair</option>
-                                            <option value="appointment">Schedule Appointment</option>
-                                            <option value="wholesale">Wholesale Orders</option>
-                                        </select>
+                                            {isSubmitting ? (
+                                                <>
+                                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                                    <span>Sending...</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span className="relative z-10 transition-colors duration-300 group-hover:text-[var(--smallText-color)]">
+                                                        Send Message
+                                                    </span>
+                                                    <svg
+                                                        className="w-8 h-8 p-2 border border-white rounded-full transition-all duration-300 rotate-45 group-hover:rotate-90 group-hover:bg-white group-hover:border-transparent group-hover:text-black"
+                                                        viewBox="0 0 16 19"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                    >
+                                                        <path
+                                                            d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                                                            className="fill-white group-hover:fill-[var(--smallText-color)]"
+                                                        ></path>
+                                                    </svg>
+                                                    <span className="absolute inset-0 before:content-[''] before:absolute before:w-full before:aspect-square before:rounded-full before:bg-white before:-left-full before:transition-all before:duration-700 group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
+                                                </>
+                                            )}
+                                        </button>
                                     </div>
                                 </div>
-
-                                {/* Message */}
-                                <div>
-                                    <label className="block text-base font-semibold mb-3 text-[var(--smallText-color)]">
-                                        Message *
-                                    </label>
-                                    <textarea
-                                        name="message"
-                                        value={formData.message}
-                                        onChange={handleInputChange}
-                                        placeholder="Tell us about your project or inquiry..."
-                                        className="w-full p-4 rounded-2xl bg-white border-2 border-gray-50 text-black resize-vertical min-h-40"
-                                        style={{ fontFamily: 'var(--font-primary)' }}
-                                        required
-                                    />
-                                </div>
-
-                                {/* Submit Button */}
-                                <div className="text-center">
-                                    <button
-                                        onClick={handleSubmit}
-                                        disabled={isSubmitting}
-                                        className="relative z-10 px-6 py-3 overflow-hidden rounded-[5px] bg-[var(--smallText-color)] text-white font-semibold flex items-center justify-center gap-2 group transition-all duration-300 shadow-xl"
-                                    >
-                                        {isSubmitting ? (
-                                            <>
-                                                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                                <span>Sending...</span>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <span className="relative z-10 transition-colors duration-300 group-hover:text-[var(--smallText-color)]">
-                                                    Send Message
-                                                </span>
-                                                <svg
-                                                    className="w-8 h-8 p-2 border border-white rounded-full transition-all duration-300 rotate-45 group-hover:rotate-90 group-hover:bg-white group-hover:border-transparent group-hover:text-black"
-                                                    viewBox="0 0 16 19"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                >
-                                                    <path
-                                                        d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-                                                        className="fill-white group-hover:fill-[var(--smallText-color)]"
-                                                    ></path>
-                                                </svg>
-                                                <span className="absolute inset-0 before:content-[''] before:absolute before:w-full before:aspect-square before:rounded-full before:bg-white before:-left-full before:transition-all before:duration-700 group-hover:before:left-0 group-hover:before:scale-150 before:-z-10"></span>
-                                            </>
-                                        )}
-                                    </button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
